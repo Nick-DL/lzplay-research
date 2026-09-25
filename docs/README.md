@@ -15,6 +15,11 @@
 | 两个换皮 App 能不能改成"能跑"？ | **能，都改通了。** 见 `02-siblings/` |
 | 华为后门权限能不能拿到？ | **不能。** `signature\|privileged`，需华为平台签名 |
 
+**★ 最重要的单点发现**：`com.lzplay.helper.apk` **本身**就是华为授权通道 ——
+它的 `META-INF/HUAWEI.CER` 里的 `DeveloperKey` 与它的真实签名证书**逐字节相等**（密码学证实）。
+**绝不能重打包或重签名它**，那会毁掉唯一的那把钥匙。
+详见 [HUAWEI-CER-华为授权机制.md](01-lzplay/HUAWEI-CER-华为授权机制.md)。
+
 **核心链条**：
 ```
 GMS 装得上 ✅  → trustspace 拦住 GSF provider ❌ → 无 GSF ID → 无法向谷歌注册 → GMS 不可用
@@ -199,9 +204,13 @@ E ActivityThread: Failed to find provider info for com.google.android.gsf.gservi
 - [x] Chat Partner：完整改包 + 真机走到主界面 + 设备管理器激活
 - [x] `LZRevive` 干净替代品（真机验证可用）
 - [x] Chat Partner 明文包清单恢复（含版本/MD5/签名指纹）
+- [x] **HUAWEI.CER 三把锁解析**：证实 lzplay 原始包证书自洽（LOCK 1 PASS），确认安装时间窗（LOCK 3 = 2019-07-25..2020-07-25），解释了"改时间"的真正原因
+- [x] 确认改包重签**必然**导致 CER 校验失败 ⇒ 原始包是唯一路径
 
 **待办**
-- [ ] **探索备份还原路径能否绕过 trustspace** ← 下一步
+- [ ] **HUAWEI.CER LOCK 2（`ApkHash`）算法还原** ← 进行中（子 agent 反汇编字节码）
+- [ ] 还原 `SignatureProcessor` / `CertificateProcessor`，确认 CER 能否被局部篡改
+- [ ] 走通备份还原：原始 APK + 时间窗 + `com.huawei.localBackup`
 - [ ] 旅游必备 `install_error` 状态机的进度回调（小尾巴）
 - [ ] lzplay 360 加固的 VM 解码器（可选，静态分析已够用）
 - [ ] 用恢复出的包清单手工装 GMS，看主界面是否转为"完成"
