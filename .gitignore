@@ -1,7 +1,7 @@
-# .gitignore for the lzplay revival workspace
-# Emulator images, tool blobs and quarantined native libs are large / AV-flagged.
+# lzplay revival workspace - .gitignore
+# Large binaries, emulator images and AV-flagged blobs stay local.
 
-# --- emulator (6 GB of disk images, never commit) ---
+# --- emulator images (6 GB) ---
 work/avd/
 work/android_home/
 work/tmp/
@@ -15,74 +15,49 @@ work/tools/jadx_pom/
 work/tools/wheels/
 work/apktool_frame/
 
-# --- 360 Jiagu native libs: antivirus (Huorong) quarantines these on sight.
-# Only the .b64.gz copies are kept; see work/native/README-native.md
+# --- 360 Jiagu native libs: antivirus (Huorong) quarantines these on sight ---
 work/native/*.so
 work/native/an/
 work/carve/
 
-# --- large generated artifacts ---
-work/native/insidehelper.apk
+# --- large generated / regenerable artifacts ---
 work/probe_out/
 work/inside/
-
-# --- per-project build dirs produced by build_apk.ps1 ---
+work/inner_decoded/
+work/apktool_out/
 work/*/build/
 work/__pycache__/
-
-# --- extracted/unpacked APK contents (regenerable from the APK) ---
-work/apktool_out/
-work/inner_decoded/
-
-# --- reports are kept, but the raw dumps are large ---
-work/class*/**_dex_dump.txt
-
-# --- misc ---
-*.log
-*.tmp
-
-# --- python deps unpacked into the workspace (unicorn engine, ~16 MB) ---
 work/pylibs/
 
-# --- large third-party APKs under analysis (140 MB+) ---
+# --- decompiled trees are regenerable from the APKs ---
+work/travel_decoded/
+work/chat_decoded/
+work/chat_smali/
+work/chat_smali_only/
+work/chat_dex/
+
+# --- patch backups (small, regenerable) ---
+work/travel_backup/
+work/chat_backup_smali/
+work/chat_backup/
+
+# --- intermediate APK builds (140 MB each; final deliverables live in root) ---
+work/travel_p*.apk
+work/travel_rebuilt*.apk
+work/chat_rebuilt*.apk
+work/chat_patched.apk
+*.idsig
+
+# --- third-party APKs under analysis (140 MB+). Keep only our own tools. ---
 *.apk
 !LZProbe.apk
 !LZRevive.apk
 !com.lzplay.helper.apk
+!work/insidehelper.apk
 
-# --- sibling patched builds (140 MB each; keep locally, not in git) ---
-*patched*.apk
-*-patched.apk
-work/travel_p*.apk
-work/travel_*unsigned.apk
-work/travel_*aligned.apk
-work/travel_rebuilt.apk
-work/travel_decoded/
-work/travel_backup/
-# --- chat partner build artifacts (large) ---
-work/chat_dex/
-work/chat_smali/
-work/chat_smali_only/
-work/chat_decoded/
-work/chat_backup*/
-work/chat_rebuilt*.apk
-work/chat_patched.apk
-ChatPartner-patched.apk
-work/devpol.txt
-work/c*.xml
-work/c*.png
-work/verify_p*/
-work/y*.png
-work/y*.xml
-work/x*.png
-work/x*.xml
-work/p3*.png
-work/ui*.xml
-work/g1.png
-work/v1.xml
-work/v2.xml
-work/w1.xml
-work/w2.xml
-work/z1.xml
-work/dex_ecc.txt
-work/apply_fileprovider.py
+# --- scratch (screenshots / uiautomator dumps produced while probing) ---
+work/*.png
+work/*.xml
+work/scratch/
+*.log
+*.tmp
