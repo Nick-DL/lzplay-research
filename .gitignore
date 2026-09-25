@@ -61,3 +61,5 @@ work/*.xml
 work/scratch/
 *.log
 *.tmp
+# --- subagent research scratch (jars, decompiled trees, downloaded tools) ---
+work/research-*/
