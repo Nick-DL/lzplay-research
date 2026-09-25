@@ -187,7 +187,7 @@ class Dex:
             yield self.type_str(self.u32(base)), base
 
     def methods_of(self, base):
-        """yield (kind, method_idx, code_off)"""
+        """yield (kind, method_idx, code_off). method_idx_diff is a delta."""
         cdo = self.u32(base + 24)
         if cdo == 0: return
         p = [cdo]
@@ -203,9 +203,12 @@ class Dex:
         for _ in range(sf + inf):
             uleb(); uleb()
         for kind, cnt in (('direct', dm), ('virtual', vm)):
+            idx = 0
             for _ in range(cnt):
-                midx = uleb(); uleb(); code = uleb()
-                yield kind, midx, code
+                idx += uleb()          # method_idx_diff
+                uleb()                 # access_flags
+                code = uleb()
+                yield kind, idx, code
 
 
 def decode(dx, code, insns_size):
@@ -257,7 +260,8 @@ def decode(dx, code, insns_size):
         elif fmt == '12x':
             txt = 'v%d, v%d' % (a, b)
         elif fmt == '11n':
-            txt = 'v%d, #%d' % (a, (b << 28) >> 28)
+            sv = b - 16 if b >= 8 else b          # const/4 is a SIGNED nibble
+            txt = 'v%d, #%d' % (a, sv)
         elif fmt == '11x':
             txt = 'v%d' % aa
         elif fmt == '10t':
@@ -285,17 +289,17 @@ def decode(dx, code, insns_size):
             elif op in KIND_TYPE: txt = 'v%d, %s' % (aa, dx.type_str(idx))
             else: txt = 'v%d, %s' % (aa, dx.field_str(idx))
         elif fmt == '22c':
-            idx = u(2); sz = 2
+            idx = u(1); sz = 2
             if op in KIND_TYPE: txt = 'v%d, v%d, %s' % (a, b, dx.type_str(idx))
             else: txt = 'v%d, v%d, %s' % (a, b, dx.field_str(idx))
         elif fmt == '22s':
-            txt = 'v%d, v%d, #%d' % (a, b, s16(2)); sz = 2
+            txt = 'v%d, v%d, #%d' % (a, b, s16(1)); sz = 2
         elif fmt == '22b':
-            c = (u(2) >> 8) & 0xFF
+            c = (u(1) >> 8) & 0xFF
             c = c - 256 if c > 127 else c
-            txt = 'v%d, v%d, #%d' % (aa, u(2) & 0xFF, c); sz = 2
+            txt = 'v%d, v%d, #%d' % (aa, u(1) & 0xFF, c); sz = 2
         elif fmt == '22t':
-            off = s16(2); sz = 2
+            off = s16(1); sz = 2
             txt = 'v%d, v%d, -> %04x' % (a, b, addr + off)
         elif fmt == '23x':
             txt = 'v%d, v%d, v%d' % (aa, u(1) & 0xFF, (u(1) >> 8) & 0xFF); sz = 2
@@ -309,21 +313,22 @@ def decode(dx, code, insns_size):
         elif fmt == '31c':
             txt = 'v%d, "%s"' % (aa, dx.string(u32at(1))); sz = 3
         elif fmt == '35c':
-            idx = u(3); sz = 3
+            # A|G|op BBBB F|E|D|C   (3 units)
+            idx = u(1); sz = 3
             cnt = (unit >> 12) & 0xF
-            regs = [ (u(1) & 0xF), (u(1) >> 4) & 0xF, (u(1) >> 8) & 0xF, (u(1) >> 12) & 0xF, (u(2) >> 12) & 0xF ]
+            greg = (unit >> 8) & 0xF
+            u2 = u(2)
+            regs = [u2 & 0xF, (u2 >> 4) & 0xF, (u2 >> 8) & 0xF, (u2 >> 12) & 0xF]
+            if cnt == 5: regs.append(greg)
             regs = regs[:cnt]
-            word = u(2) & 0xFFF
-            if cnt == 5: regs[4] = (u(3) >> 12) & 0xF
-            target = word
-            rtxt = ''
-            if op in KIND_TYPE: rtxt = dx.type_str(target)
-            elif op in KIND_METHOD: rtxt = dx.method_str(target)
-            else: rtxt = dx.type_str(target)
+            if op in KIND_TYPE: rtxt = dx.type_str(idx)
+            elif op in KIND_METHOD: rtxt = dx.method_str(idx)
+            else: rtxt = dx.type_str(idx)
             txt = '{%s}, %s' % (', '.join('v%d' % r for r in regs), rtxt)
         elif fmt == '3rc':
-            idx = u(3); sz = 3
-            cnt = u(1); first = u(2)
+            # AA|op BBBB CCCC   (3 units)
+            idx = u(1); sz = 3
+            cnt = aa; first = u(2)
             if op in KIND_TYPE: rtxt = dx.type_str(idx)
             elif op in KIND_METHOD: rtxt = dx.method_str(idx)
             else: rtxt = 'site@%d' % idx
@@ -332,14 +337,20 @@ def decode(dx, code, insns_size):
             lo = u32at(1); hi2 = u32at(3)
             txt = 'v%d, #0x%x' % (aa, (hi2 << 32) | lo); sz = 5
         elif fmt == '45cc':
-            idx = u(3); sz = 4
+            # A|G|op BBBB F|E|D|C HHHH  (4 units)
+            idx = u(1); sz = 4
             cnt = (unit >> 12) & 0xF
-            regs = [ (u(1) & 0xF), (u(1) >> 4) & 0xF, (u(1) >> 8) & 0xF, (u(1) >> 12) & 0xF, (u(2) >> 12) & 0xF ][:cnt]
-            txt = '{%s}, %s, proto@%d' % (', '.join('v%d' % r for r in regs), dx.method_str(u(2) & 0xFFF), u(4))
+            greg = (unit >> 8) & 0xF
+            u2 = u(2)
+            regs = [u2 & 0xF, (u2 >> 4) & 0xF, (u2 >> 8) & 0xF, (u2 >> 12) & 0xF]
+            if cnt == 5: regs.append(greg)
+            regs = regs[:cnt]
+            txt = '{%s}, %s, proto@%d' % (', '.join('v%d' % r for r in regs), dx.method_str(idx), u(3))
         elif fmt == '4rcc':
-            idx = u(3); sz = 4
-            cnt = u(1); first = u(2)
-            txt = '{v%d..v%d}, %s, proto@%d' % (first, first + cnt - 1, dx.method_str(idx), u(4))
+            # AA|op BBBB CCCC HHHH  (4 units)
+            idx = u(1); sz = 4
+            cnt = aa; first = u(2)
+            txt = '{v%d..v%d}, %s, proto@%d' % (first, first + cnt - 1, dx.method_str(idx), u(3))
         else:
             txt = '<fmt %s>' % fmt
 
@@ -401,7 +412,12 @@ def main():
                       % (registers, ins_size, outs_size, tries, insns_size))
                 cbuf = raw[code + 16: code + 16 + insns_size * 2]
                 for addr, txt, op, sz in decode(dx, cbuf, insns_size):
-                    print('      %04x: %s' % (addr, txt))
+                    if op == -1:
+                        print('      %04x: [payload] %s' % (addr, txt))
+                        continue
+                    mn = OPS[op][0] if op in OPS else 'op_%02x' % op
+                    line = ('%s %s' % (mn, txt)).rstrip()
+                    print('      %04x: %-58s' % (addr, line))
 
 
 if __name__ == '__main__':
