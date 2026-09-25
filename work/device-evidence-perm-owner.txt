@@ -1,0 +1,10 @@
+﻿  Permission [com.huawei.permission.sec.MDM_DEVICE_OWNER] (1ca5704):
+    sourcePackage=androidhwext
+    uid=1000 gids=[] type=0 prot=signature|privileged
+    perm=PermissionInfo{ccbbbdc com.huawei.permission.sec.MDM_DEVICE_OWNER}
+  Permission [com.changhong.smarthome.permission.JOPERATE_MESSAGE] (ac274ed):
+    sourcePackage=com.changhong.smarthome
+    uid=10215 gids=[] type=0 prot=normal
+    perm=PermissionInfo{ba67bba com.changhong.smarthome.permission.JOPERATE_MESSAGE}
+  Permission [com.huawei.vassistant.permission.CAPTION] (ba2f22):
+    sourcePackage=com.huawei.vassistant

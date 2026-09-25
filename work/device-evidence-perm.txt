@@ -1,0 +1,10 @@
+﻿  Permission [com.huawei.permission.sec.MDM_DEVICE_MANAGER] (70c360a):
+    sourcePackage=androidhwext
+    uid=1000 gids=[] type=0 prot=signature|privileged
+    perm=PermissionInfo{2dc52d6 com.huawei.permission.sec.MDM_DEVICE_MANAGER}
+  Permission [android.permission.MANAGE_NOTIFICATION_LISTENERS] (e663e7b):
+    sourcePackage=android
+    uid=1000 gids=[] type=0 prot=signature|installer
+    perm=PermissionInfo{17acc44 android.permission.MANAGE_NOTIFICATION_LISTENERS}
+  Permission [android.permission.SET_POINTER_SPEED] (6b44498):
+    sourcePackage=android

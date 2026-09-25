@@ -232,6 +232,29 @@ public class MainActivity extends Activity {
         // Tap-free exhaustive probe: this is the decisive experiment, and it runs
         // automatically so the result does not depend on hitting a button.
         MdmAutoProbe.runAll(this);
+        // If APKs have been staged in files/gms/, install them automatically so the
+        // outcome does not depend on hitting a button either.
+        runAutoInstallIfStaged();
+    }
+
+    /** Install anything staged in files/gms/ at startup, so results are tap-free. */
+    private void runAutoInstallIfStaged() {
+        File dir = getExternalFilesDir(null);
+        if (dir == null) return;
+        File gms = new File(dir, "gms");
+        File[] apks = gms.listFiles();
+        if (apks == null || apks.length == 0) {
+            LzLog.get().kv("auto-install", "no APK staged in " + gms.getAbsolutePath());
+            return;
+        }
+        int n = 0;
+        for (File f : apks) if (f.getName().toLowerCase().endsWith(".apk")) n++;
+        if (n == 0) {
+            LzLog.get().kv("auto-install", "no .apk files in " + gms.getAbsolutePath());
+            return;
+        }
+        LzLog.get().kv("auto-install", n + " APK(s) staged, running install");
+        installFromFolder();
     }
 
     private void runGsfProbe() {

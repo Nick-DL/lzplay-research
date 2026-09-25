@@ -43,3 +43,9 @@ work/class*/**_dex_dump.txt
 
 # --- python deps unpacked into the workspace (unicorn engine, ~16 MB) ---
 work/pylibs/
+
+# --- large third-party APKs under analysis (140 MB+) ---
+*.apk
+!LZProbe.apk
+!LZRevive.apk
+!com.lzplay.helper.apk

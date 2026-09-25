@@ -1,0 +1,218 @@
+﻿LZRevive 1.0  -  clean-room lzplay replacement
+  device                               = HUAWEI DCO-AL00 / 12 / SDK 31 / EMUI=EmotionUI_14.2.0 HMOS=<unset>
+
+==== HUAWEI PERMISSION DECLARATIONS ====
+  com.huawei.permission.sec.MDM        = GRANTED
+  com.huawei.permission.sec.MDM_APP_MANAGEMENT = DENIED (permission not defined by platform, or not held)
+  com.huawei.permission.sec.MDM_INSTALL_SYS_APP = DENIED (permission not defined by platform, or not held)
+  com.huawei.permission.sec.MDM_INSTALL_UNDETACHABLE_APP = DENIED (permission not defined by platform, or not held)
+  com.huawei.systemmanager.permission.ACCESS_INTERFACE = DENIED (permission not defined by platform, or not held)
+  com.google.android.providers.gsf.permission.READ_GSERVICES = DENIED (permission not defined by platform, or not held)
+
+==== DEVICE ADMIN / OWNER STATE ====
+  isAdminActive                        = true
+  isDeviceOwnerApp                     = false
+
+==== SYSTEM PROPERTIES ====
+  ro.build.version.emui                = EmotionUI_14.2.0
+  ro.build.harmonyos.version           = <unset>
+  hw_sc.build.platform.version         = 4.2.0
+  ro.comp.hl.product_base_version      = DCO-LGRP1-CHN 4.2.0.218
+  ro.product.hwv                       = <unset>
+  ro.build.characteristics             = default
+  ro.product.cpu.abi                   = arm64-v8a
+  ro.build.version.security_patch      = 2022-08-01
+
+==== HUAWEI SILENT DEVICE-ADMIN ACTIVATION ====
+  com.huawei.android.app.admin.DevicePolicyManager = absent
+  com.huawei.android.app.admin.HwDevicePolicyManagerEx = absent
+  com.huawei.android.app.admin.DeviceControlManager = FOUND
+    instantiated via                   = []
+    method                             = public boolean com.huawei.android.app.admin.DeviceControlManager.addBackgroundPopUpWindowTrustList(android.content.ComponentName,java.util.ArrayList)
+    method                             = public android.graphics.Bitmap com.huawei.android.app.admin.DeviceControlManager.captureScreen(android.content.ComponentName)
+    method                             = public boolean com.huawei.android.app.admin.DeviceControlManager.clearCarrierLockScreenPassword(android.content.ComponentName,java.lang.String)
+    method                             = public void com.huawei.android.app.admin.DeviceControlManager.clearDefaultLauncher(android.content.ComponentName)
+    method                             = public void com.huawei.android.app.admin.DeviceControlManager.clearDeviceOwnerApp()
+    method                             = public boolean java.lang.Object.equals(java.lang.Object)
+    method                             = public void com.huawei.android.app.admin.DeviceControlManager.forceMobiledataOn(android.content.ComponentName)
+    method                             = public boolean com.huawei.android.app.admin.DeviceControlManager.formatSDCard(android.content.ComponentName,java.lang.String)
+    method                             = public java.util.ArrayList com.huawei.android.app.admin.DeviceControlManager.getBackgroundPopUpWindowPackages()
+    method                             = public java.util.ArrayList com.huawei.android.app.admin.DeviceControlManager.getBackgroundPopUpWindowTrustList(android.content.ComponentName)
+    method                             = public final java.lang.Class java.lang.Object.getClass()
+    method                             = public int com.huawei.android.app.admin.DeviceControlManager.getControlMode(android.content.ComponentName)
+    method                             = public java.util.HashMap com.huawei.android.app.admin.DeviceControlManager.getDefaultVoiceAssistant(android.content.ComponentName)
+    method                             = public long com.huawei.android.app.admin.DeviceControlManager.getDeviceAdminDeactiveTime(android.content.ComponentName)
+    method                             = public java.lang.String com.huawei.android.app.admin.DeviceControlManager.getDeviceName(android.content.ComponentName)
+    method                             = public int com.huawei.android.app.admin.DeviceControlManager.getSleepTimeIntervalAfterPowerOn(android.content.ComponentName)
+    method                             = public int java.lang.Object.hashCode()
+    method                             = public boolean com.huawei.android.app.admin.DeviceControlManager.installCertificateWithType(android.content.ComponentName,int,byte[],java.lang.String,java.lang.String,int,boolean)
+    method                             = public boolean com.huawei.android.app.admin.DeviceControlManager.isCCModeTurnedOn(android.content.ComponentName)
+    method                             = public boolean com.huawei.android.app.admin.DeviceControlManager.isEyeComfortTurnedOn(android.content.ComponentName)
+    method                             = public boolean com.huawei.android.app.admin.DeviceControlManager.isForcedActiveDeviceAdmin(android.content.ComponentName)
+    method                             = public boolean com.huawei.android.app.admin.DeviceControlManager.isGPSTurnOn(android.content.ComponentName)
+    method                             = public boolean com.huawei.android.app.admin.DeviceControlManager.isMediaControlDisabled(android.content.ComponentName)
+    method                             = public boolean com.huawei.android.app.admin.DeviceControlManager.isRooted(android.content.ComponentName)
+    method                             = public boolean com.huawei.android.app.admin.DeviceControlManager.isScreenCastTurnOn(android.content.ComponentName)
+    method                             = public final native void java.lang.Object.notify()
+    method                             = public final native void java.lang.Object.notifyAll()
+    method                             = public void com.huawei.android.app.admin.DeviceControlManager.rebootDevice(android.content.ComponentName)
+    method                             = public boolean com.huawei.android.app.admin.DeviceControlManager.removeActiveDeviceAdmin(android.content.ComponentName)
+    method                             = public boolean com.huawei.android.app.admin.DeviceControlManager.removeBackgroundPopUpWindowTrustList(android.content.ComponentName,java.util.ArrayList)
+    method                             = public boolean com.huawei.android.app.admin.DeviceControlManager.setCarrierLockScreenPassword(android.content.ComponentName,java.lang.String,java.lang.String)
+    method                             = public boolean com.huawei.android.app.admin.DeviceControlManager.setControlMode(android.content.ComponentName,int)
+    method                             = public void com.huawei.android.app.admin.DeviceControlManager.setCustomSettingsMenu(android.content.ComponentName,java.util.List)
+    method                             = public boolean com.huawei.android.app.admin.DeviceControlManager.setDefaultDataCard(android.content.ComponentName,int,android.os.Message)
+    method                             = public void com.huawei.android.app.admin.DeviceControlManager.setDefaultLauncher(android.content.ComponentName,java.lang.String,java.lang.String)
+    method                             = public boolean com.huawei.android.app.admin.DeviceControlManager.setDefaultVoiceAssistant(android.content.ComponentName,java.lang.String,java.util.ArrayList)
+    method                             = public boolean com.huawei.android.app.admin.DeviceControlManager.setDelayDeactiveDeviceAdmin(android.content.ComponentName,int,android.content.Context)
+    method                             = public boolean com.huawei.android.app.admin.DeviceControlManager.setDeviceName(android.content.ComponentName,java.lang.String)
+    method                             = public void com.huawei.android.app.admin.DeviceControlManager.setDeviceOwnerApp(android.content.ComponentName,java.lang.String)
+    method                             = public boolean com.huawei.android.app.admin.DeviceControlManager.setForcedActiveDeviceAdmin(android.content.ComponentName,android.content.Context)
+    method                             = public boolean com.huawei.android.app.admin.DeviceControlManager.setMediaControlDisabled(android.content.ComponentName,boolean)
+    method                             = public boolean com.huawei.android.app.admin.DeviceControlManager.setQuickLaunchApp(android.content.ComponentName,android.content.ComponentName)
+    method                             = public void com.huawei.android.app.admin.DeviceControlManager.setSilentActiveAdmin(android.content.ComponentName)
+    method                             = public boolean com.huawei.android.app.admin.DeviceControlManager.setSleepTimeIntervalAfterPowerOn(android.content.ComponentName,int)
+    method                             = public void com.huawei.android.app.admin.DeviceControlManager.setSysTime(android.content.ComponentName,long)
+    method                             = public boolean com.huawei.android.app.admin.DeviceControlManager.setSystemLanguage(android.content.ComponentName,java.util.Locale)
+    method                             = public void com.huawei.android.app.admin.DeviceControlManager.shutdownDevice(android.content.ComponentName)
+    method                             = public java.lang.String java.lang.Object.toString()
+    method                             = public boolean com.huawei.android.app.admin.DeviceControlManager.turnOnAutoRotation(android.content.ComponentName,boolean)
+    method                             = public boolean com.huawei.android.app.admin.DeviceControlManager.turnOnCCMode(android.content.ComponentName,boolean)
+    method                             = public void com.huawei.android.app.admin.DeviceControlManager.turnOnConnectionAlwaysOn(android.content.ComponentName,boolean)
+    method                             = public boolean com.huawei.android.app.admin.DeviceControlManager.turnOnEyeComfort(android.content.ComponentName,boolean)
+    method                             = public boolean com.huawei.android.app.admin.DeviceControlManager.turnOnEyesProtect(android.content.ComponentName,int,boolean)
+    method                             = public void com.huawei.android.app.admin.DeviceControlManager.turnOnGPS(android.content.ComponentName,boolean)
+    method                             = public void com.huawei.android.app.admin.DeviceControlManager.turnOnMobiledata(android.content.ComponentName,boolean)
+    method                             = public boolean com.huawei.android.app.admin.DeviceControlManager.turnOnScreenCast(android.content.ComponentName,boolean)
+    method                             = public boolean com.huawei.android.app.admin.DeviceControlManager.turnOnUsbDebugMode(android.content.ComponentName,boolean)
+    method                             = public boolean com.huawei.android.app.admin.DeviceControlManager.turnOnUsbTethering(android.content.ComponentName,boolean)
+    method                             = public boolean com.huawei.android.app.admin.DeviceControlManager.unmountUsbDevices(android.content.ComponentName,java.lang.String)
+    method                             = public final void java.lang.Object.wait() throws java.lang.InterruptedException
+    method                             = public final void java.lang.Object.wait(long) throws java.lang.InterruptedException
+    method                             = public final native void java.lang.Object.wait(long,int) throws java.lang.InterruptedException
+  com.huawei.android.app.admin.HwDevicePolicyManager = absent
+
+==== HUAWEI DeviceControlManager API SURFACE ====
+    public boolean com.huawei.android.app.admin.DeviceControlManager.addBackgroundPopUpWindowTrustList(android.content.ComponentName,java.util.ArrayList<java.lang.String>)
+    public android.graphics.Bitmap com.huawei.android.app.admin.DeviceControlManager.captureScreen(android.content.ComponentName)
+    public boolean com.huawei.android.app.admin.DeviceControlManager.clearCarrierLockScreenPassword(android.content.ComponentName,java.lang.String)
+    public void com.huawei.android.app.admin.DeviceControlManager.clearDefaultLauncher(android.content.ComponentName)
+    public void com.huawei.android.app.admin.DeviceControlManager.clearDeviceOwnerApp()
+    public boolean java.lang.Object.equals(java.lang.Object)
+    public void com.huawei.android.app.admin.DeviceControlManager.forceMobiledataOn(android.content.ComponentName)
+    public boolean com.huawei.android.app.admin.DeviceControlManager.formatSDCard(android.content.ComponentName,java.lang.String)
+    public java.util.ArrayList<java.lang.String> com.huawei.android.app.admin.DeviceControlManager.getBackgroundPopUpWindowPackages()
+    public java.util.ArrayList<java.lang.String> com.huawei.android.app.admin.DeviceControlManager.getBackgroundPopUpWindowTrustList(android.content.ComponentName)
+    public final java.lang.Class<?> java.lang.Object.getClass()
+    public int com.huawei.android.app.admin.DeviceControlManager.getControlMode(android.content.ComponentName)
+    public java.util.HashMap<java.lang.String, java.lang.String> com.huawei.android.app.admin.DeviceControlManager.getDefaultVoiceAssistant(android.content.ComponentName)
+    public long com.huawei.android.app.admin.DeviceControlManager.getDeviceAdminDeactiveTime(android.content.ComponentName)
+    public java.lang.String com.huawei.android.app.admin.DeviceControlManager.getDeviceName(android.content.ComponentName)
+    public int com.huawei.android.app.admin.DeviceControlManager.getSleepTimeIntervalAfterPowerOn(android.content.ComponentName)
+    public int java.lang.Object.hashCode()
+    public boolean com.huawei.android.app.admin.DeviceControlManager.installCertificateWithType(android.content.ComponentName,int,byte[],java.lang.String,java.lang.String,int,boolean)
+    public boolean com.huawei.android.app.admin.DeviceControlManager.isCCModeTurnedOn(android.content.ComponentName)
+    public boolean com.huawei.android.app.admin.DeviceControlManager.isEyeComfortTurnedOn(android.content.ComponentName)
+    public boolean com.huawei.android.app.admin.DeviceControlManager.isForcedActiveDeviceAdmin(android.content.ComponentName)
+    public boolean com.huawei.android.app.admin.DeviceControlManager.isGPSTurnOn(android.content.ComponentName)
+    public boolean com.huawei.android.app.admin.DeviceControlManager.isMediaControlDisabled(android.content.ComponentName)
+    public boolean com.huawei.android.app.admin.DeviceControlManager.isRooted(android.content.ComponentName)
+    public boolean com.huawei.android.app.admin.DeviceControlManager.isScreenCastTurnOn(android.content.ComponentName)
+    public final native void java.lang.Object.notify()
+    public final native void java.lang.Object.notifyAll()
+    public void com.huawei.android.app.admin.DeviceControlManager.rebootDevice(android.content.ComponentName)
+    public boolean com.huawei.android.app.admin.DeviceControlManager.removeActiveDeviceAdmin(android.content.ComponentName)
+    public boolean com.huawei.android.app.admin.DeviceControlManager.removeBackgroundPopUpWindowTrustList(android.content.ComponentName,java.util.ArrayList<java.lang.String>)
+    public boolean com.huawei.android.app.admin.DeviceControlManager.setCarrierLockScreenPassword(android.content.ComponentName,java.lang.String,java.lang.String)
+    public boolean com.huawei.android.app.admin.DeviceControlManager.setControlMode(android.content.ComponentName,int)
+    public void com.huawei.android.app.admin.DeviceControlManager.setCustomSettingsMenu(android.content.ComponentName,java.util.List<java.lang.String>)
+    public boolean com.huawei.android.app.admin.DeviceControlManager.setDefaultDataCard(android.content.ComponentName,int,android.os.Message)
+    public void com.huawei.android.app.admin.DeviceControlManager.setDefaultLauncher(android.content.ComponentName,java.lang.String,java.lang.String)
+    public boolean com.huawei.android.app.admin.DeviceControlManager.setDefaultVoiceAssistant(android.content.ComponentName,java.lang.String,java.util.ArrayList<java.lang.String>)
+    public boolean com.huawei.android.app.admin.DeviceControlManager.setDelayDeactiveDeviceAdmin(android.content.ComponentName,int,android.content.Context)
+    public boolean com.huawei.android.app.admin.DeviceControlManager.setDeviceName(android.content.ComponentName,java.lang.String)
+    public void com.huawei.android.app.admin.DeviceControlManager.setDeviceOwnerApp(android.content.ComponentName,java.lang.String)
+    public boolean com.huawei.android.app.admin.DeviceControlManager.setForcedActiveDeviceAdmin(android.content.ComponentName,android.content.Context)
+    public boolean com.huawei.android.app.admin.DeviceControlManager.setMediaControlDisabled(android.content.ComponentName,boolean)
+    public boolean com.huawei.android.app.admin.DeviceControlManager.setQuickLaunchApp(android.content.ComponentName,android.content.ComponentName)
+    public void com.huawei.android.app.admin.DeviceControlManager.setSilentActiveAdmin(android.content.ComponentName)
+    public boolean com.huawei.android.app.admin.DeviceControlManager.setSleepTimeIntervalAfterPowerOn(android.content.ComponentName,int)
+    public void com.huawei.android.app.admin.DeviceControlManager.setSysTime(android.content.ComponentName,long)
+    public boolean com.huawei.android.app.admin.DeviceControlManager.setSystemLanguage(android.content.ComponentName,java.util.Locale)
+    public void com.huawei.android.app.admin.DeviceControlManager.shutdownDevice(android.content.ComponentName)
+    public java.lang.String java.lang.Object.toString()
+    public boolean com.huawei.android.app.admin.DeviceControlManager.turnOnAutoRotation(android.content.ComponentName,boolean)
+    public boolean com.huawei.android.app.admin.DeviceControlManager.turnOnCCMode(android.content.ComponentName,boolean)
+    public void com.huawei.android.app.admin.DeviceControlManager.turnOnConnectionAlwaysOn(android.content.ComponentName,boolean)
+    public boolean com.huawei.android.app.admin.DeviceControlManager.turnOnEyeComfort(android.content.ComponentName,boolean)
+    public boolean com.huawei.android.app.admin.DeviceControlManager.turnOnEyesProtect(android.content.ComponentName,int,boolean)
+    public void com.huawei.android.app.admin.DeviceControlManager.turnOnGPS(android.content.ComponentName,boolean)
+    public void com.huawei.android.app.admin.DeviceControlManager.turnOnMobiledata(android.content.ComponentName,boolean)
+    public boolean com.huawei.android.app.admin.DeviceControlManager.turnOnScreenCast(android.content.ComponentName,boolean)
+    public boolean com.huawei.android.app.admin.DeviceControlManager.turnOnUsbDebugMode(android.content.ComponentName,boolean)
+    public boolean com.huawei.android.app.admin.DeviceControlManager.turnOnUsbTethering(android.content.ComponentName,boolean)
+    public boolean com.huawei.android.app.admin.DeviceControlManager.unmountUsbDevices(android.content.ComponentName,java.lang.String)
+    public final void java.lang.Object.wait() throws java.lang.InterruptedException
+    public final void java.lang.Object.wait(long) throws java.lang.InterruptedException
+    public final native void java.lang.Object.wait(long,int) throws java.lang.InterruptedException
+  method count                         = 62
+
+==== INTERESTING MDM METHODS ====
+    ** public void com.huawei.android.app.admin.DeviceControlManager.clearDeviceOwnerApp()
+    ** public long com.huawei.android.app.admin.DeviceControlManager.getDeviceAdminDeactiveTime(android.content.ComponentName)
+    ** public boolean com.huawei.android.app.admin.DeviceControlManager.installCertificateWithType(android.content.ComponentName,int,byte[],java.lang.String,java.lang.String,int,boolean)
+    ** public boolean com.huawei.android.app.admin.DeviceControlManager.isForcedActiveDeviceAdmin(android.content.ComponentName)
+    ** public boolean com.huawei.android.app.admin.DeviceControlManager.removeActiveDeviceAdmin(android.content.ComponentName)
+    ** public boolean com.huawei.android.app.admin.DeviceControlManager.setDelayDeactiveDeviceAdmin(android.content.ComponentName,int,android.content.Context)
+    ** public void com.huawei.android.app.admin.DeviceControlManager.setDeviceOwnerApp(android.content.ComponentName,java.lang.String)
+    ** public boolean com.huawei.android.app.admin.DeviceControlManager.setForcedActiveDeviceAdmin(android.content.ComponentName,android.content.Context)
+    ** public void com.huawei.android.app.admin.DeviceControlManager.setSilentActiveAdmin(android.content.ComponentName)
+
+==== MDM AUTO PROBE (tap-free) ====
+  admin component                      = com.lzplay.revive/com.lzplay.revive.AdminReceiver
+  isAdminActive @start                 = true
+  isDeviceOwnerApp @start              = false
+  com.huawei.android.app.admin.DeviceControlManager = FOUND
+  instantiated                         = yes (no-arg ctor)
+
+==== READ-ONLY CANARIES (no side effects) ====
+    isRooted                           = THREW java.lang.SecurityException: does not have device_manager MDM permission!: Neither user 10225 nor current process has com.huawei.permission.sec.MDM_DEVICE_MANAGER.
+    getDeviceName                      = returned UNKNOWN  (1 ms)
+    isGPSTurnOn                        = returned true  (0 ms)
+    isForcedActiveDeviceAdmin          = THREW java.lang.SecurityException: does not have device_manager MDM permission!: Neither user 10225 nor current process has com.huawei.permission.sec.MDM_DEVICE_MANAGER.
+
+==== WRITE PATH: silent / forced activation ====
+    setSilentActiveAdmin               = returned null  (0 ms)
+    isAdminActive now                  = true
+    setForcedActiveDeviceAdmin         = THREW java.lang.SecurityException: does not have device_manager MDM permission!: Neither user 10225 nor current process has com.huawei.permission.sec.MDM_DEVICE_MANAGER.
+    isAdminActive now                  = true
+    setDelayDeactiveDeviceAdmin        = THREW java.lang.IllegalArgumentException: delayTime illegal is out of range of [1, 72] (too low)
+
+==== WRITE PATH: device owner ====
+    setDeviceOwnerApp                  = THREW java.lang.SecurityException: does not have device_manager MDM permission!: Neither user 10225 nor current process has com.huawei.permission.sec.MDM_DEVICE_OWNER.
+    isDeviceOwnerApp now               = false
+
+==== INSTALL-RELATED METHODS PRESENT ====
+    public boolean com.huawei.android.app.admin.DeviceControlManager.addBackgroundPopUpWindowTrustList(android.content.ComponentName,java.util.ArrayList<java.lang.String>)
+    public java.util.ArrayList<java.lang.String> com.huawei.android.app.admin.DeviceControlManager.getBackgroundPopUpWindowTrustList(android.content.ComponentName)
+    public boolean com.huawei.android.app.admin.DeviceControlManager.installCertificateWithType(android.content.ComponentName,int,byte[],java.lang.String,java.lang.String,int,boolean)
+    public boolean com.huawei.android.app.admin.DeviceControlManager.removeBackgroundPopUpWindowTrustList(android.content.ComponentName,java.util.ArrayList<java.lang.String>)
+
+==== MDM AUTO PROBE DONE ====
+  isAdminActive @end                   = true
+  isDeviceOwnerApp @end                = false
+  auto-install                         = 1 APK(s) staged, running install
+
+==== INSTALL GMS PACKAGES FROM FOLDER ====
+  folder                               = /storage/emulated/0/Android/data/com.lzplay.revive/files/gms
+  device owner                         = false
+[install] test-install.apk -> /storage/emulated/0/Android/data/com.lzplay.revive/files/gms/test-install.apk
+  [install] bytes written              = 16850
+[install] session committed for test-install.apk
+  提示: 若非 Device Owner，系统会弹出安装确认框，需手动点确认。
+
+==== GSF ID ====
+  <empty>  — com.google.android.gsf 未安装，或 READ_GSERVICES 未授予
+  说明：必须先把 GSF 装进来，才拿得到 GSF ID。
+
+--- generated 2026-09-26 00:24:13 ---
