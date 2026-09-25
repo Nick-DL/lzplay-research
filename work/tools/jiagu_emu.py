@@ -124,14 +124,20 @@ class JiaguHarness:
 
     # --------------------------------------------------------------- stubs
     def _stub_page(self):
+        """One 16-byte trampoline per external symbol.  The area must be big enough
+        for every relocated symbol or later symbols land outside the mapping and the
+        emulator silently returns a garbage value."""
+        STUB_BASE = 0x50000000
+        STUB_AREA = PAGE * 256          # room for 4096 stubs
         if not hasattr(self, '_stub_cur'):
-            self._stub_cur = 0x50000000
-            self.uc.mem_map(0x50000000, PAGE * 16, UC_PROT_ALL)
+            self._stub_cur = STUB_BASE
+            self.uc.mem_map(STUB_BASE, STUB_AREA, UC_PROT_ALL)
+            self.uc.mem_write(STUB_BASE, b'\x00' * STUB_AREA)
         p = self._stub_cur
-        if p + 16 > 0x50000000 + PAGE * 16:
+        if p + 16 > STUB_BASE + STUB_AREA:
             raise UcError('stub area exhausted')
         self._stub_cur += 16
-        # int3; ret  -> we intercept at the hook and skip
+        # int3; ret  -> intercepted by the code hook, which skips it
         self.uc.mem_write(p, b'\xcc' + b'\xc3' + b'\x00' * 14)
         return p
 
