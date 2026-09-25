@@ -96,6 +96,9 @@ public class MainActivity extends Activity {
         row2.addView(btn("华为接口探测", new Runnable() {
             @Override public void run() { runEnvironmentProbe(); }
         }));
+        row2.addView(btn("安装 GMS 包", new Runnable() {
+            @Override public void run() { installFromFolder(); }
+        }));
         row2.addView(btn("保存报告", new Runnable() {
             @Override public void run() { saveReport(); }
         }));
@@ -105,6 +108,40 @@ public class MainActivity extends Activity {
         col.addView(row1);
         col.addView(row2);
         return col;
+    }
+
+    /**
+     * Install every .apk found in the app's external files dir /gms.
+     * Put the GMS packages there via:
+     *   adb push *.apk /sdcard/Android/data/com.lzplay.revive/files/gms/
+     */
+    private void installFromFolder() {
+        LzLog.get().section("INSTALL GMS PACKAGES FROM FOLDER");
+        File dir = getExternalFilesDir(null);
+        if (dir == null) {
+            LzLog.get().add("  external files dir unavailable");
+            return;
+        }
+        File gms = new File(dir, "gms");
+        LzLog.get().kv("folder", gms.getAbsolutePath());
+        if (!gms.isDirectory()) {
+            boolean made = gms.mkdirs();
+            LzLog.get().add("  folder missing, mkdirs=" + made);
+            LzLog.get().add("  用法: adb push *.apk " + gms.getAbsolutePath() + "/");
+            return;
+        }
+        File[] apks = gms.listFiles();
+        if (apks == null || apks.length == 0) {
+            LzLog.get().add("  no .apk in folder");
+            LzLog.get().add("  用法: adb push *.apk " + gms.getAbsolutePath() + "/");
+            return;
+        }
+        LzLog.get().kv("device owner", ApkInstaller.isDeviceOwner(this));
+        for (File f : apks) {
+            if (!f.getName().toLowerCase().endsWith(".apk")) continue;
+            ApkInstaller.install(this, f, f.getName());
+        }
+        LzLog.get().add("  提示: 若非 Device Owner，系统会弹出安装确认框，需手动点确认。");
     }
 
     private Button btn(String label, final Runnable action) {

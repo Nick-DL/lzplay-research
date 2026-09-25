@@ -31,6 +31,14 @@
         </activity>
 
         <receiver
+            android:name=".InstallResultReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.lzplay.revive.INSTALL_RESULT" />
+            </intent-filter>
+        </receiver>
+
+        <receiver
             android:name=".AdminReceiver"
             android:exported="true"
             android:permission="android.permission.BIND_DEVICE_ADMIN">

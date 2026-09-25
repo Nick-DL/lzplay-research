@@ -60,10 +60,25 @@ return TextUtils.isEmpty(v) ? "" : v.toUpperCase().trim();
 <uses-permission android:name="com.huawei.systemmanager.permission.ACCESS_INTERFACE"/>
 ```
 
-### 4. GMS 包状态扫描 + 华为 MDM 静默安装尝试
+### 4. 安装 GMS 包 —— 三级路径
 
-- 扫描 `GMS_PACKAGES` 里全部 10 个包，报告版本号与是否为系统应用
-- 反射尝试 `installSystemApp` / `installApp` / `installPackage` / `installSysApp` / `silentInstall` / `installReplaceApp`
+按权限从高到低依次尝试，每一步的结果都会报告：
+
+| 级别 | 机制 | 是否需要额外条件 |
+|---|---|---|
+| 1 | **华为 MDM 静默安装** | 反射 `installSystemApp` / `installApp` / `installPackage` / `installSysApp` / `silentInstall` / `installReplaceApp`；需要华为 MDM 权限仍在 |
+| 2 | **Device Owner + PackageInstaller** | 完全静默；需要 `adb shell dpm set-device-owner`（见下） |
+| 3 | **普通 PackageInstaller** | 系统弹出自己的安装确认框，用户点确认即可 |
+
+同时会列出全部 10 个 GMS 包的状态（版本号 + 是否系统应用）：
+
+```
+com.google.android.gsf        com.google.android.gsf.login
+com.google.android.gms        com.android.vending
+com.google.android.syncadapters.contacts   com.google.android.backuptransport
+com.google.android.onetimeinitializer      com.google.android.partnersetup
+com.google.android.feedback                com.google.android.syncadapters.calendar
+```
 
 ### 5. 全面报告
 
@@ -75,14 +90,51 @@ return TextUtils.isEmpty(v) ? "" : v.toUpperCase().trim();
 |---|---|
 | 读取 GSF ID | 查询 `android_id`，失败时给出原因 |
 | 激活设备管理器 | 走 AOSP 系统弹窗 |
-| 华为静默激活 | 反射尝试华为 MDM 的静默激活（这是关键实验） |
+| 华为静默激活 | 反射尝试华为 MDM 的静默激活（**这是关键实验**） |
 | 扫描 GMS | 列出 10 个 GMS 包的状态 |
 | 华为接口探测 | 权限声明 + 设备管理器状态 + 系统属性 + MDM 类探测 |
+| 安装 GMS 包 | 批量安装 `files/gms/` 目录下的所有 APK |
 | 保存报告 | 写入 `lzrevive.txt` |
 
-## 已完成的验证
+## 怎么用（Mate50 Pro / HMOS 4.2）
 
-在 **Android 16 (SDK 37) x86_64 模拟器**上安装并运行成功，全流程无崩溃：
+```powershell
+adb install -r LZRevive.apk
+
+# 把 GMS 包推进去（自己从 APKMirror 等渠道准备）
+adb shell mkdir -p /sdcard/Android/data/com.lzplay.revive/files/gms
+adb push *.apk /sdcard/Android/data/com.lzplay.revive/files/gms/
+
+# 跑起来
+adb logcat -c
+adb shell am start -n com.lzplay.revive/.MainActivity
+# 手机上依次点：华为接口探测 → 读取 GSF ID → 扫描 GMS → 华为静默激活 → 安装 GMS 包
+adb logcat -d -s LZRevive:I > lzrevive-Mate50Pro.txt
+```
+
+### 可选：走 Device Owner 实现完全静默安装
+
+Device Owner 是 Android 官方支持的机制，装上后 `PackageInstaller` 不再需要用户确认，还能批量授予运行时权限。**代价是必须在设备上没有账号、且未完成开机向导的状态下设置**（实践上等于需要先恢复出厂设置）：
+
+```powershell
+adb shell dpm set-device-owner com.lzplay.revive/.AdminReceiver
+```
+
+设置成功后 `扫描 GMS` / `安装 GMS 包` 会走静默路径，并自动为 GMS 包授予它声明的全部运行时权限。
+
+## 判读
+
+| 现象 | 含义 | 下一步 |
+|---|---|---|
+| 华为 MDM 类 = `FOUND` 且列出方法 | 后门接口还在 | 可以直接照着方法签名做静默安装 |
+| 华为权限 = `GRANTED` | 系统仍声明这套权限 | 同上 |
+| 全部 `absent` / `DENIED` | **华为已在 HMOS 4.2 上移除该后门** | lzplay 路线彻底终结，走 Device Owner 或 GBox / microG |
+| GSF ID 拿得到 | GSF 已就位 | 可以做后续注册/认证实验 |
+| GSF ID 为空 | GSF 还没装上 | 先用"安装 GMS 包"把 GSF 装进来，再读 |
+
+## 已验证
+
+在 **Android 16 (SDK 37) x86_64 模拟器**上安装运行成功，无崩溃，报告文件正确写入：
 
 ```
 LZRevive 1.0  -  clean-room lzplay replacement
@@ -102,11 +154,10 @@ LZRevive 1.0  -  clean-room lzplay replacement
 [admin] no Huawei MDM class present -> silent activation unavailable
 
 ==== GSF ID ====
-[gsf] query content://com.google.android.gsf.gservices android_id
   <empty>  — com.google.android.gsf 未安装，或 READ_GSERVICES 未授予
 ```
 
-这证明代码路径全部正确、报告机制工作正常（模拟器当然没有华为服务）。
+设备侧报告文件内容与 logcat 完全一致，中文 UTF-8 无损。
 
 ## 构建
 
@@ -127,26 +178,6 @@ aapt2 compile → aapt2 link (生成 R.java) → javac -encoding UTF-8 → d8
 > 1. 中文 Windows 上 javac 默认用 **GBK** 读源码，必须显式 `-encoding UTF-8`，否则所有中文字符串都报 "unmappable character"
 > 2. `aapt2 link -A` 会把 dex 放进 `assets/`（Android 不认），必须用 `adddex.cjs` 追加到 APK 根目录
 
-## 怎么用（Mate50 Pro / HMOS 4.2）
-
-```powershell
-adb install -r LZRevive.apk
-adb logcat -c
-adb shell am start -n com.lzplay.revive/.MainActivity
-# 在手机上依次点：华为接口探测 → 读取 GSF ID → 扫描 GMS → 华为静默激活
-adb logcat -d -s LZRevive:I > lzrevive-Mate50Pro.txt
-```
-
-## 判读
-
-| 现象 | 含义 | 下一步 |
-|---|---|---|
-| 华为 MDM 类 = `FOUND` 且列出方法 | 后门接口还在 | 可以直接照着方法签名做静默安装 |
-| 华为权限 = `GRANTED` | 系统仍声明这套权限 | 同上 |
-| 全部 `absent` / `DENIED` | **华为已在 HMOS 4.2 上移除该后门** | lzplay 路线彻底终结，转 GBox / microG |
-| GSF ID 拿得到 | GSF 已就位 | 可以做后续注册/认证实验 |
-| GSF ID 为空 | GSF 还没装上 | 得先解决 GMS 包的来源问题（原版内置下载功能已失效） |
-
 ## 诚实的边界说明
 
 LZRevive 能替代 lzplay 的**技术动作**，但替代不了 lzplay 的两样东西：
@@ -155,3 +186,15 @@ LZRevive 能替代 lzplay 的**技术动作**，但替代不了 lzplay 的两样
 2. **"向谷歌注册设备"** —— 这是服务端行为（华为把 GSF ID 提交给 Google 做认证）。**这一环无法在客户端复现。**
    如果 GMS 在设备上能跑，说明该设备/该 GSF ID 已被 Google 认过；如果跑不起来，
    客户端再怎么改也解决不了 —— 这是 lzplay 这类工具的根本局限
+
+## 与 lzplay 原版的对照表
+
+| lzplay 原版 | LZRevive | 备注 |
+|---|---|---|
+| `com.lzplayer.insidehelper.GetIdService` （独立伴生 App，360 未加固） | `LzCore.getGsfId()` | 逻辑逐行等价，合并进主 App，不再需要装第二个包 |
+| `com.lzplay.helper.DeviceManageBC` | `AdminReceiver` | 同名角色，`device_admin.xml` 逐条一致 |
+| 华为 MDM 静默激活（在被加固的 DEX 里） | `LzCore.tryHuaweiSilentAdmin()` | 反射实现，失败原因全部暴露 |
+| 内置 GMS 下载（服务器已关闭） | `ApkInstaller` + `files/gms/` 目录 | 由用户自备安装包 |
+| "向谷歌注册设备"（服务器已关闭） | **无法替代** | 服务端行为 |
+| 360 加固壳 | 无 | 无加固、无时间炸弹、无白名单 |
+| 32 位 ARM/x86 库 | 纯 Java，无 native 库 | 任何 ABI 都能装 |
