@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Kept only so aapt2 has at least one resource to compile. -->
+<resources>
+    <string name="app_name">LZRevive</string>
+</resources>

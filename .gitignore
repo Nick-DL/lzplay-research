@@ -25,6 +25,11 @@ work/carve/
 work/native/insidehelper.apk
 work/probe_out/
 work/inside/
+work/pylibs/
+
+# --- per-project build dirs produced by build_apk.ps1 ---
+work/*/build/
+work/__pycache__/
 
 # --- extracted/unpacked APK contents (regenerable from the APK) ---
 work/apktool_out/
