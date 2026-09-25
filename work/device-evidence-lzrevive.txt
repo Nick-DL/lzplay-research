@@ -7,7 +7,7 @@
   com.huawei.permission.sec.MDM_INSTALL_SYS_APP = DENIED (permission not defined by platform, or not held)
   com.huawei.permission.sec.MDM_INSTALL_UNDETACHABLE_APP = DENIED (permission not defined by platform, or not held)
   com.huawei.systemmanager.permission.ACCESS_INTERFACE = DENIED (permission not defined by platform, or not held)
-  com.google.android.providers.gsf.permission.READ_GSERVICES = DENIED (permission not defined by platform, or not held)
+  com.google.android.providers.gsf.permission.READ_GSERVICES = GRANTED
 
 ==== DEVICE ADMIN / OWNER STATE ====
   isAdminActive                        = true
@@ -177,8 +177,8 @@
 
 ==== READ-ONLY CANARIES (no side effects) ====
     isRooted                           = THREW java.lang.SecurityException: does not have device_manager MDM permission!: Neither user 10225 nor current process has com.huawei.permission.sec.MDM_DEVICE_MANAGER.
-    getDeviceName                      = returned UNKNOWN  (1 ms)
-    isGPSTurnOn                        = returned true  (0 ms)
+    getDeviceName                      = returned UNKNOWN  (0 ms)
+    isGPSTurnOn                        = returned true  (1 ms)
     isForcedActiveDeviceAdmin          = THREW java.lang.SecurityException: does not have device_manager MDM permission!: Neither user 10225 nor current process has com.huawei.permission.sec.MDM_DEVICE_MANAGER.
 
 ==== WRITE PATH: silent / forced activation ====
@@ -201,6 +201,69 @@
 ==== MDM AUTO PROBE DONE ====
   isAdminActive @end                   = true
   isDeviceOwnerApp @end                = false
+
+==== SIBLING-APP GATE PROBE (DevicePackageManager.getSysAppList) ====
+  com.huawei.android.app.admin.DevicePackageManager = FOUND  methods=30  from=<bootstrap / framework>
+  com.huawei.android.app.admin.DeviceControlManager = FOUND  methods=53  from=<bootstrap / framework>
+  com.huawei.android.app.admin.DeviceHwSystemManager = FOUND  methods=19  from=<bootstrap / framework>
+  com.huawei.android.app.admin.DeviceApplicationManager = FOUND  methods=35  from=<bootstrap / framework>
+  com.huawei.android.util.NoExtAPIException = FOUND  methods=0  from=<bootstrap / framework>
+  DevicePackageManager classloader     = java.lang.BootClassLoader@52a2a01
+  declared methods:
+      private java.lang.String com.huawei.android.app.admin.DevicePackageManager.buildValueSrting(java.util.Map<java.lang.String, java.lang.String>,boolean,boolean)
+      private java.util.ArrayList<java.lang.String> com.huawei.android.app.admin.DevicePackageManager.filterListPkg(android.content.ComponentName,java.util.ArrayList<java.lang.String>)
+      private java.lang.String com.huawei.android.app.admin.DevicePackageManager.findValueFromBundle(android.os.Bundle,java.lang.String)
+      private java.lang.String com.huawei.android.app.admin.DevicePackageManager.formatSysAppData(java.lang.String,java.lang.String,boolean)
+      public boolean com.huawei.android.app.admin.DevicePackageManager.addAllowNotificationApps(android.content.ComponentName,java.util.ArrayList<java.lang.String>)
+      public void com.huawei.android.app.admin.DevicePackageManager.addDisabledDeactivateMdmPackages(android.content.ComponentName,java.util.List<java.lang.String>)
+      public void com.huawei.android.app.admin.DevicePackageManager.addDisallowedUninstallPackages(android.content.ComponentName,java.util.List<java.lang.String>)
+      public void com.huawei.android.app.admin.DevicePackageManager.addInstallPackageTrustList(android.content.ComponentName,java.util.List<java.lang.String>)
+      public void com.huawei.android.app.admin.DevicePackageManager.addInstallPackageWhiteList(android.content.ComponentName,java.util.List<java.lang.String>)
+      public void com.huawei.android.app.admin.DevicePackageManager.clearPackageData(android.content.ComponentName,java.lang.String)
+      public void com.huawei.android.app.admin.DevicePackageManager.disableInstallSource(android.content.ComponentName,java.util.List<java.lang.String>)
+      public void com.huawei.android.app.admin.DevicePackageManager.enableInstallPackage(android.content.ComponentName)
+      public java.util.ArrayList<java.lang.String> com.huawei.android.app.admin.DevicePackageManager.getAllowNotificationApps(android.content.ComponentName)
+      public java.util.List<java.lang.String> com.huawei.android.app.admin.DevicePackageManager.getDisabledDeactivateMdmPackageList(android.content.ComponentName)
+      public java.util.List<java.lang.String> com.huawei.android.app.admin.DevicePackageManager.getDisallowedUninstallPackageList(android.content.ComponentName)
+      public java.util.List<java.lang.String> com.huawei.android.app.admin.DevicePackageManager.getInstallPackageSourceTrustList(android.content.ComponentName)
+      public java.util.List<java.lang.String> com.huawei.android.app.admin.DevicePackageManager.getInstallPackageSourceWhiteList(android.content.ComponentName)
+      public java.util.List<java.lang.String> com.huawei.android.app.admin.DevicePackageManager.getInstallPackageTrustList(android.content.ComponentName)
+      public java.util.List<java.lang.String> com.huawei.android.app.admin.DevicePackageManager.getInstallPackageWhiteList(android.content.ComponentName)
+      public java.util.List<java.lang.String> com.huawei.android.app.admin.DevicePackageManager.getSysAppList(android.content.ComponentName,java.util.List<java.lang.String>)
+      public void com.huawei.android.app.admin.DevicePackageManager.installBundle(android.content.ComponentName,java.util.List<android.net.Uri>)
+      public void com.huawei.android.app.admin.DevicePackageManager.installPackage(android.content.ComponentName,java.lang.String)
+      public boolean com.huawei.android.app.admin.DevicePackageManager.isInstallSourceDisabled(android.content.ComponentName)
+      public boolean com.huawei.android.app.admin.DevicePackageManager.removeAllowNotificationApps(android.content.ComponentName,java.util.ArrayList<java.lang.String>)
+      public void com.huawei.android.app.admin.DevicePackageManager.removeDisabledDeactivateMdmPackages(android.content.ComponentName,java.util.List<java.lang.String>)
+      public void com.huawei.android.app.admin.DevicePackageManager.removeDisallowedUninstallPackages(android.content.ComponentName,java.util.List<java.lang.String>)
+      public void com.huawei.android.app.admin.DevicePackageManager.removeInstallPackageTrustList(android.content.ComponentName,java.util.List<java.lang.String>)
+      public void com.huawei.android.app.admin.DevicePackageManager.removeInstallPackageWhiteList(android.content.ComponentName,java.util.List<java.lang.String>)
+      public void com.huawei.android.app.admin.DevicePackageManager.setSysAppList(android.content.ComponentName,java.util.Map<java.lang.String, java.lang.String>,android.os.Bundle)
+      public void com.huawei.android.app.admin.DevicePackageManager.uninstallPackage(android.content.ComponentName,java.lang.String,boolean)
+
+==== CALLING getSysAppList EXACTLY LIKE THE APP DOES ====
+  getSysAppList                        = returned []
+
+==== DeviceControlManager: does IT have getSysAppList? ====
+      no getSysAppList on DeviceControlManager
+
+==== GSF PROVIDER RAW PROBE ====
+  open provider (null projection)      = NULL cursor
+  key android_id                       = null cursor
+  key checkin_interval                 = null cursor
+  key digest                           = null cursor
+  key device_country                   = null cursor
+  key google_login                     = null cursor
+
+==== GSF / GMS HEALTH ====
+  process com.google.android.gsf       = not running
+  process com.google.android.gms       = not running
+  process com.google.process.gapps     = not running
+  process com.android.vending          = not running
+  com.google.android.gsf               = v10 not-system user-installed
+  com.google.android.gms               = v20.06.15 (100408-294478903) not-system user-installed
+  com.android.vending                  = v18.8.16-all [0] [PR] 294806574 not-system user-installed
+  com.google.android.syncadapters.contacts = v10 not-system user-installed
   auto-install                         = 1 APK(s) staged, running install
 
 ==== INSTALL GMS PACKAGES FROM FOLDER ====
@@ -215,4 +278,4 @@
   <empty>  — com.google.android.gsf 未安装，或 READ_GSERVICES 未授予
   说明：必须先把 GSF 装进来，才拿得到 GSF ID。
 
---- generated 2026-09-26 00:24:13 ---
+--- generated 2026-09-26 01:02:54 ---

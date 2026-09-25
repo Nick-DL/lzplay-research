@@ -1,0 +1,403 @@
+﻿
+09-26 01:03:12.591  2926  5128 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.591  2926  5128 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.592  2926  5128 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.592  2926  5128 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.599  2926  5128 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.599  2926  5128 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.600  2926  5128 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.600  2926  5128 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.611  2926  4341 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.611  2926  4341 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.614  2926  4341 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.614  2926  4341 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.614  2926  4341 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.614  2926  4341 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.615  2926  4341 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.615  2926  4341 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.616  2926  4341 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.616  2926  4341 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.618  2926  4341 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.618  2926  4341 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.619  2926  4341 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.619  2926  4341 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.620  2926  4341 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.620  2926  4341 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.621  2926  4341 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.621  2926  4341 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.627  2926  4341 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.627  2926  4341 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.628  2926  4341 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.628  2926  4341 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.628  2926  4323 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.628  2926  4323 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.629  2926  4323 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.629  2926  4323 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.630  2926  4323 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.630  2926  4323 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.630  2926  4323 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.630  2926  4323 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.631  2926  4323 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.631  2926  4323 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.632  2926  4323 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.632  2926  4323 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.632  2926  4323 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.632  2926  4323 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.633  2926  4323 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.633  2926  4323 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.633  2926  4323 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.633  2926  4323 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.634  2926  4323 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.634  2926  4323 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.634  2926  4323 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.634  2926  4323 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.634  2926  4323 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.634  2926  4323 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.635  2926  4323 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.635  2926  4323 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.635  2926  4323 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.635  2926  4323 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.636  2926  4323 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.636  2926  4323 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.636  2926  4323 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.636  2926  4323 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.636  2926  4323 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.637  2926  4323 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.637  2926  4323 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.637  2926  4323 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.637  2926  4323 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.637  2926  4323 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.638  2926  4323 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.638  2926  4323 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.638  2926  4323 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.638  2926  4323 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.639  2926  4323 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.639  2926  4323 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.639  2926  4323 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.639  2926  4323 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.640  2926  4323 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.640  2926  4323 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.640  2926  4323 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.640  2926  4323 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.641  2926  4323 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.641  2926  4323 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.641  2926  4323 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.641  2926  4323 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.641  2926  4341 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.641  2926  4341 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.642  2926  4341 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.642  2926  4341 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.642  2926  4341 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.642  2926  4341 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.643  2926  4341 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.643  2926  4341 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.643  2926  4341 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.643  2926  4341 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.644  2926  4341 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.644  2926  4341 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.644  2926  4341 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.644  2926  4341 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.644  2926  4341 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.644  2926  4341 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.645  2926  4341 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.645  2926  4341 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.645  2926  4341 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.645  2926  4341 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.646  2926  4341 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.646  2926  4341 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.646  2926  4341 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.646  2926  4341 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.646  2926  4341 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.646  2926  4341 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.647  2926  4341 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.647  2926  4341 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.647  2926  4341 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.647  2926  4341 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.648  2926  4341 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.648  2926  4341 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.648  2926  4341 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.648  2926  4341 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.648  2926  4341 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.648  2926  4341 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.649  2926  4341 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.649  2926  4341 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.649  2926  4341 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.649  2926  4341 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.652  2926  4341 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.652  2926  4341 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.653  2926  4341 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.653  2926  4341 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.653  2926  4341 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.653  2926  4341 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.653  2926  4341 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.653  2926  4341 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.654  2926  4341 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.654  2926  4341 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.655  2926  4341 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.655  2926  4341 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.655  2926  4341 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.655  2926  4341 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.657  2926  4341 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.657  2926  4341 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.657  2926  4341 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.657  2926  4341 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.658  2926  4341 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.658  2926  4341 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.659  2926  4341 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.659  2926  4341 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.661  2926  4341 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.661  2926  4341 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.663  2926  4323 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.663  2926  4323 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.665  2926  4323 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.665  2926  4323 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.665  2926  4323 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.665  2926  4323 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.666  2926  4323 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.666  2926  4323 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.666  2926  4323 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.666  2926  4323 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.666  2926  4323 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.666  2926  4323 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.667  2926  4323 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.667  2926  4323 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.667  2926  4323 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.667  2926  4323 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.668  2926  4341 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.668  2926  4341 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.668  2926  4341 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.668  2926  4341 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.669  2926  4341 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.669  2926  4341 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.669  2926  4341 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.669  2926  4341 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.670  2926  4341 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.670  2926  4341 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.670  2926  4341 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.670  2926  4341 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.670  2926  4341 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.670  2926  4341 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.671  2926  4341 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.671  2926  4341 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.671  2926  4341 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.671  2926  4341 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.672  2926  4341 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.672  2926  4341 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.672  2926  4341 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.672  2926  4341 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.672  2926  4341 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.672  2926  4341 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.673  2926  4341 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.673  2926  4341 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.673  2926  4341 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.673  2926  4341 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.673  2926  4341 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.674  2926  4341 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.674  2926  4341 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.674  2926  4341 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.675  2926  4341 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.675  2926  4341 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+09-26 01:03:12.675  2926  4341 I HwActivityManagerServiceEx: provider is prevented for iaware
+09-26 01:03:12.675  2926  4341 E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider name:com.google
+.android.gsf.gservices cpi:ContentProviderInfo{name=com.google.android.gsf.gservices className=com.google.android.gsf.g
+services.GservicesProvider}
+
+
