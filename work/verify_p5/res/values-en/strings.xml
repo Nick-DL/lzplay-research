@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="Install_complete">Install Completed</string>
+    <string name="Installing">Installing...</string>
+    <string name="activate">Activate</string>
+    <string name="app_exit">Exit</string>
+    <string name="app_name">Travel Essentials</string>
+    <string name="authorize_guide">Please activate device manager first</string>
+    <string name="btn_refresh">Refresh</string>
+    <string name="btn_start">Start</string>
+    <string name="cancel">Cancel</string>
+    <string name="click_for_quit">Press again to exit.</string>
+    <string name="complete">Complete</string>
+    <string name="download_notice">Data network detected. Downloading this file will consume your mobile data. Continue downloading?</string>
+    <string name="error_res_install_repeat">Resource file error. Please retry your download.</string>
+    <string name="fix_now">Fix Now</string>
+    <string name="has_preset_app">Verified device environment. Please use roaming normally.</string>
+    <string name="home">Home</string>
+    <string name="home_done">Everything is OK.</string>
+    <string name="home_gms_error">Install error. Please install it again.</string>
+    <string name="home_repair">Reinstall</string>
+    <string name="incompatible">Your current device is not supported at this time.</string>
+    <string name="install_error">Installation failed,please try again.</string>
+    <string name="installing">Installing, please do not exit.May take a few minutes.</string>
+    <string name="network_notice">No network detected. Please check your network connection.</string>
+    <string name="new_guide">Detected a problem of supporting Google related services. This tool can fix it perfectly.</string>
+    <string name="new_version">New version detected!</string>
+    <string name="ok">OK</string>
+    <string name="reboot">Reboot</string>
+    <string name="reboot_phone_desc">Register succeeds，You need to reboot the phone. Reboot now?</string>
+    <string name="register_error">Registration failed,please try again.</string>
+    <string name="register_fail_notice">Device registration failed.To guarantee your security, go to your homepage and click “Register to Google” while you have a stable network connection.</string>
+    <string name="register_google">Register to Google</string>
+    <string name="register_net">Network error.Please check your network connection.</string>
+    <string name="registering">Your device is currently being registered.Please wait.</string>
+    <string name="request_error_json_parse">Server data parsing failed</string>
+    <string name="request_error_service_sign">Server digital signature check failed</string>
+    <string name="retry">Retry</string>
+    <string name="slogan">"Break through geographical limits.
+ Travel around the world."</string>
+    <string name="tip_start_play">It takes a few minutes to get registered.It will take effect later.</string>
+    <string name="tip_start_register_2">Please activate to ensure services run normally.</string>
+    <string name="titlebar_installing">Installing</string>
+    <string name="txt_continue">Continue</string>
+    <string name="uninstall_gms_notice">You need to manually uninstall any earlier versions of Google Service. Please click Uninstall on the pop-up page.</string>
+    <string name="uninstall_notice">An earlier version has been detected. The system will uninstall it and install the latest version.</string>
+    <string name="update_content">This version provides important security and stability updates.Update now!</string>
+    <string name="update_right_now">Update</string>
+</resources>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <cache-path name="app_cachePath" path="file" />
+    <external-path name="download_path" path="Android/data/com.x.plus.pro/cache/" />
+</paths>
