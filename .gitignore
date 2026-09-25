@@ -1,0 +1,38 @@
+# .gitignore for the lzplay revival workspace
+# Emulator images, tool blobs and quarantined native libs are large / AV-flagged.
+
+# --- emulator (6 GB of disk images, never commit) ---
+work/avd/
+work/android_home/
+work/tmp/
+
+# --- third-party tool blobs ---
+work/tools/*.jar
+work/tools/*.zip
+work/tools/*.whl
+work/tools/jadx_lib/
+work/tools/jadx_pom/
+work/tools/wheels/
+work/apktool_frame/
+
+# --- 360 Jiagu native libs: antivirus (Huorong) quarantines these on sight.
+# Only the .b64.gz copies are kept; see work/native/README-native.md
+work/native/*.so
+work/native/an/
+work/carve/
+
+# --- large generated artifacts ---
+work/native/insidehelper.apk
+work/probe_out/
+work/inside/
+
+# --- extracted/unpacked APK contents (regenerable from the APK) ---
+work/apktool_out/
+work/inner_decoded/
+
+# --- reports are kept, but the raw dumps are large ---
+work/class*/**_dex_dump.txt
+
+# --- misc ---
+*.log
+*.tmp

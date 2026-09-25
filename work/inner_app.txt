@@ -1,0 +1,1204 @@
+
+##############################################################################
+CLASS Lcom/lzplayer/insidehelper/GetIdService$1; extends Ljava/lang/Object;  (access=0x0, class_data_off=0x1bc2c0)
+##############################################################################
+
+  .method direct Lcom/lzplayer/insidehelper/GetIdService$1;-><init>
+      ; registers=2 ins=2 outs=1 tries=0 insns=6 @0x118844
+      000000: iput-object            v1, v0, Lcom/lzplayer/insidehelper/GetIdService$1;->a : Lcom/lzplayer/insidehelper/GetIdService;  ; idx=9400
+      000004: invoke-direct          {v0}, Ljava/lang/Object;-><init>  ; idx=15707
+      00000a: return-void            
+
+  .method public virtual <mcls#30137 OOB>-><mname>
+      ; registers=5 ins=1 outs=3 tries=0 insns=61 @0x118860
+      000000: const/16               v0, #+30
+      000004: if-lez                 v0, -> +35 (0x1188ba)
+      000008: iget-object            v1, v4, Lcom/lzplayer/insidehelper/GetIdService$1;->a : Lcom/lzplayer/insidehelper/GetIdService;  ; idx=9400
+      00000c: iget-object            v2, v4, Lcom/lzplayer/insidehelper/GetIdService$1;->a : Lcom/lzplayer/insidehelper/GetIdService;  ; idx=9400
+      000010: iget-object            v3, v4, Lcom/lzplayer/insidehelper/GetIdService$1;->a : Lcom/lzplayer/insidehelper/GetIdService;  ; idx=9400
+      000014: invoke-virtual         {v2, v3}, Lcom/lzplayer/insidehelper/GetIdService;->a  ; idx=15072
+      00001a: move-result-object     v2
+      00001c: invoke-static          {v1, v2}, Lcom/lzplayer/insidehelper/GetIdService;->a  ; idx=15074
+      000022: iget-object            v1, v4, Lcom/lzplayer/insidehelper/GetIdService$1;->a : Lcom/lzplayer/insidehelper/GetIdService;  ; idx=9400
+      000026: invoke-static          {v1}, Lcom/lzplayer/insidehelper/GetIdService;->a  ; idx=15073
+      00002c: move-result-object     v1
+      00002e: invoke-static          {v1}, Landroid/text/TextUtils;->isEmpty  ; idx=13384
+      000034: move-result            v1
+      000036: if-eqz                 v1, -> +10 (0x1188ba)
+      00003a: add-int/lit8           v0, v255, #+0
+      00003e: const-wide/16          v1, #+1000
+      000042: invoke-static          {v1, v2}, Landroid/os/SystemClock;->sleep  ; idx=1324
+      000048: goto                   -> -34 (0x118874)
+      00004a: new-instance           v0, Landroid/content/Intent;  ; idx=109
+      00004e: const-string           v1, "com.lzplay.helper.recev.sfid"  ; idx=8651
+      000052: invoke-direct          {v0, v1}, Landroid/content/Intent;-><init>  ; idx=526
+      000058: const-string           v1, "sf_id"  ; idx=16300
+      00005c: iget-object            v2, v4, Lcom/lzplayer/insidehelper/GetIdService$1;->a : Lcom/lzplayer/insidehelper/GetIdService;  ; idx=9400
+      000060: invoke-static          {v2}, Lcom/lzplayer/insidehelper/GetIdService;->a  ; idx=15073
+      000066: move-result-object     v2
+      000068: invoke-virtual         {v0, v1, v2}, Landroid/content/Intent;->putExtra  ; idx=554
+      00006e: iget-object            v4, v4, Lcom/lzplayer/insidehelper/GetIdService$1;->a : Lcom/lzplayer/insidehelper/GetIdService;  ; idx=9400
+      000072: invoke-virtual         {v4, v0}, Lcom/lzplayer/insidehelper/GetIdService;->sendBroadcast  ; idx=15078
+      000078: return-void            
+
+##############################################################################
+CLASS Lcom/lzplayer/insidehelper/GetIdService; extends Landroid/app/Service;  (access=0x1, class_data_off=0x1bc2d6)
+##############################################################################
+
+  .method direct Lcom/lzplayer/insidehelper/GetIdService;-><clinit>
+      ; registers=0 ins=0 outs=0 tries=0 insns=1 @0x118a60
+      000000: return-void            
+
+  .method direct Lcom/lzplayer/insidehelper/GetIdService;-><init>
+      ; registers=2 ins=1 outs=1 tries=0 insns=8 @0x118a74
+      000000: invoke-direct          {v1}, Landroid/app/Service;-><init>  ; idx=336
+      000006: const-string           v0, ""  ; idx=0
+      00000a: iput-object            v0, v1, Lcom/lzplayer/insidehelper/GetIdService;->d : Ljava/lang/String;  ; idx=9404
+      00000e: return-void            
+
+  .method direct Lcom/lzplayer/insidehelper/GetIdService;->a
+      ; registers=1 ins=1 outs=0 tries=0 insns=3 @0x118a30
+      000000: iget-object            v0, v0, Lcom/lzplayer/insidehelper/GetIdService;->d : Ljava/lang/String;  ; idx=9404
+      000004: return-object          v0
+
+  .method direct Lcom/lzplayer/insidehelper/GetIdService;->a
+      ; registers=2 ins=2 outs=0 tries=0 insns=3 @0x118a48
+      000000: iput-object            v1, v0, Lcom/lzplayer/insidehelper/GetIdService;->d : Ljava/lang/String;  ; idx=9404
+      000004: return-object          v1
+
+  .method public virtual <mcls#30146 OOB>-><mname>
+      ; registers=9 ins=2 outs=6 tries=1 insns=77 @0x118974
+      000000: const-string           v7, "content://com.google.android.gsf.gservices"  ; idx=8769
+      000004: invoke-static          {v7}, Landroid/net/Uri;->parse  ; idx=1145
+      00000a: move-result-object     v1
+      00000c: const-string           v7, ""  ; idx=0
+      000010: const-string           v6, ""  ; idx=0
+      000014: invoke-virtual         {v8}, Landroid/content/Context;->getContentResolver  ; idx=469
+      00001a: move-result-object     v0
+      00001c: const/4                v2, #0
+      00001e: const/4                v3, #0
+      000020: const-string           v8, "android_id"  ; idx=8175
+      000024: filled-new-array       {v8}, ref2145  ; idx=2145
+      00002a: move-result-object     v4
+      00002c: const/4                v5, #0
+      00002e: invoke-virtual/range   {v6..v5}, Landroid/content/ContentResolver;->query  ; idx=452
+      000034: move-result-object     v8
+      000036: if-nez                 v8, -> +5 (0x1189c4)
+      00003a: const-string           v7, ""  ; idx=0
+      00003e: return-object          v7
+      000040: invoke-interface       {v8}, Landroid/database/Cursor;->moveToFirst  ; idx=734
+      000046: move-result            v0
+      000048: if-eqz                 v0, -> +34 (0x118a10)
+      00004c: invoke-interface       {v8}, Landroid/database/Cursor;->getColumnCount  ; idx=723
+      000052: move-result            v0
+      000054: const/4                v1, #2
+      000056: if-ge                  v0, v1, -> +3 (0x1189e0)
+      00005a: goto                   -> +25 (0x118a10)
+      00005c: const/4                v0, #1
+      00005e: invoke-interface       {v8, v0}, Landroid/database/Cursor;->getString  ; idx=731
+      000064: move-result-object     v0
+      000066: invoke-interface       {v8}, Landroid/database/Cursor;->close  ; idx=722
+      00006c: invoke-static          {v0}, Landroid/text/TextUtils;->isEmpty  ; idx=13384
+      000072: move-result            v8
+      000074: if-nez                 v8, -> +10 (0x118a0c)
+      000078: invoke-virtual         {v0}, Ljava/lang/String;->toUpperCase  ; idx=15751
+      00007e: move-result-object     v7
+      000080: invoke-virtual         {v7}, Ljava/lang/String;->trim  ; idx=15753
+      000086: move-result-object     v7
+      000088: move-object            v6, v7
+      00008a: goto                   -> +7 (0x118a1c)
+      00008c: invoke-interface       {v8}, Landroid/database/Cursor;->close  ; idx=722
+      000092: const-string           v7, ""  ; idx=0
+      000096: return-object          v7
+      000098: return-object          v6
+
+  .method public virtual <mcls#30149 OOB>-><mname>
+      ; registers=2 ins=2 outs=2 tries=0 insns=8 @0x1188ec
+      000000: new-instance           v0, Ljava/lang/UnsupportedOperationException;  ; idx=1985
+      000004: const-string           v1, "Not yet implemented"  ; idx=5563
+      000008: invoke-direct          {v0, v1}, Ljava/lang/UnsupportedOperationException;-><init>  ; idx=15795
+      00000e: throw                  v0
+
+  .method public virtual <mcls#30150 OOB>-><mname>
+      ; registers=2 ins=1 outs=2 tries=0 insns=10 @0x118a94
+      000000: invoke-super           {v1}, Landroid/app/Service;->onCreate  ; idx=337
+      000006: invoke-virtual         {v1, v1}, Lcom/lzplayer/insidehelper/GetIdService;->a  ; idx=15072
+      00000c: move-result-object     v0
+      00000e: iput-object            v0, v1, Lcom/lzplayer/insidehelper/GetIdService;->d : Ljava/lang/String;  ; idx=9404
+      000012: return-void            
+
+  .method public virtual <mcls#30151 OOB>-><mname>
+      ; registers=7 ins=4 outs=4 tries=0 insns=44 @0x11890c
+      000000: iget-object            v0, v3, Lcom/lzplayer/insidehelper/GetIdService;->d : Ljava/lang/String;  ; idx=9404
+      000004: invoke-static          {v0}, Landroid/text/TextUtils;->isEmpty  ; idx=13384
+      00000a: move-result            v0
+      00000c: if-eqz                 v0, -> +16 (0x118948)
+      000010: new-instance           v0, Ljava/lang/Thread;  ; idx=1982
+      000014: new-instance           v1, Lcom/lzplayer/insidehelper/GetIdService$1;  ; idx=1823
+      000018: invoke-direct          {v1, v3}, Lcom/lzplayer/insidehelper/GetIdService$1;-><init>  ; idx=15068
+      00001e: invoke-direct          {v0, v1}, Ljava/lang/Thread;-><init>  ; idx=15779
+      000024: invoke-virtual         {v0}, Ljava/lang/Thread;->start  ; idx=15784
+      00002a: goto                   -> +18 (0x11896a)
+      00002c: new-instance           v0, Landroid/content/Intent;  ; idx=109
+      000030: const-string           v1, "com.lzplay.helper.recev.sfid"  ; idx=8651
+      000034: invoke-direct          {v0, v1}, Landroid/content/Intent;-><init>  ; idx=526
+      00003a: const-string           v1, "sf_id"  ; idx=16300
+      00003e: iget-object            v2, v3, Lcom/lzplayer/insidehelper/GetIdService;->d : Ljava/lang/String;  ; idx=9404
+      000042: invoke-virtual         {v0, v1, v2}, Landroid/content/Intent;->putExtra  ; idx=554
+      000048: invoke-virtual         {v3, v0}, Lcom/lzplayer/insidehelper/GetIdService;->sendBroadcast  ; idx=15078
+      00004e: invoke-super           {v3, v4, v5, v6}, Landroid/app/Service;->onStartCommand  ; idx=339
+      000054: move-result            v3
+      000056: return                 v3
+
+##############################################################################
+CLASS Lcom/lzplayer/insidehelper/MainActivity; extends Landroid/app/Activity;  (access=0x1, class_data_off=0x1bc314)
+##############################################################################
+
+  .method direct Lcom/lzplayer/insidehelper/MainActivity;-><init>
+      ; registers=1 ins=1 outs=1 tries=0 insns=4 @0x118ab8
+      000000: invoke-direct          {v0}, Landroid/app/Activity;-><init>  ; idx=79
+      000006: return-void            
+
+  .method public virtual <mcls#30160 OOB>-><mname>
+      ; registers=3 ins=2 outs=3 tries=0 insns=20 @0x118ad0
+      000000: invoke-super           {v1, v2}, Landroid/app/Activity;->onCreate  ; idx=103
+      000006: const                  v2, #0x7f09001c (2131296284)
+      00000c: invoke-virtual         {v1, v2}, Lcom/lzplayer/insidehelper/MainActivity;->setContentView  ; idx=15083
+      000012: new-instance           v2, Landroid/content/Intent;  ; idx=109
+      000016: const-class            v0, Lcom/lzplayer/insidehelper/GetIdService;  ; idx=1824
+      00001a: invoke-direct          {v2, v1, v0}, Landroid/content/Intent;-><init>  ; idx=524
+      000020: invoke-virtual         {v1, v2}, Lcom/lzplayer/insidehelper/MainActivity;->startService  ; idx=15084
+      000026: return-void            
+
+  .method public virtual <mcls#30161 OOB>-><mname>
+      ; registers=1 ins=1 outs=1 tries=0 insns=7 @0x118b08
+      000000: invoke-super           {v0}, Landroid/app/Activity;->onResume  ; idx=104
+      000006: invoke-virtual         {v0}, Lcom/lzplayer/insidehelper/MainActivity;->finish  ; idx=15080
+      00000c: return-void            
+
+##############################################################################
+CLASS Lcom/lzplayer/insidehelper/R$anim; extends Ljava/lang/Object;  (access=0x11, class_data_off=0x1bc32b)
+##############################################################################
+
+  .method direct Lcom/lzplayer/insidehelper/R$anim;-><init>
+      ; registers=1 ins=1 outs=1 tries=0 insns=4 @0x118b28
+      000000: invoke-direct          {v0}, Ljava/lang/Object;-><init>  ; idx=15707
+      000006: return-void            
+
+##############################################################################
+CLASS Lcom/lzplayer/insidehelper/R$attr; extends Ljava/lang/Object;  (access=0x11, class_data_off=0x1bc350)
+##############################################################################
+
+  .method direct Lcom/lzplayer/insidehelper/R$attr;-><init>
+      ; registers=1 ins=1 outs=1 tries=0 insns=4 @0x118b40
+      000000: invoke-direct          {v0}, Ljava/lang/Object;-><init>  ; idx=15707
+      000006: return-void            
+
+##############################################################################
+CLASS Lcom/lzplayer/insidehelper/R$bool; extends Ljava/lang/Object;  (access=0x11, class_data_off=0x1bc5f0)
+##############################################################################
+
+  .method direct Lcom/lzplayer/insidehelper/R$bool;-><init>
+      ; registers=1 ins=1 outs=1 tries=0 insns=4 @0x118b58
+      000000: invoke-direct          {v0}, Ljava/lang/Object;-><init>  ; idx=15707
+      000006: return-void            
+
+##############################################################################
+CLASS Lcom/lzplayer/insidehelper/R$color; extends Ljava/lang/Object;  (access=0x11, class_data_off=0x1bc603)
+##############################################################################
+
+  .method direct Lcom/lzplayer/insidehelper/R$color;-><init>
+      ; registers=1 ins=1 outs=1 tries=0 insns=4 @0x118b70
+      000000: invoke-direct          {v0}, Ljava/lang/Object;-><init>  ; idx=15707
+      000006: return-void            
+
+##############################################################################
+CLASS Lcom/lzplayer/insidehelper/R$dimen; extends Ljava/lang/Object;  (access=0x11, class_data_off=0x1bc6be)
+##############################################################################
+
+  .method direct Lcom/lzplayer/insidehelper/R$dimen;-><init>
+      ; registers=1 ins=1 outs=1 tries=0 insns=4 @0x118b88
+      000000: invoke-direct          {v0}, Ljava/lang/Object;-><init>  ; idx=15707
+      000006: return-void            
+
+##############################################################################
+CLASS Lcom/lzplayer/insidehelper/R$drawable; extends Ljava/lang/Object;  (access=0x11, class_data_off=0x1bc7af)
+##############################################################################
+
+  .method direct Lcom/lzplayer/insidehelper/R$drawable;-><init>
+      ; registers=1 ins=1 outs=1 tries=0 insns=4 @0x118ba0
+      000000: invoke-direct          {v0}, Ljava/lang/Object;-><init>  ; idx=15707
+      000006: return-void            
+
+##############################################################################
+CLASS Lcom/lzplayer/insidehelper/R$id; extends Ljava/lang/Object;  (access=0x11, class_data_off=0x1bc884)
+##############################################################################
+
+  .method direct Lcom/lzplayer/insidehelper/R$id;-><init>
+      ; registers=1 ins=1 outs=1 tries=0 insns=4 @0x118bb8
+      000000: invoke-direct          {v0}, Ljava/lang/Object;-><init>  ; idx=15707
+      000006: return-void            
+
+##############################################################################
+CLASS Lcom/lzplayer/insidehelper/R$integer; extends Ljava/lang/Object;  (access=0x11, class_data_off=0x1bc9b8)
+##############################################################################
+
+  .method direct Lcom/lzplayer/insidehelper/R$integer;-><init>
+      ; registers=1 ins=1 outs=1 tries=0 insns=4 @0x118bd0
+      000000: invoke-direct          {v0}, Ljava/lang/Object;-><init>  ; idx=15707
+      000006: return-void            
+
+##############################################################################
+CLASS Lcom/lzplayer/insidehelper/R$layout; extends Ljava/lang/Object;  (access=0x11, class_data_off=0x1bc9cf)
+##############################################################################
+
+  .method direct Lcom/lzplayer/insidehelper/R$layout;-><init>
+      ; registers=1 ins=1 outs=1 tries=0 insns=4 @0x118be8
+      000000: invoke-direct          {v0}, Ljava/lang/Object;-><init>  ; idx=15707
+      000006: return-void            
+
+##############################################################################
+CLASS Lcom/lzplayer/insidehelper/R$mipmap; extends Ljava/lang/Object;  (access=0x11, class_data_off=0x1bca2a)
+##############################################################################
+
+  .method direct Lcom/lzplayer/insidehelper/R$mipmap;-><init>
+      ; registers=1 ins=1 outs=1 tries=0 insns=4 @0x118c00
+      000000: invoke-direct          {v0}, Ljava/lang/Object;-><init>  ; idx=15707
+      000006: return-void            
+
+##############################################################################
+CLASS Lcom/lzplayer/insidehelper/R$string; extends Ljava/lang/Object;  (access=0x11, class_data_off=0x1bca3b)
+##############################################################################
+
+  .method direct Lcom/lzplayer/insidehelper/R$string;-><init>
+      ; registers=1 ins=1 outs=1 tries=0 insns=4 @0x118c18
+      000000: invoke-direct          {v0}, Ljava/lang/Object;-><init>  ; idx=15707
+      000006: return-void            
+
+##############################################################################
+CLASS Lcom/lzplayer/insidehelper/R$style; extends Ljava/lang/Object;  (access=0x11, class_data_off=0x1bca9c)
+##############################################################################
+
+  .method direct Lcom/lzplayer/insidehelper/R$style;-><init>
+      ; registers=1 ins=1 outs=1 tries=0 insns=4 @0x119938
+      000000: invoke-direct          {v0}, Ljava/lang/Object;-><init>  ; idx=15707
+      000006: return-void            
+
+##############################################################################
+CLASS Lcom/lzplayer/insidehelper/R$styleable; extends Ljava/lang/Object;  (access=0x11, class_data_off=0x1bcd60)
+##############################################################################
+
+  .method direct Lcom/lzplayer/insidehelper/R$styleable;-><clinit>
+      ; registers=10 ins=0 outs=0 tries=0 insns=1648 @0x118c30
+      000000: const/16               v0, #+29
+      000004: new-array              v1, v0, [I  ; idx=2074
+      000008: fill-array-data        v1, -> 0x118f38
+      00000e: sput-object            v1, Lcom/lzplayer/insidehelper/R$styleable;->ActionBar : [I  ; idx=10632
+      000012: const/4                v1, #1
+      000014: new-array              v2, v1, [I  ; idx=2074
+      000018: const/4                v3, #0
+      00001a: const                  v4, #0x10100b3 (16842931)
+      000020: aput                   v4, v3, v2
+      000024: sput-object            v2, Lcom/lzplayer/insidehelper/R$styleable;->ActionBarLayout : [I  ; idx=10633
+      000028: new-array              v2, v1, [I  ; idx=2074
+      00002c: const                  v4, #0x101013f (16843071)
+      000032: aput                   v4, v3, v2
+      000036: sput-object            v2, Lcom/lzplayer/insidehelper/R$styleable;->ActionMenuItemView : [I  ; idx=10664
+      00003a: new-array              v2, v3, [I  ; idx=2074
+      00003e: sput-object            v2, Lcom/lzplayer/insidehelper/R$styleable;->ActionMenuView : [I  ; idx=10666
+      000042: const/4                v2, #6
+      000044: new-array              v4, v2, [I  ; idx=2074
+      000048: fill-array-data        v4, -> 0x118fb4
+      00004e: sput-object            v4, Lcom/lzplayer/insidehelper/R$styleable;->ActionMode : [I  ; idx=10667
+      000052: const/4                v4, #2
+      000054: new-array              v5, v4, [I  ; idx=2074
+      000058: fill-array-data        v5, -> 0x118fd4
+      00005e: sput-object            v5, Lcom/lzplayer/insidehelper/R$styleable;->ActivityChooserView : [I  ; idx=10674
+      000062: const/16               v5, #+8
+      000066: new-array              v6, v5, [I  ; idx=2074
+      00006a: fill-array-data        v6, -> 0x118fe4
+      000070: sput-object            v6, Lcom/lzplayer/insidehelper/R$styleable;->AlertDialog : [I  ; idx=10677
+      000074: new-array              v6, v2, [I  ; idx=2074
+      000078: fill-array-data        v6, -> 0x11900c
+      00007e: sput-object            v6, Lcom/lzplayer/insidehelper/R$styleable;->AnimatedStateListDrawableCompat : [I  ; idx=10686
+      000082: new-array              v6, v4, [I  ; idx=2074
+      000086: fill-array-data        v6, -> 0x11902c
+      00008c: sput-object            v6, Lcom/lzplayer/insidehelper/R$styleable;->AnimatedStateListDrawableItem : [I  ; idx=10693
+      000090: const/4                v6, #4
+      000092: new-array              v7, v6, [I  ; idx=2074
+      000096: fill-array-data        v7, -> 0x11903c
+      00009c: sput-object            v7, Lcom/lzplayer/insidehelper/R$styleable;->AnimatedStateListDrawableTransition : [I  ; idx=10696
+      0000a0: new-array              v7, v6, [I  ; idx=2074
+      0000a4: fill-array-data        v7, -> 0x119054
+      0000aa: sput-object            v7, Lcom/lzplayer/insidehelper/R$styleable;->AppCompatImageView : [I  ; idx=10701
+      0000ae: new-array              v7, v6, [I  ; idx=2074
+      0000b2: fill-array-data        v7, -> 0x11906c
+      0000b8: sput-object            v7, Lcom/lzplayer/insidehelper/R$styleable;->AppCompatSeekBar : [I  ; idx=10706
+      0000bc: const/4                v7, #7
+      0000be: new-array              v8, v7, [I  ; idx=2074
+      0000c2: fill-array-data        v8, -> 0x119084
+      0000c8: sput-object            v8, Lcom/lzplayer/insidehelper/R$styleable;->AppCompatTextHelper : [I  ; idx=10711
+      0000cc: const/16               v8, #+11
+      0000d0: new-array              v8, v8, [I  ; idx=2074
+      0000d4: fill-array-data        v8, -> 0x1190a8
+      0000da: sput-object            v8, Lcom/lzplayer/insidehelper/R$styleable;->AppCompatTextView : [I  ; idx=10719
+      0000de: const/16               v8, #+121
+      0000e2: new-array              v8, v8, [I  ; idx=2074
+      0000e6: fill-array-data        v8, -> 0x1190dc
+      0000ec: sput-object            v8, Lcom/lzplayer/insidehelper/R$styleable;->AppCompatTheme : [I  ; idx=10731
+      0000f0: new-array              v8, v1, [I  ; idx=2074
+      0000f4: const                  v9, #0x7f020026 (2130837542)
+      0000fa: aput                   v9, v3, v8
+      0000fe: sput-object            v8, Lcom/lzplayer/insidehelper/R$styleable;->ButtonBarLayout : [I  ; idx=10853
+      000102: const/4                v8, #3
+      000104: new-array              v9, v8, [I  ; idx=2074
+      000108: fill-array-data        v9, -> 0x1192c8
+      00010e: sput-object            v9, Lcom/lzplayer/insidehelper/R$styleable;->ColorStateListItem : [I  ; idx=10855
+      000112: new-array              v9, v8, [I  ; idx=2074
+      000116: fill-array-data        v9, -> 0x1192dc
+      00011c: sput-object            v9, Lcom/lzplayer/insidehelper/R$styleable;->CompoundButton : [I  ; idx=10859
+      000120: const/16               v9, #+60
+      000124: new-array              v9, v9, [I  ; idx=2074
+      000128: fill-array-data        v9, -> 0x1192f0
+      00012e: sput-object            v9, Lcom/lzplayer/insidehelper/R$styleable;->ConstraintLayout_Layout : [I  ; idx=10863
+      000132: new-array              v9, v4, [I  ; idx=2074
+      000136: fill-array-data        v9, -> 0x1193e8
+      00013c: sput-object            v9, Lcom/lzplayer/insidehelper/R$styleable;->ConstraintLayout_placeholder : [I  ; idx=10924
+      000140: const/16               v9, #+80
+      000144: new-array              v9, v9, [I  ; idx=2074
+      000148: fill-array-data        v9, -> 0x1193f8
+      00014e: sput-object            v9, Lcom/lzplayer/insidehelper/R$styleable;->ConstraintSet : [I  ; idx=10927
+      000152: new-array              v9, v4, [I  ; idx=2074
+      000156: fill-array-data        v9, -> 0x119540
+      00015c: sput-object            v9, Lcom/lzplayer/insidehelper/R$styleable;->CoordinatorLayout : [I  ; idx=11008
+      000160: new-array              v7, v7, [I  ; idx=2074
+      000164: fill-array-data        v7, -> 0x119550
+      00016a: sput-object            v7, Lcom/lzplayer/insidehelper/R$styleable;->CoordinatorLayout_Layout : [I  ; idx=11009
+      00016e: new-array              v5, v5, [I  ; idx=2074
+      000172: fill-array-data        v5, -> 0x119574
+      000178: sput-object            v5, Lcom/lzplayer/insidehelper/R$styleable;->DrawerArrowToggle : [I  ; idx=11019
+      00017c: new-array              v5, v2, [I  ; idx=2074
+      000180: fill-array-data        v5, -> 0x11959c
+      000186: sput-object            v5, Lcom/lzplayer/insidehelper/R$styleable;->FontFamily : [I  ; idx=11028
+      00018a: const/16               v5, #+10
+      00018e: new-array              v5, v5, [I  ; idx=2074
+      000192: fill-array-data        v5, -> 0x1195bc
+      000198: sput-object            v5, Lcom/lzplayer/insidehelper/R$styleable;->FontFamilyFont : [I  ; idx=11029
+      00019c: const/16               v5, #+12
+      0001a0: new-array              v5, v5, [I  ; idx=2074
+      0001a4: fill-array-data        v5, -> 0x1195ec
+      0001aa: sput-object            v5, Lcom/lzplayer/insidehelper/R$styleable;->GradientColor : [I  ; idx=11046
+      0001ae: new-array              v5, v4, [I  ; idx=2074
+      0001b2: fill-array-data        v5, -> 0x119624
+      0001b8: sput-object            v5, Lcom/lzplayer/insidehelper/R$styleable;->GradientColorItem : [I  ; idx=11047
+      0001bc: new-array              v5, v1, [I  ; idx=2074
+      0001c0: const                  v7, #0x10100c4 (16842948)
+      0001c6: aput                   v7, v3, v5
+      0001ca: sput-object            v5, Lcom/lzplayer/insidehelper/R$styleable;->LinearConstraintLayout : [I  ; idx=11062
+      0001ce: const/16               v5, #+9
+      0001d2: new-array              v7, v5, [I  ; idx=2074
+      0001d6: fill-array-data        v7, -> 0x119634
+      0001dc: sput-object            v7, Lcom/lzplayer/insidehelper/R$styleable;->LinearLayoutCompat : [I  ; idx=11064
+      0001e0: new-array              v6, v6, [I  ; idx=2074
+      0001e4: fill-array-data        v6, -> 0x119660
+      0001ea: sput-object            v6, Lcom/lzplayer/insidehelper/R$styleable;->LinearLayoutCompat_Layout : [I  ; idx=11065
+      0001ee: new-array              v6, v4, [I  ; idx=2074
+      0001f2: fill-array-data        v6, -> 0x119678
+      0001f8: sput-object            v6, Lcom/lzplayer/insidehelper/R$styleable;->ListPopupWindow : [I  ; idx=11079
+      0001fc: new-array              v6, v2, [I  ; idx=2074
+      000200: fill-array-data        v6, -> 0x119688
+      000206: sput-object            v6, Lcom/lzplayer/insidehelper/R$styleable;->MenuGroup : [I  ; idx=11082
+      00020a: const/16               v6, #+23
+      00020e: new-array              v6, v6, [I  ; idx=2074
+      000212: fill-array-data        v6, -> 0x1196a8
+      000218: sput-object            v6, Lcom/lzplayer/insidehelper/R$styleable;->MenuItem : [I  ; idx=11089
+      00021c: new-array              v5, v5, [I  ; idx=2074
+      000220: fill-array-data        v5, -> 0x11970c
+      000226: sput-object            v5, Lcom/lzplayer/insidehelper/R$styleable;->MenuView : [I  ; idx=11113
+      00022a: new-array              v5, v8, [I  ; idx=2074
+      00022e: fill-array-data        v5, -> 0x119738
+      000234: sput-object            v5, Lcom/lzplayer/insidehelper/R$styleable;->PopupWindow : [I  ; idx=11123
+      000238: new-array              v5, v1, [I  ; idx=2074
+      00023c: const                  v6, #0x7f020108 (2130837768)
+      000242: aput                   v6, v3, v5
+      000246: sput-object            v5, Lcom/lzplayer/insidehelper/R$styleable;->PopupWindowBackgroundState : [I  ; idx=11124
+      00024a: new-array              v4, v4, [I  ; idx=2074
+      00024e: fill-array-data        v4, -> 0x11974c
+      000254: sput-object            v4, Lcom/lzplayer/insidehelper/R$styleable;->RecycleListView : [I  ; idx=11129
+      000258: const/16               v4, #+17
+      00025c: new-array              v4, v4, [I  ; idx=2074
+      000260: fill-array-data        v4, -> 0x11975c
+      000266: sput-object            v4, Lcom/lzplayer/insidehelper/R$styleable;->SearchView : [I  ; idx=11132
+      00026a: const/4                v4, #5
+      00026c: new-array              v5, v4, [I  ; idx=2074
+      000270: fill-array-data        v5, -> 0x1197a8
+      000276: sput-object            v5, Lcom/lzplayer/insidehelper/R$styleable;->Spinner : [I  ; idx=11150
+      00027a: new-array              v2, v2, [I  ; idx=2074
+      00027e: fill-array-data        v2, -> 0x1197c4
+      000284: sput-object            v2, Lcom/lzplayer/insidehelper/R$styleable;->StateListDrawable : [I  ; idx=11156
+      000288: new-array              v1, v1, [I  ; idx=2074
+      00028c: const                  v2, #0x1010199 (16843161)
+      000292: aput                   v2, v3, v1
+      000296: sput-object            v1, Lcom/lzplayer/insidehelper/R$styleable;->StateListDrawableItem : [I  ; idx=11157
+      00029a: const/16               v1, #+14
+      00029e: new-array              v1, v1, [I  ; idx=2074
+      0002a2: fill-array-data        v1, -> 0x1197e4
+      0002a8: sput-object            v1, Lcom/lzplayer/insidehelper/R$styleable;->SwitchCompat : [I  ; idx=11165
+      0002ac: const/16               v1, #+13
+      0002b0: new-array              v1, v1, [I  ; idx=2074
+      0002b4: fill-array-data        v1, -> 0x119824
+      0002ba: sput-object            v1, Lcom/lzplayer/insidehelper/R$styleable;->TextAppearance : [I  ; idx=11180
+      0002be: new-array              v0, v0, [I  ; idx=2074
+      0002c2: fill-array-data        v0, -> 0x119860
+      0002c8: sput-object            v0, Lcom/lzplayer/insidehelper/R$styleable;->Toolbar : [I  ; idx=11194
+      0002cc: new-array              v0, v4, [I  ; idx=2074
+      0002d0: fill-array-data        v0, -> 0x1198dc
+      0002d6: sput-object            v0, Lcom/lzplayer/insidehelper/R$styleable;->View : [I  ; idx=11224
+      0002da: new-array              v0, v8, [I  ; idx=2074
+      0002de: fill-array-data        v0, -> 0x1198f8
+      0002e4: sput-object            v0, Lcom/lzplayer/insidehelper/R$styleable;->ViewBackgroundHelper : [I  ; idx=11225
+      0002e8: new-array              v0, v8, [I  ; idx=2074
+      0002ec: fill-array-data        v0, -> 0x11990c
+      0002f2: sput-object            v0, Lcom/lzplayer/insidehelper/R$styleable;->ViewStubCompat : [I  ; idx=11229
+      0002f6: return-void            
+      0002f8: nop                    
+      0002fa: move-wide              v0, v0
+      0002fc: monitor-enter          v0
+      0002fe: nop                    
+      000300: cmp-long               v0, v127, v2
+      000304: if-eq                  v0, v0, -> +32514 (0x128d48)
+      000308: if-ne                  v0, v0, -> +32514 (0x128d4c)
+      00030c: iput-byte              v0, v0, <fcls#32514 OOB>-><fname> : <ftype>  ; idx=32514
+      000310: iput-char              v0, v0, <fcls#32514 OOB>-><fname> : <ftype>  ; idx=32514
+      000314: iput-short             v0, v0, <fcls#32514 OOB>-><fname> : <ftype>  ; idx=32514
+      000318: sget                   v0, <fcls#32514 OOB>-><fname> : <ftype>  ; idx=32514
+      00031c: sget-wide              v0, <fcls#32514 OOB>-><fname> : <ftype>  ; idx=32514
+      000320: sget-object            v0, <fcls#32514 OOB>-><fname> : <ftype>  ; idx=32514
+      000324: sget-char              v0, <fcls#32514 OOB>-><fname> : <ftype>  ; idx=32514
+      000328: sput-boolean           v0, <fcls#32514 OOB>-><fname> : <ftype>  ; idx=32514
+      00032c: sput-byte              v0, <fcls#32514 OOB>-><fname> : <ftype>  ; idx=32514
+      000330: invoke-direct/range    {v0..v134}, <mcls#32514 OOB>-><mname>  ; idx=32514
+      000336: move/from16            raw=0x7f02,0x88
+      00033a: move/from16            raw=0x7f02,0x89
+      00033e: move/from16            raw=0x7f02,0x8a
+      000342: move/from16            raw=0x7f02,0x8b
+      000346: move/from16            raw=0x7f02,0x90
+      00034a: move/from16            raw=0x7f02,0x93
+      00034e: move/from16            raw=0x7f02,0xdb
+      000352: move/from16            raw=0x7f02,0xe2
+      000356: move/from16            raw=0x7f02,0xed
+      00035a: move/from16            raw=0x7f02,0xf0
+      00035e: move/from16            raw=0x7f02,0xf1
+      000362: move/from16            raw=0x7f02,0x10c
+      000366: move/from16            raw=0x7f02,0x10f
+      00036a: move/from16            raw=0x7f02,0x12a
+      00036e: move/from16            raw=0x7f02,0x133
+      000372: move/from16            raw=0x7f02,0x300
+      000376: move-wide              v0, v0
+      000378: move-wide/16           v0, v49
+      00037e: move/from16            raw=0x7f02,0x32
+      000382: move/from16            raw=0x7f02,0x4a
+      000386: move/from16            raw=0x7f02,0x87
+      00038a: move/from16            raw=0x7f02,0x10f
+      00038e: move/from16            raw=0x7f02,0x133
+      000392: move/from16            raw=0x7f02,0x300
+      000396: move-wide              v0, v0
+      000398: move/from16            raw=0x2,0x0
+      00039c: invoke-interface/range {v0..v144}, <mcls#32514 OOB>-><mname>  ; idx=32514
+      0003a2: move/from16            raw=0x7f02,0x300
+      0003a6: move-wide              v0, v0
+      0003a8: move-object/from16     raw=0x8,0x0
+      0003ac: opf2                   
+      0003ae: move                   v1, v0
+      0003b0: op40                   
+      0003b2: move/from16            raw=0x7f02,0x41
+      0003b6: move/from16            raw=0x7f02,0xd2
+      0003ba: move/from16            raw=0x7f02,0xd3
+      0003be: move/from16            raw=0x7f02,0xdf
+      0003c2: move/from16            raw=0x7f02,0x101
+      0003c6: move/from16            raw=0x7f02,0x102
+      0003ca: move/from16            raw=0x7f02,0x300
+      0003ce: move-wide              v0, v0
+      0003d0: move-wide/16           v0, v284
+      0003d6: move                   v1, v0
+      0003d8: rem-int                v1, v1, v1
+      0003dc: and-int                v1, v1, v1
+      0003e0: or-int                 v1, v1, v1
+      0003e4: move-result-object     v3
+      0003e6: move                   v1, v0
+      0003e8: move-exception         v3
+      0003ea: move                   v1, v0
+      0003ec: nop                    
+      0003ee: move-wide              v0, v0
+      0003f0: move/from16            raw=0x2,0x0
+      0003f4: add-int/lit16          v0, v0, #+257
+      0003f8: shr-int                v1, v1, v1
+      0003fc: nop                    
+      0003fe: move-wide              v0, v0
+      000400: move-wide              v0, v0
+      000402: nop                    
+      000404: shr-int                v1, v1, v1
+      000408: aget-char              v4, v1, v1
+      00040c: aget-short             v4, v1, v1
+      000410: aput                   v4, v1, v1
+      000414: nop                    
+      000416: move-wide              v0, v0
+      000418: move-wide              v0, v0
+      00041a: nop                    
+      00041c: const-wide/high16      v1, #+257
+      000420: move-object            v1, v0
+      000422: move/from16            raw=0x7f02,0x128
+      000426: move/from16            raw=0x7f02,0x129
+      00042a: move/from16            raw=0x7f02,0x300
+      00042e: move-wide              v0, v0
+      000430: move-wide              v0, v0
+      000432: nop                    
+      000434: op42                   
+      000436: move                   v1, v0
+      000438: filled-new-array/range {v1..v294}, ref32514  ; idx=32514
+      00043e: move/from16            raw=0x7f02,0x127
+      000442: move/from16            raw=0x7f02,0x300
+      000446: move-wide              v0, v0
+      000448: move-object            v0, v0
+      00044a: nop                    
+      00044c: if-lt                  v0, v0, -> +257 (0x11928e)
+      000450: sput-short             v1, Landroid/support/asynclayoutinflater/R$styleable;->FontFamilyFont_android_fontStyle : I  ; idx=257
+      000454: invoke-virtual         {}, Landroid/app/Notification$DecoratedCustomViewStyle;-><init>  ; idx=257
+      00045a: move                   v1, v0
+      00045c: invoke-direct          {}, Landroid/app/Notification$DecoratedCustomViewStyle;-><init>  ; idx=257
+      000462: move                   v1, v0
+      000464: div-int                v3, v1, v1
+      000468: nop                    
+      00046a: move-wide              v0, v0
+      00046c: move-result-wide       v0
+      00046e: nop                    
+      000470: if-lt                  v0, v0, -> +257 (0x1192b2)
+      000474: sparse-switch          v0, -> 0x6c8eb8
+      00047a: move/from16            raw=0x7f02,0x2e
+      00047e: move/from16            raw=0x7f02,0x2f
+      000482: move/from16            raw=0x7f02,0x30
+      000486: move/from16            raw=0x7f02,0x79
+      00048a: move/from16            raw=0x7f02,0x7b
+      00048e: move/from16            raw=0x7f02,0x95
+      000492: move/from16            raw=0x7f02,0xcf
+      000496: move/from16            raw=0x7f02,0x115
+      00049a: move/from16            raw=0x7f02,0x300
+      00049e: move-wide              v0, v0
+      0004a0: op79                   
+      0004a2: nop                    
+      0004a4: iget-char              v0, v0, Landroid/support/asynclayoutinflater/R$styleable;->FontFamilyFont_android_fontStyle : I  ; idx=257
+      0004a8: div-double             v0, v1, v1
+      0004ac: nop                    
+      0004ae: move/from16            raw=0x7f02,0x1
+      0004b2: move/from16            raw=0x7f02,0x2
+      0004b6: move/from16            raw=0x7f02,0x3
+      0004ba: move/from16            raw=0x7f02,0x4
+      0004be: move/from16            raw=0x7f02,0x5
+      0004c2: move/from16            raw=0x7f02,0x6
+      0004c6: move/from16            raw=0x7f02,0x7
+      0004ca: move/from16            raw=0x7f02,0x8
+      0004ce: move/from16            raw=0x7f02,0x9
+      0004d2: move/from16            raw=0x7f02,0xa
+      0004d6: move/from16            raw=0x7f02,0xb
+      0004da: move/from16            raw=0x7f02,0xc
+      0004de: move/from16            raw=0x7f02,0xe
+      0004e2: move/from16            raw=0x7f02,0xf
+      0004e6: move/from16            raw=0x7f02,0x10
+      0004ea: move/from16            raw=0x7f02,0x11
+      0004ee: move/from16            raw=0x7f02,0x12
+      0004f2: move/from16            raw=0x7f02,0x13
+      0004f6: move/from16            raw=0x7f02,0x14
+      0004fa: move/from16            raw=0x7f02,0x15
+      0004fe: move/from16            raw=0x7f02,0x16
+      000502: move/from16            raw=0x7f02,0x17
+      000506: move/from16            raw=0x7f02,0x18
+      00050a: move/from16            raw=0x7f02,0x19
+      00050e: move/from16            raw=0x7f02,0x1a
+      000512: move/from16            raw=0x7f02,0x1b
+      000516: move/from16            raw=0x7f02,0x1c
+      00051a: move/from16            raw=0x7f02,0x1d
+      00051e: move/from16            raw=0x7f02,0x1e
+      000522: move/from16            raw=0x7f02,0x21
+      000526: move/from16            raw=0x7f02,0x22
+      00052a: move/from16            raw=0x7f02,0x23
+      00052e: move/from16            raw=0x7f02,0x24
+      000532: move/from16            raw=0x7f02,0x25
+      000536: move/from16            raw=0x7f02,0x2b
+      00053a: move/from16            raw=0x7f02,0x39
+      00053e: move/from16            raw=0x7f02,0x3a
+      000542: move/from16            raw=0x7f02,0x3b
+      000546: move/from16            raw=0x7f02,0x3c
+      00054a: move/from16            raw=0x7f02,0x3d
+      00054e: move/from16            raw=0x7f02,0x3e
+      000552: move/from16            raw=0x7f02,0x42
+      000556: move/from16            raw=0x7f02,0x43
+      00055a: move/from16            raw=0x7f02,0x47
+      00055e: move/from16            raw=0x7f02,0x48
+      000562: move/from16            raw=0x7f02,0x4e
+      000566: move/from16            raw=0x7f02,0x4f
+      00056a: move/from16            raw=0x7f02,0x50
+      00056e: move/from16            raw=0x7f02,0x51
+      000572: move/from16            raw=0x7f02,0x52
+      000576: move/from16            raw=0x7f02,0x53
+      00057a: move/from16            raw=0x7f02,0x54
+      00057e: move/from16            raw=0x7f02,0x55
+      000582: move/from16            raw=0x7f02,0x56
+      000586: move/from16            raw=0x7f02,0x57
+      00058a: move/from16            raw=0x7f02,0x63
+      00058e: move/from16            raw=0x7f02,0x67
+      000592: move/from16            raw=0x7f02,0x68
+      000596: move/from16            raw=0x7f02,0x69
+      00059a: move/from16            raw=0x7f02,0x6c
+      00059e: move/from16            raw=0x7f02,0x6e
+      0005a2: move/from16            raw=0x7f02,0x71
+      0005a6: move/from16            raw=0x7f02,0x72
+      0005aa: move/from16            raw=0x7f02,0x73
+      0005ae: move/from16            raw=0x7f02,0x74
+      0005b2: move/from16            raw=0x7f02,0x75
+      0005b6: move/from16            raw=0x7f02,0x89
+      0005ba: move/from16            raw=0x7f02,0x8f
+      0005be: move/from16            raw=0x7f02,0xd0
+      0005c2: move/from16            raw=0x7f02,0xd1
+      0005c6: move/from16            raw=0x7f02,0xd4
+      0005ca: move/from16            raw=0x7f02,0xd5
+      0005ce: move/from16            raw=0x7f02,0xd6
+      0005d2: move/from16            raw=0x7f02,0xd7
+      0005d6: move/from16            raw=0x7f02,0xd8
+      0005da: move/from16            raw=0x7f02,0xd9
+      0005de: move/from16            raw=0x7f02,0xda
+      0005e2: move/from16            raw=0x7f02,0xe9
+      0005e6: move/from16            raw=0x7f02,0xea
+      0005ea: move/from16            raw=0x7f02,0xeb
+      0005ee: move/from16            raw=0x7f02,0xec
+      0005f2: move/from16            raw=0x7f02,0xee
+      0005f6: move/from16            raw=0x7f02,0xf4
+      0005fa: move/from16            raw=0x7f02,0xf5
+      0005fe: move/from16            raw=0x7f02,0xf6
+      000602: move/from16            raw=0x7f02,0xf7
+      000606: move/from16            raw=0x7f02,0xfa
+      00060a: move/from16            raw=0x7f02,0xfb
+      00060e: move/from16            raw=0x7f02,0xfc
+      000612: move/from16            raw=0x7f02,0xfd
+      000616: move/from16            raw=0x7f02,0x104
+      00061a: move/from16            raw=0x7f02,0x105
+      00061e: move/from16            raw=0x7f02,0x113
+      000622: move/from16            raw=0x7f02,0x116
+      000626: move/from16            raw=0x7f02,0x117
+      00062a: move/from16            raw=0x7f02,0x118
+      00062e: move/from16            raw=0x7f02,0x119
+      000632: move/from16            raw=0x7f02,0x11a
+      000636: move/from16            raw=0x7f02,0x11b
+      00063a: move/from16            raw=0x7f02,0x11c
+      00063e: move/from16            raw=0x7f02,0x11d
+      000642: move/from16            raw=0x7f02,0x11e
+      000646: move/from16            raw=0x7f02,0x11f
+      00064a: move/from16            raw=0x7f02,0x134
+      00064e: move/from16            raw=0x7f02,0x135
+      000652: move/from16            raw=0x7f02,0x136
+      000656: move/from16            raw=0x7f02,0x137
+      00065a: move/from16            raw=0x7f02,0x13d
+      00065e: move/from16            raw=0x7f02,0x13f
+      000662: move/from16            raw=0x7f02,0x140
+      000666: move/from16            raw=0x7f02,0x141
+      00066a: move/from16            raw=0x7f02,0x142
+      00066e: move/from16            raw=0x7f02,0x143
+      000672: move/from16            raw=0x7f02,0x144
+      000676: move/from16            raw=0x7f02,0x145
+      00067a: move/from16            raw=0x7f02,0x146
+      00067e: move/from16            raw=0x7f02,0x147
+      000682: move/from16            raw=0x7f02,0x148
+      000686: move/from16            raw=0x7f02,0x300
+      00068a: move-wide              v0, v0
+      00068c: move/16                v0, v421
+      000692: move                   v1, v0
+      000694: check-cast             v3, Landroid/os/IBinder;  ; idx=257
+      000698: throw                  v0
+      00069a: move/from16            raw=0x7f02,0x300
+      00069e: move-wide              v0, v0
+      0006a0: move/16                v0, v263
+      0006a6: move                   v1, v0
+      0006a8: aget                   v0, v127, v2
+      0006ac: aget-wide              v0, v127, v2
+      0006b0: nop                    
+      0006b2: move-wide              v0, v0
+      0006b4: if-gtz                 v0, -> +0 (0x1192f4)
+      0006b8: shr-long/2addr         v0, v0
+      0006ba: move                   v1, v0
+      0006bc: check-cast             v1, Landroid/os/IBinder;  ; idx=257
+      0006c0: instance-of            v1, v0, Landroid/os/IBinder;  ; idx=257
+      0006c4: op3f                   
+      0006c6: move                   v1, v0
+      0006c8: op40                   
+      0006ca: move                   v1, v0
+      0006cc: if-le                  v0, v0, -> +32514 (0x129110)
+      0006d0: if-eqz                 v0, -> +32514 (0x129114)
+      0006d4: aget-object            v0, v127, v2
+      0006d8: iput                   v0, v0, <fcls#32514 OOB>-><fname> : <ftype>  ; idx=32514
+      0006dc: iput-wide              v0, v0, <fcls#32514 OOB>-><fname> : <ftype>  ; idx=32514
+      0006e0: ushr-int               v0, v127, v2
+      0006e4: add-long               v0, v127, v2
+      0006e8: sub-long               v0, v127, v2
+      0006ec: mul-long               v0, v127, v2
+      0006f0: div-long               v0, v127, v2
+      0006f4: rem-long               v0, v127, v2
+      0006f8: and-long               v0, v127, v2
+      0006fc: or-long                v0, v127, v2
+      000700: xor-long               v0, v127, v2
+      000704: shl-long               v0, v127, v2
+      000708: shr-long               v0, v127, v2
+      00070c: ushr-long              v0, v127, v2
+      000710: add-float              v0, v127, v2
+      000714: sub-float              v0, v127, v2
+      000718: mul-float              v0, v127, v2
+      00071c: div-float              v0, v127, v2
+      000720: rem-float              v0, v127, v2
+      000724: add-double             v0, v127, v2
+      000728: sub-double             v0, v127, v2
+      00072c: mul-double             v0, v127, v2
+      000730: div-double             v0, v127, v2
+      000734: rem-double             v0, v127, v2
+      000738: add-int/2addr          v0, v0
+      00073a: move/from16            raw=0x7f02,0xb1
+      00073e: move/from16            raw=0x7f02,0xb2
+      000742: move/from16            raw=0x7f02,0xb3
+      000746: move/from16            raw=0x7f02,0xb4
+      00074a: move/from16            raw=0x7f02,0xb5
+      00074e: move/from16            raw=0x7f02,0xb6
+      000752: move/from16            raw=0x7f02,0xb7
+      000756: move/from16            raw=0x7f02,0xb8
+      00075a: move/from16            raw=0x7f02,0xb9
+      00075e: move/from16            raw=0x7f02,0xba
+      000762: move/from16            raw=0x7f02,0xbb
+      000766: move/from16            raw=0x7f02,0xbc
+      00076a: move/from16            raw=0x7f02,0xbd
+      00076e: move/from16            raw=0x7f02,0xbe
+      000772: move/from16            raw=0x7f02,0xbf
+      000776: move/from16            raw=0x7f02,0xc0
+      00077a: move/from16            raw=0x7f02,0xc1
+      00077e: move/from16            raw=0x7f02,0xc2
+      000782: move/from16            raw=0x7f02,0xc4
+      000786: move/from16            raw=0x7f02,0xc5
+      00078a: move/from16            raw=0x7f02,0xc6
+      00078e: move/from16            raw=0x7f02,0xc7
+      000792: move/from16            raw=0x7f02,0xc8
+      000796: move/from16            raw=0x7f02,0xc9
+      00079a: move/from16            raw=0x7f02,0xca
+      00079e: move/from16            raw=0x7f02,0xcb
+      0007a2: move/from16            raw=0x7f02,0xce
+      0007a6: move/from16            raw=0x7f02,0x300
+      0007aa: move-wide              v0, v0
+      0007ac: move/from16            raw=0x2,0x0
+      0007b0: iput-object            v0, v0, <fcls#32514 OOB>-><fname> : <ftype>  ; idx=32514
+      0007b4: invoke-static/range    {v0..v767}, <mcls#32514 OOB>-><mname>  ; idx=32514
+      0007ba: move-wide              v0, v0
+      0007bc: aput-char              v0, v0, v0
+      0007c0: shr-long/2addr         v0, v0
+      0007c2: move                   v1, v0
+      0007c4: add-int/lit16          v0, v0, #+257
+      0007c8: rem-int/lit8           v0, v1, #+1
+      0007cc: opf4                   
+      0007ce: move                   v1, v0
+      0007d0: opf5                   
+      0007d2: move                   v1, v0
+      0007d4: opf7                   
+      0007d6: move                   v1, v0
+      0007d8: opf8                   
+      0007da: move                   v1, v0
+      0007dc: opf9                   
+      0007de: move                   v1, v0
+      0007e0: opfa                   
+      0007e2: move                   v1, v0
+      0007e4: check-cast             v1, Landroid/os/IBinder;  ; idx=257
+      0007e8: instance-of            v1, v0, Landroid/os/IBinder;  ; idx=257
+      0007ec: op3f                   
+      0007ee: move                   v1, v0
+      0007f0: op40                   
+      0007f2: move                   v1, v0
+      0007f4: check-cast             v3, Landroid/os/IBinder;  ; idx=257
+      0007f8: instance-of            v3, v0, Landroid/os/IBinder;  ; idx=257
+      0007fc: array-length           v3, v0
+      0007fe: move                   v1, v0
+      000800: new-instance           v3, Landroid/os/IBinder;  ; idx=257
+      000804: new-array              v3, v0, Landroid/os/IBinder;  ; idx=257
+      000808: filled-new-array       {}, ref257  ; idx=257
+      00080e: move                   v1, v0
+      000810: fill-array-data        v3, -> 0x65f9652
+      000816: move                   v1, v0
+      000818: goto                   -> +3 (0x11945e)
+      00081a: move                   v1, v0
+      00081c: and-int/2addr          v3, v0
+      00081e: move                   v1, v0
+      000820: or-int/2addr           v3, v0
+      000822: move                   v1, v0
+      000824: opfa                   
+      000826: move                   v1, v0
+      000828: op40                   
+      00082a: move                   v1, v0
+      00082c: if-le                  v0, v0, -> +32514 (0x129270)
+      000830: if-eqz                 v0, -> +32514 (0x129274)
+      000834: aget-object            v0, v127, v2
+      000838: iput-wide              v0, v0, <fcls#32514 OOB>-><fname> : <ftype>  ; idx=32514
+      00083c: ushr-int               v0, v127, v2
+      000840: add-long               v0, v127, v2
+      000844: sub-long               v0, v127, v2
+      000848: mul-long               v0, v127, v2
+      00084c: div-long               v0, v127, v2
+      000850: rem-long               v0, v127, v2
+      000854: and-long               v0, v127, v2
+      000858: or-long                v0, v127, v2
+      00085c: xor-long               v0, v127, v2
+      000860: shl-long               v0, v127, v2
+      000864: shr-long               v0, v127, v2
+      000868: ushr-long              v0, v127, v2
+      00086c: add-float              v0, v127, v2
+      000870: sub-float              v0, v127, v2
+      000874: mul-float              v0, v127, v2
+      000878: div-float              v0, v127, v2
+      00087c: rem-float              v0, v127, v2
+      000880: add-double             v0, v127, v2
+      000884: sub-double             v0, v127, v2
+      000888: mul-double             v0, v127, v2
+      00088c: div-double             v0, v127, v2
+      000890: rem-double             v0, v127, v2
+      000894: add-int/2addr          v0, v0
+      000896: move/from16            raw=0x7f02,0xb1
+      00089a: move/from16            raw=0x7f02,0xb2
+      00089e: move/from16            raw=0x7f02,0xb3
+      0008a2: move/from16            raw=0x7f02,0xb4
+      0008a6: move/from16            raw=0x7f02,0xb5
+      0008aa: move/from16            raw=0x7f02,0xb6
+      0008ae: move/from16            raw=0x7f02,0xb7
+      0008b2: move/from16            raw=0x7f02,0xb8
+      0008b6: move/from16            raw=0x7f02,0xb9
+      0008ba: move/from16            raw=0x7f02,0xba
+      0008be: move/from16            raw=0x7f02,0xbb
+      0008c2: move/from16            raw=0x7f02,0xbc
+      0008c6: move/from16            raw=0x7f02,0xbd
+      0008ca: move/from16            raw=0x7f02,0xbe
+      0008ce: move/from16            raw=0x7f02,0xbf
+      0008d2: move/from16            raw=0x7f02,0xc0
+      0008d6: move/from16            raw=0x7f02,0xc1
+      0008da: move/from16            raw=0x7f02,0xc2
+      0008de: move/from16            raw=0x7f02,0xc4
+      0008e2: move/from16            raw=0x7f02,0xc5
+      0008e6: move/from16            raw=0x7f02,0xc6
+      0008ea: move/from16            raw=0x7f02,0xc7
+      0008ee: move/from16            raw=0x7f02,0xc8
+      0008f2: move/from16            raw=0x7f02,0xc9
+      0008f6: move/from16            raw=0x7f02,0xca
+      0008fa: move/from16            raw=0x7f02,0xcb
+      0008fe: move/from16            raw=0x7f02,0x300
+      000902: move-wide              v0, v0
+      000904: move/from16            raw=0x2,0x0
+      000908: rem-int                v0, v127, v2
+      00090c: move-object/16         v32514, v768
+      000912: move-wide              v0, v0
+      000914: move-object            v0, v0
+      000916: nop                    
+      000918: div-int/2addr          v0, v0
+      00091a: move                   v1, v0
+      00091c: xor-int                v0, v127, v2
+      000920: shl-int                v0, v127, v2
+      000924: shr-int                v0, v127, v2
+      000928: shl-long/2addr         v0, v0
+      00092a: move/from16            raw=0x7f02,0xcc
+      00092e: move/from16            raw=0x7f02,0xcd
+      000932: move/from16            raw=0x7f02,0x300
+      000936: move-wide              v0, v0
+      000938: move-object/from16     raw=0x8,0x0
+      00093c: goto/16                -> +32514 (0x129380)
+      000940: goto/32                -> +3571458 (0x7e9384)
+      000946: move/from16            raw=0x7f02,0x4d
+      00094a: move/from16            raw=0x7f02,0x6f
+      00094e: move/from16            raw=0x7f02,0x85
+      000952: move/from16            raw=0x7f02,0x103
+      000956: move/from16            raw=0x7f02,0x121
+      00095a: move/from16            raw=0x7f02,0x300
+      00095e: move-wide              v0, v0
+      000960: move-wide/16           v0, v124
+      000966: move/from16            raw=0x7f02,0x7d
+      00096a: move/from16            raw=0x7f02,0x7e
+      00096e: move/from16            raw=0x7f02,0x7f
+      000972: move/from16            raw=0x7f02,0x80
+      000976: move/from16            raw=0x7f02,0x81
+      00097a: move/from16            raw=0x7f02,0x300
+      00097e: move-wide              v0, v0
+      000980: move-result            v0
+      000982: nop                    
+      000984: if-eq                  v5, v0, -> +257 (0x1197c6)
+      000988: if-ne                  v5, v0, -> +257 (0x1197ca)
+      00098c: op3f                   
+      00098e: move                   v1, v0
+      000990: invoke-super           {}, Landroid/app/Notification$DecoratedCustomViewStyle;-><init>  ; idx=257
+      000996: move                   v1, v0
+      000998: op7a                   
+      00099a: move/from16            raw=0x7f02,0x82
+      00099e: move/from16            raw=0x7f02,0x83
+      0009a2: move/from16            raw=0x7f02,0x84
+      0009a6: move/from16            raw=0x7f02,0x13c
+      0009aa: move/from16            raw=0x7f02,0x300
+      0009ae: move-wide              v0, v0
+      0009b0: move-result-object     v0
+      0009b2: nop                    
+      0009b4: mul-long               v1, v1, v1
+      0009b8: div-long               v1, v1, v1
+      0009bc: or-long                v1, v1, v1
+      0009c0: xor-long               v1, v1, v1
+      0009c4: shl-long               v1, v1, v1
+      0009c8: shr-long               v1, v1, v1
+      0009cc: move                   v2, v0
+      0009ce: move                   v1, v0
+      0009d0: move-result-wide       v2
+      0009d2: move                   v1, v0
+      0009d4: return-wide            v5
+      0009d6: move                   v1, v0
+      0009d8: return-object          v5
+      0009da: move                   v1, v0
+      0009dc: const/4                v5, #0
+      0009de: move                   v1, v0
+      0009e0: const/16               v5, #+257
+      0009e4: nop                    
+      0009e6: move-wide              v0, v0
+      0009e8: move/from16            raw=0x2,0x0
+      0009ec: ushr-long              v1, v1, v1
+      0009f0: const                  v5, #0x3000101 (50331905)
+      0009f6: move-wide              v0, v0
+      0009f8: move-object/16         v0, v175
+      0009fe: move                   v1, v0
+      000a00: shr-long/2addr         v0, v0
+      000a02: move                   v1, v0
+      000a04: fill-array-data        v1, -> 0x25f9846
+      000a0a: move                   v1, v0
+      000a0c: goto                   -> +1 (0x11964e)
+      000a0e: move                   v1, v0
+      000a10: sput-byte              v0, <fcls#32514 OOB>-><fname> : <ftype>  ; idx=32514
+      000a14: sput-short             v0, <fcls#32514 OOB>-><fname> : <ftype>  ; idx=32514
+      000a18: or-int/lit8            v0, v127, #+2
+      000a1c: opff                   
+      000a1e: move/from16            raw=0x7f02,0x300
+      000a22: move-wide              v0, v0
+      000a24: move-wide              v0, v0
+      000a26: nop                    
+      000a28: div-int/2addr          v0, v0
+      000a2a: move                   v1, v0
+      000a2c: opf4                   
+      000a2e: move                   v1, v0
+      000a30: opf5                   
+      000a32: move                   v1, v0
+      000a34: int-to-long            v1, v0
+      000a36: move                   v1, v0
+      000a38: nop                    
+      000a3a: move-wide              v0, v0
+      000a3c: move/from16            raw=0x2,0x0
+      000a40: sub-double             v2, v1, v1
+      000a44: mul-double             v2, v1, v1
+      000a48: nop                    
+      000a4a: move-wide              v0, v0
+      000a4c: move-wide/16           v0, v14
+      000a52: move                   v1, v0
+      000a54: add-int/lit16          v0, v0, #+257
+      000a58: rem-int                v1, v1, v1
+      000a5c: or-int/lit8            v1, v1, #+1
+      000a60: xor-int/lit8           v1, v1, #+1
+      000a64: shl-int/lit8           v1, v1, #+1
+      000a68: nop                    
+      000a6a: move-wide              v0, v0
+      000a6c: const-wide/32          v0, #0x20000 (131072)
+      000a72: move                   v1, v0
+      000a74: return-void            
+      000a76: move                   v1, v0
+      000a78: add-int/lit16          v0, v0, #+257
+      000a7c: move-wide/16           v257, v404
+      000a82: move                   v1, v0
+      000a84: or-int/lit8            v1, v1, #+1
+      000a88: xor-int/lit8           v1, v1, #+1
+      000a8c: shr-int/lit8           v1, v1, #+1
+      000a90: ushr-int/lit8          v1, v1, #+1
+      000a94: ope3                   
+      000a96: move                   v1, v0
+      000a98: ope4                   
+      000a9a: move                   v1, v0
+      000a9c: ope5                   
+      000a9e: move                   v1, v0
+      000aa0: invoke-super           {}, Landroid/app/Notification$DecoratedCustomViewStyle;-><init>  ; idx=257
+      000aa6: move/from16            raw=0x7f02,0x1f
+      000aaa: move/from16            raw=0x7f02,0x20
+      000aae: move/from16            raw=0x7f02,0x28
+      000ab2: move/from16            raw=0x7f02,0x5c
+      000ab6: move/from16            raw=0x7f02,0x8c
+      000aba: move/from16            raw=0x7f02,0x8d
+      000abe: move/from16            raw=0x7f02,0xe3
+      000ac2: move/from16            raw=0x7f02,0xfe
+      000ac6: move/from16            raw=0x7f02,0x138
+      000aca: move/from16            raw=0x7f02,0x300
+      000ace: move-wide              v0, v0
+      000ad0: move-object/16         v0, v174
+      000ad6: move                   v1, v0
+      000ad8: sparse-switch          v1, -> 0x26b991a
+      000ade: move                   v1, v0
+      000ae0: cmpg-float             v1, v1, v1
+      000ae4: cmpl-double            v1, v1, v1
+      000ae8: cmpg-double            v1, v1, v1
+      000aec: cmp-long               v1, v1, v1
+      000af0: opef                   
+      000af2: move/from16            raw=0x7f02,0x10a
+      000af6: move/from16            raw=0x7f02,0x300
+      000afa: move-wide              v0, v0
+      000afc: move/16                v0, v374
+      000b02: move                   v1, v0
+      000b04: div-float/2addr        v2, v0
+      000b06: move                   v1, v0
+      000b08: ope4                   
+      000b0a: move/from16            raw=0x7f02,0x300
+      000b0e: move-wide              v0, v0
+      000b10: move/from16            raw=0x2,0x0
+      000b14: ope5                   
+      000b16: move/from16            raw=0x7f02,0xe8
+      000b1a: move/from16            raw=0x7f02,0x300
+      000b1e: move-wide              v0, v0
+      000b20: return-object          v0
+      000b22: nop                    
+      000b24: mul-int/lit8           v0, v1, #+1
+      000b28: check-cast             v1, Landroid/os/IBinder;  ; idx=257
+      000b2c: instance-of            v2, v0, Landroid/os/IBinder;  ; idx=257
+      000b30: sget-byte              v2, Landroid/support/asynclayoutinflater/R$styleable;->FontFamilyFont_android_fontStyle : I  ; idx=257
+      000b34: aget-char              v0, v127, v2
+      000b38: iget-short             v0, v0, <fcls#32514 OOB>-><fname> : <ftype>  ; idx=32514
+      000b3c: sget-short             v0, <fcls#32514 OOB>-><fname> : <ftype>  ; idx=32514
+      000b40: long-to-double         v0, v0
+      000b42: move/from16            raw=0x7f02,0x8e
+      000b46: move/from16            raw=0x7f02,0x96
+      000b4a: move/from16            raw=0x7f02,0xf2
+      000b4e: move/from16            raw=0x7f02,0xf3
+      000b52: move/from16            raw=0x7f02,0xf8
+      000b56: move/from16            raw=0x7f02,0xf9
+      000b5a: move/from16            raw=0x7f02,0x10b
+      000b5e: move/from16            raw=0x7f02,0x110
+      000b62: move/from16            raw=0x7f02,0x13e
+      000b66: move/from16            raw=0x7f02,0x300
+      000b6a: move-wide              v0, v0
+      000b6c: move-wide/from16       raw=0x5,0x0
+      000b70: mul-int/2addr          v0, v0
+      000b72: move                   v1, v0
+      000b74: invoke-direct/range    {v1..v379}, Landroid/app/Notification$DecoratedCustomViewStyle;-><init>  ; idx=257
+      000b7a: move                   v1, v0
+      000b7c: sget-object            v2, Landroid/support/asynclayoutinflater/R$styleable;->FontFamilyFont_android_fontStyle : I  ; idx=257
+      000b80: oped                   
+      000b82: move/from16            raw=0x7f02,0x300
+      000b86: move-wide              v0, v0
+      000b88: move-wide/16           v0, v284
+      000b8e: move                   v1, v0
+      000b90: rem-int                v1, v1, v1
+      000b94: and-int                v1, v1, v1
+      000b98: or-int                 v1, v1, v1
+      000b9c: move-result-object     v3
+      000b9e: move                   v1, v0
+      000ba0: move-exception         v3
+      000ba2: move                   v1, v0
+      000ba4: nop                    
+      000ba6: move-wide              v0, v0
+      000ba8: return-void            
+      000baa: nop                    
+      000bac: filled-new-array       {}, ref257  ; idx=257
+      000bb2: move                   v1, v0
+      000bb4: op42                   
+      000bb6: move                   v1, v0
+      000bb8: nop                    
+      000bba: move/from16            raw=0x7f02,0x106
+      000bbe: move/from16            raw=0x7f02,0x111
+      000bc2: move/from16            raw=0x7f02,0x112
+      000bc6: move/from16            raw=0x7f02,0x114
+      000bca: move/from16            raw=0x7f02,0x122
+      000bce: move/from16            raw=0x7f02,0x123
+      000bd2: move/from16            raw=0x7f02,0x124
+      000bd6: move/from16            raw=0x7f02,0x139
+      000bda: move/from16            raw=0x7f02,0x13a
+      000bde: move/from16            raw=0x7f02,0x13b
+      000be2: move/from16            raw=0x7f02,0x300
+      000be6: move-wide              v0, v0
+      000be8: move-exception         v0
+      000bea: nop                    
+      000bec: and-int                v0, v1, v1
+      000bf0: or-int                 v0, v1, v1
+      000bf4: xor-int                v0, v1, v1
+      000bf8: shl-int                v0, v1, v1
+      000bfc: ushr-int               v0, v1, v1
+      000c00: add-long               v0, v1, v1
+      000c04: sget-wide              v1, Landroid/support/asynclayoutinflater/R$styleable;->FontFamilyFont_android_fontStyle : I  ; idx=257
+      000c08: sget-object            v1, Landroid/support/asynclayoutinflater/R$styleable;->FontFamilyFont_android_fontStyle : I  ; idx=257
+      000c0c: sget-boolean           v1, Landroid/support/asynclayoutinflater/R$styleable;->FontFamilyFont_android_fontStyle : I  ; idx=257
+      000c10: sget-byte              v1, Landroid/support/asynclayoutinflater/R$styleable;->FontFamilyFont_android_fontStyle : I  ; idx=257
+      000c14: sub-double             v3, v1, v1
+      000c18: neg-int                v0, v0
+      000c1a: move/from16            raw=0x7f02,0x115
+      000c1e: move/from16            raw=0x7f02,0x300
+      000c22: move-wide              v0, v0
+      000c24: monitor-enter          v0
+      000c26: nop                    
+      000c28: rem-double             v0, v1, v1
+      000c2c: op40                   
+      000c2e: move                   v1, v0
+      000c30: op3f                   
+      000c32: move/from16            raw=0x7f02,0x4b
+      000c36: move/from16            raw=0x7f02,0x4c
+      000c3a: move/from16            raw=0x7f02,0x5d
+      000c3e: move/from16            raw=0x7f02,0x5e
+      000c42: move/from16            raw=0x7f02,0x5f
+      000c46: move/from16            raw=0x7f02,0x60
+      000c4a: move/from16            raw=0x7f02,0x61
+      000c4e: move/from16            raw=0x7f02,0x62
+      000c52: move/from16            raw=0x7f02,0xdb
+      000c56: move/from16            raw=0x7f02,0xdc
+      000c5a: move/from16            raw=0x7f02,0xdd
+      000c5e: move/from16            raw=0x7f02,0xe0
+      000c62: move/from16            raw=0x7f02,0xe1
+      000c66: move/from16            raw=0x7f02,0xed
+      000c6a: move/from16            raw=0x7f02,0x10c
+      000c6e: move/from16            raw=0x7f02,0x10d
+      000c72: move/from16            raw=0x7f02,0x10e
+      000c76: move/from16            raw=0x7f02,0x12a
+      000c7a: move/from16            raw=0x7f02,0x12b
+      000c7e: move/from16            raw=0x7f02,0x12c
+      000c82: move/from16            raw=0x7f02,0x12d
+      000c86: move/from16            raw=0x7f02,0x12e
+      000c8a: move/from16            raw=0x7f02,0x12f
+      000c8e: move/from16            raw=0x7f02,0x130
+      000c92: move/from16            raw=0x7f02,0x131
+      000c96: move/from16            raw=0x7f02,0x132
+      000c9a: move/from16            raw=0x7f02,0x300
+      000c9e: move-wide              v0, v0
+      000ca0: move-wide/from16       raw=0x5,0x0
+      000ca4: nop                    
+      000ca6: move                   v1, v0
+      000ca8: mul-int/lit8           v0, v1, #+1
+      000cac: ope6                   
+      000cae: move/from16            raw=0x7f02,0xe7
+      000cb2: move/from16            raw=0x7f02,0x120
+      000cb6: move/from16            raw=0x7f02,0x300
+      000cba: move-wide              v0, v0
+      000cbc: move/16                v0, v212
+      000cc2: move                   v1, v0
+      000cc4: if-lt                  v0, v0, -> +32514 (0x129708)
+      000cc8: if-ge                  v0, v0, -> +32514 (0x12970c)
+      000ccc: nop                    
+      000cce: move-wide              v0, v0
+      000cd0: move/16                v0, v208
+      000cd6: move                   v1, v0
+      000cd8: opf2                   
+      000cda: move                   v1, v0
+      000cdc: opf3                   
+      000cde: move                   v1, v0
+
+  .method direct Lcom/lzplayer/insidehelper/R$styleable;-><init>
+      ; registers=1 ins=1 outs=1 tries=0 insns=4 @0x119920
+      000000: invoke-direct          {v0}, Ljava/lang/Object;-><init>  ; idx=15707
+      000006: return-void            
+
+##############################################################################
+CLASS Lcom/lzplayer/insidehelper/R; extends Ljava/lang/Object;  (access=0x11, class_data_off=0x1bd231)
+##############################################################################
+
+  .method direct Lcom/lzplayer/insidehelper/R;-><init>
+      ; registers=1 ins=1 outs=1 tries=0 insns=4 @0x119950
+      000000: invoke-direct          {v0}, Ljava/lang/Object;-><init>  ; idx=15707
+      000006: return-void            
