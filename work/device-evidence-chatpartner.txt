@@ -1,0 +1,222 @@
+﻿
+09-26 01:38:36.475  2926  4323 I HwMultiWindowManager: updateToSourceWinModeIfNeeded : source: ActivityRecord{bf0d9d8 u
+0 com.tyq.pro/com.qiyetong.pro.SplashActivity t266}, calling: com.tyq.proaInfo: ActivityInfo{54be779 com.ssss.ss_im.log
+in.LoginActivity}
+09-26 01:38:36.476  2926  4323 D HwASInterceptor: both page open. caller:com.tyq.pro, target:com.tyq.pro
+09-26 01:38:36.476  2926  4323 D ActivityTaskManager: TaskLaunchParamsModifier:task=null activity=ActivityRecord{5ced11
+f u0 com.tyq.pro/com.ssss.ss_im.login.LoginActivity display-area-from-source=DefaultTaskDisplayArea@146720747 display-i
+d=0 display-windowing-mode=1 suggested-display-area=DefaultTaskDisplayArea@146720747
+09-26 01:38:36.476  2926  4323 D ActivityTaskManager: TaskLaunchParamsModifier:task=Task{7616016 #266 type=standard A=1
+0227:com.tyq.pro U=0 visible=true mode=fullscreen translucent=false sz=1} activity=ActivityRecord{5ced11f u0 com.tyq.pr
+o/com.ssss.ss_im.login.LoginActivity t-1} display-area-from-source=DefaultTaskDisplayArea@146720747 display-id=0 displa
+y-windowing-mode=1 suggested-display-area=DefaultTaskDisplayArea@146720747 inherit-from-source=fullscreen activity-opti
+ons-fullscreen=Rect(0, 0 - 0, 0) non-freeform-mode=1 display-area=DefaultTaskDisplayArea@146720747
+09-26 01:38:36.476  2926  4323 W HwMultiWindowManager: launch multi window activity: invalid params. r=ActivityRecord{5
+ced11f u0 com.tyq.pro/com.ssss.ss_im.login.LoginActivity t-1} options=null source=ActivityRecord{bf0d9d8 u0 com.tyq.pro
+/com.qiyetong.pro.SplashActivity t266}
+09-26 01:38:36.477  2926  4323 I WindowManager: addWindowToken: displayid:0 binder:Token{26e9cbe ActivityRecord{5ced11f
+ u0 com.tyq.pro/com.ssss.ss_im.login.LoginActivity t-1}} token:ActivityRecord{5ced11f u0 com.tyq.pro/com.ssss.ss_im.log
+in.LoginActivity t-1}
+09-26 01:38:36.481  2926  4323 I WindowManager: reportResized : win = Window{9ba6908 u0 Splash Screen com.tyq.pro} draw
+State = HAS_DRAWN
+09-26 01:38:36.482  2926  4341 I HWMW_HwMagicStackManager: finish application, finishActivity:ActivityRecord{bf0d9d8 u0
+ com.tyq.pro/com.qiyetong.pro.SplashActivity t266} reason=app-request
+09-26 01:38:36.485 18009 18009 I ActivityThread: add activity client record, r= ActivityRecord{cc95692 token=android.os
+.BinderProxy@c87ddf8 {com.tyq.pro/com.qiyetong.pro.SplashActivity}} token= android.os.BinderProxy@c87ddf8
+09-26 01:38:36.486 18009 18009 I TopResumedActivityChangeItem: execute start, ActivityClientRecord = ActivityRecord{cc9
+5692 token=android.os.BinderProxy@c87ddf8 {com.tyq.pro/com.qiyetong.pro.SplashActivity}}
+09-26 01:38:36.487 18009 18009 I TopResumedActivityChangeItem: execute start, ActivityClientRecord = ActivityRecord{cc9
+5692 token=android.os.BinderProxy@c87ddf8 {com.tyq.pro/com.qiyetong.pro.SplashActivity}}
+09-26 01:38:36.489  2926  3050 I HwAudioServiceEx: ComponentInfo : className = com.qiyetong.pro.SplashActivity, flag = 
+onResume, isHomeActivity = , isTop = true
+09-26 01:38:36.493  2926  3210 I WindowManager: Check opening app=ActivityRecord{5ced11f u0 com.tyq.pro/com.ssss.ss_im.
+login.LoginActivity t266}: allDrawn=false startingDisplayed=true startingMoved=false isRelaunching()=false mStartingWin
+dow=Window{9ba6908 u0 Splash Screen com.tyq.pro} isOneStepWindowChanging=falseisOpenCombinationSplitScreen=false should
+WaitCombine=false
+09-26 01:38:36.494  2926  3210 V WindowManager: commitVisibility: ActivityRecord{bf0d9d8 u0 com.tyq.pro/com.qiyetong.pr
+o.SplashActivity t266 f}}: visible=false mVisibleRequested=false
+09-26 01:38:36.503  2926  3050 I HwAudioServiceEx: ComponentInfo : className = com.qiyetong.pro.SplashActivity, flag = 
+onPause, isHomeActivity = , isTop = false
+09-26 01:38:36.506  3665  3986 I NetworkQoeChr: updateTopAppInfo: com.tyq.pro, appState1, uid10227
+09-26 01:38:36.509  3665  3986 I SmartDualCardConfig: getAppType,pkgName=com.tyq.pro,appType=-1
+09-26 01:38:36.511  3665  3986 I HcPreDnsQueryCtrl: mForeAppPackageName update=com.tyq.pro
+09-26 01:38:36.520 18009 18009 I ActivityThread: add activity client record, r= ActivityRecord{9c130fa token=android.os
+.BinderProxy@1cf47bf {com.tyq.pro/com.ssss.ss_im.login.LoginActivity}} token= android.os.BinderProxy@1cf47bf
+09-26 01:38:36.544  2926  4118 I ActivityManager: startProcess: name=com.tyq.pro:marsservice app=null knownToBeDead=tru
+e thread=null pid=-1 preloadStatus=-1
+09-26 01:38:36.544  2926  4118 I BigFontUtils: adjustAppProcessConfiguration appInfo:com.tyq.pro
+09-26 01:38:36.544  2926  4118 I ActivityManager: Posting procStart msg for 0:com.tyq.pro:marsservice/u0a227
+09-26 01:38:36.544  2926  3056 I ActivityManager: startProcess: asking zygote to start proc ProcessRecord{99ece2b 0:com
+.tyq.pro:marsservice/u0a227}
+09-26 01:38:36.558  2926  3056 I ActivityManager: Start proc 18159:com.tyq.pro:marsservice/u0a227 for service {com.tyq.
+pro/com.ssss.mars.service.MarsServiceNative}
+09-26 01:38:36.559  2926  3056 I SWAP_Scene: Entering notifySceneData notifySceneData. EventType:PROCESS_CREATE pkg:com
+.tyq.pro uid:10227 pid:18159 proc: activity:null
+09-26 01:38:36.559  2926  3056 I HwActivityManagerServiceEx: notifyProcessStatusChange::pkg:com.tyq.pro pid:18159 uid:1
+0227
+09-26 01:38:36.566  2926  3053 D ActivityManager: setPrivilegeType serviceRecord: ServiceRecord{9f7bc3c u0 com.tyq.pro/
+com.qiyetong.pro.CoreService}, interfaceDescriptor: android.os.IMessenger, shouldSetPrivType: false
+09-26 01:38:36.576  2926  5470 I WindowManager: addWindow: Window{e499af7 u0 com.tyq.pro/com.ssss.ss_im.login.LoginActi
+vity} currentDisplayId:0 requestDisplayId:0 token:Token{26e9cbe ActivityRecord{5ced11f u0 com.tyq.pro/com.ssss.ss_im.lo
+gin.LoginActivity t266}} appearance:8 fl_fullscreen=false vsysui_fullscreen=false
+09-26 01:38:36.581 18009 18009 I TopResumedActivityChangeItem: execute start, ActivityClientRecord = ActivityRecord{9c1
+30fa token=android.os.BinderProxy@1cf47bf {com.tyq.pro/com.ssss.ss_im.login.LoginActivity}}
+09-26 01:38:36.595  2926  4118 I WindowManager: Changing focus from null to Window{e499af7 u0 com.tyq.pro/com.ssss.ss_i
+m.login.LoginActivity} displayId=0
+09-26 01:38:36.595  2926  4118 D HwActivityTaskManagerServiceEx: getVisibleTasks add visible task to list, topActivity 
+: ActivityRecord{5ced11f u0 com.tyq.pro/com.ssss.ss_im.login.LoginActivity t266}
+09-26 01:38:36.600  2926  4118 I NavigationCallOut: focusChanged, focus=Window{e499af7 u0 com.tyq.pro/com.ssss.ss_im.lo
+gin.LoginActivity}, mIsFocusWinInBlackList=false
+09-26 01:38:36.600  2926  4118 V HwPhoneWindowManager: updateSystemUiColorLw window=Window{e499af7 u0 com.tyq.pro/com.s
+sss.ss_im.login.LoginActivity},EmuiStyle=0,StatusBarColor=0xffffffff,NavigationBarColor=0xfffcfcfc, mForceNotchStatusBa
+r=false
+09-26 01:38:36.601  2926  3020 I StatusBarDisable: setFlags what=0 which=1 pkg=Window{e499af7 u0 com.tyq.pro/com.ssss.s
+s_im.login.LoginActivity}
+09-26 01:38:36.601  2926  3023 I WindowManager: Focus requested for window=:e499af7 com.tyq.pro/com.ssss.ss_im.login.Lo
+ginActivity
+09-26 01:38:36.602  2926  4341 W ActivityTaskManager: do not allow hiding recent tasks, task id: 266 , package = com.ty
+q.pro
+09-26 01:38:36.606  2926  4118 W ActivityTaskManager: do not allow hiding recent tasks, task id: 266 , package = com.ty
+q.pro
+09-26 01:38:36.613  2926  3023 I WindowManager: wm_insets notifyInsetsControlChanged for:Window{e499af7 u0 com.tyq.pro/
+com.ssss.ss_im.login.LoginActivity}
+09-26 01:38:36.613  2926  3023 I WindowManager: wm_insets notifyInsetsControlChanged for:Window{9ba6908 u0 Splash Scree
+n com.tyq.pro}
+09-26 01:38:36.678  2926  4341 I HwOcrImeController: updateMultiWindow focus window = com.tyq.pro/com.ssss.ss_im.login.
+LoginActivity mIsInMultiScreen = false
+09-26 01:38:36.679  2926  3023 I HwRestoreStateManager: com.tyq.pro doesn't support recovery
+09-26 01:38:36.682  2926  3023 I WindowManager: removeIfPossible: Window{9ba6908 u0 Splash Screen com.tyq.pro} callers=
+com.android.server.wm.WindowState.removeIfPossible:3349 com.android.server.wm.WindowManagerService.removeWindow:2825 co
+m.android.server.wm.Session.remove:228 android.view.ViewRootImpl.dispatchDetachedFromWindow:6694 android.view.ViewRootI
+mpl.doDie:10435 
+09-26 01:38:36.683  2926  3023 I WindowManager: Not removing Window{9ba6908 u0 Splash Screen com.tyq.pro EXITING} due t
+o exit animation 
+09-26 01:38:36.685  2926  4341 V ActivityTaskManager: Activity idle: ActivityRecord{5ced11f u0 com.tyq.pro/com.ssss.ss_
+im.login.LoginActivity t266}
+09-26 01:38:36.686  2926  4341 W ActivityTaskManager: do not allow hiding recent tasks, task id: 266 , package = com.ty
+q.pro
+09-26 01:38:36.687  2926  4341 I ActivityTaskManager: Stopping ActivityRecord{bf0d9d8 u0 com.tyq.pro/com.qiyetong.pro.S
+plashActivity t266 f}}: nowVisible=false animating=true finishing=true
+09-26 01:38:36.696  2926  3023 I WindowManager: wm_insets notifyInsetsControlChanged for:Window{e499af7 u0 com.tyq.pro/
+com.ssss.ss_im.login.LoginActivity}
+09-26 01:38:36.699  2926  4341 I HwOcrImeController: updateMultiWindow focus window = com.tyq.pro/com.ssss.ss_im.login.
+LoginActivity mIsInMultiScreen = false
+09-26 01:38:36.711  2926  3022 I ActivityTaskManager: Stopping ActivityRecord{bf0d9d8 u0 com.tyq.pro/com.qiyetong.pro.S
+plashActivity t266 f}}: nowVisible=false animating=true finishing=true
+09-26 01:38:36.713  2926  3022 D ActivityTaskManager: Ready to stop: ActivityRecord{bf0d9d8 u0 com.tyq.pro/com.qiyetong
+.pro.SplashActivity t266 f}} animating=false finishing=true isInHistory=true
+09-26 01:38:36.721 18009 18009 I ActivityThread: Remove activity client record, r= ActivityRecord{cc95692 token=android
+.os.BinderProxy@c87ddf8 {com.tyq.pro/com.qiyetong.pro.SplashActivity}} token= android.os.BinderProxy@c87ddf8
+09-26 01:38:36.728  2926  3301 I WindowManager: removeWindowToken: displayid:0 binder:Token{aa7b30d ActivityRecord{bf0d
+9d8 u0 com.tyq.pro/com.qiyetong.pro.SplashActivity t266 f}}} token:ActivityRecord{bf0d9d8 u0 com.tyq.pro/com.qiyetong.p
+ro.SplashActivity t266 f}}
+09-26 01:38:36.728  2926  3301 I WindowManager: removeWindowToken: displayid:0 binder:Token{aa7b30d ActivityRecord{bf0d
+9d8 u0 com.tyq.pro/com.qiyetong.pro.SplashActivity t266 f}}} token:null
+09-26 01:38:36.728  2926  3301 I WindowManager: removeChild: child=ActivityRecord{bf0d9d8 u0 com.tyq.pro/com.qiyetong.p
+ro.SplashActivity t266 f}} reason=removeChild
+09-26 01:38:36.785  2926  3023 I WindowManager: Exit animation finished in Window{9ba6908 u0 Splash Screen com.tyq.pro 
+EXITING}: remove=true
+09-26 01:38:36.785  2926  3023 I WindowManager: Removing Window{9ba6908 u0 Splash Screen com.tyq.pro} from ActivityReco
+rd{5ced11f u0 com.tyq.pro/com.ssss.ss_im.login.LoginActivity t266}
+09-26 01:38:36.786  2926  3020 I StatusBarDisable: setFlags what=0 which=1 pkg=Window{e499af7 u0 com.tyq.pro/com.ssss.s
+s_im.login.LoginActivity}
+09-26 01:38:36.806  2926  3053 D ActivityManager: setPrivilegeType serviceRecord: ServiceRecord{187b9da u0 com.tyq.pro/
+com.ssss.mars.service.MarsServiceNative}, interfaceDescriptor: com.ssss.mars.remote.MarsService, shouldSetPrivType: fal
+se
+09-26 01:38:54.044  2926  4341 I HwApsManagerConfig: registerCallbackLocked success, pkgName:com.tyq.pro, callback_coun
+t:13
+09-26 01:38:54.044  2926  4341 I HwApsManagerConfig: doCallbackAtFirstRegisterLocked, start ! pkgName:com.tyq.pro
+09-26 01:38:54.048  2926  3210 I ActivityTaskManager: notifyActivityLaunching intent=Intent { cmp=com.tyq.pro/com.qiyet
+ong.pro.MainActivity } existingInfo=null
+09-26 01:38:54.048  2926  3210 I SWAP_Scene: Entering notifySceneData notifySceneData. EventType:SWITCH_TO_FOREGROUND p
+kg:com.tyq.pro uid:10227 pid:0 proc: activity:com.qiyetong.pro.MainActivity
+09-26 01:38:54.049  2926  3210 I ActivityTaskManager: START u0 {hwFlg=0x10 cmp=com.tyq.pro/com.qiyetong.pro.MainActivit
+y} from uid 10227
+09-26 01:38:54.049  2926  3210 D HwActivityStarterEx: isNeedInterceptStart true, interceptionState:BACKGROUND, callerPk
+g:com.tyq.pro, uid:10227
+09-26 01:38:54.049  2926  3210 D ActivityTaskManager: real mask = 6160 real binary mask = 1100000010000shouldIntercept 
+start, isNeedIntercept = true callingUid = 10227 callingPackage = com.tyq.pro
+09-26 01:38:54.049  2926  3210 D HwActivityStarterEx: reportResult packageName = com.tyq.pro uid = 10227 activityOrigin
+alStartResult = 7 hwInterceptionMask = 0 validLen = 4
+09-26 01:38:54.050  2926  3210 D HwMWPM  : activityInfo: ActivityInfo{1b6ab97 com.qiyetong.pro.MainActivity}, intent: I
+ntent { cmp=com.tyq.pro/com.qiyetong.pro.MainActivity }, options: null, callingPackage: com.tyq.pro, isStartToSplit: fa
+lse
+09-26 01:38:54.050  2926  3210 I HwMultiWindowManager: updateToSourceWinModeIfNeeded : source: ActivityRecord{5ced11f u
+0 com.tyq.pro/com.ssss.ss_im.login.LoginActivity t266}, calling: com.tyq.proaInfo: ActivityInfo{1b6ab97 com.qiyetong.pr
+o.MainActivity}
+09-26 01:38:54.052  2926  3210 D HwASInterceptor: both page open. caller:com.tyq.pro, target:com.tyq.pro
+09-26 01:38:54.052  2926  3210 I ActivityTaskManager: ActivityRecord info: ActivityInfo{1b6ab97 com.qiyetong.pro.MainAc
+tivity}
+09-26 01:38:54.053  2926  3210 D ActivityTaskManager: TaskLaunchParamsModifier:task=null activity=ActivityRecord{be95da
+2 u0 com.tyq.pro/com.qiyetong.pro.MainActivity display-area-from-source=DefaultTaskDisplayArea@146720747 display-id=0 d
+isplay-windowing-mode=1 suggested-display-area=DefaultTaskDisplayArea@146720747
+09-26 01:38:54.053  2926  3210 D ActivityTaskManager: TaskLaunchParamsModifier:task=Task{7616016 #266 type=standard A=1
+0227:com.tyq.pro U=0 visible=true mode=fullscreen translucent=false sz=1} activity=ActivityRecord{be95da2 u0 com.tyq.pr
+o/com.qiyetong.pro.MainActivity t-1} display-area-from-source=DefaultTaskDisplayArea@146720747 display-id=0 display-win
+dowing-mode=1 suggested-display-area=DefaultTaskDisplayArea@146720747 inherit-from-source=fullscreen activity-options-f
+ullscreen=Rect(0, 0 - 0, 0) non-freeform-mode=1 display-area=DefaultTaskDisplayArea@146720747
+09-26 01:38:54.053  2926  3210 W HwMultiWindowManager: launch multi window activity: invalid params. r=ActivityRecord{b
+e95da2 u0 com.tyq.pro/com.qiyetong.pro.MainActivity t-1} options=null source=ActivityRecord{5ced11f u0 com.tyq.pro/com.
+ssss.ss_im.login.LoginActivity t266}
+09-26 01:38:54.054  2926  3210 I WindowManager: addWindowToken: displayid:0 binder:Token{e8f4d6d ActivityRecord{be95da2
+ u0 com.tyq.pro/com.qiyetong.pro.MainActivity t-1}} token:ActivityRecord{be95da2 u0 com.tyq.pro/com.qiyetong.pro.MainAc
+tivity t-1}
+09-26 01:38:54.062 18009 18009 I TopResumedActivityChangeItem: execute start, ActivityClientRecord = ActivityRecord{9c1
+30fa token=android.os.BinderProxy@1cf47bf {com.tyq.pro/com.ssss.ss_im.login.LoginActivity}}
+09-26 01:38:54.067  2926  4341 I AlarmManager: set(PendingIntent{423b1ee: PendingIntentRecord{f7d768f com.tyq.pro broad
+castIntent}}) : type=2 triggerAtTime=2866082 win=0 tElapsed=2866082 maxElapsed=2866082 interval=0 flags=0x1 at=+599998m
+s uid=10227 count=1
+09-26 01:38:54.069  2926  4341 I ActivityTaskManager: Making visible and scheduling visibility: ActivityRecord{be95da2 
+u0 com.tyq.pro/com.qiyetong.pro.MainActivity t266}
+09-26 01:38:54.073  2926  4341 I WindowManager: Changing focus from Window{e499af7 u0 com.tyq.pro/com.ssss.ss_im.login.
+LoginActivity} to null displayId=0
+09-26 01:38:54.076  2926  4341 I WindowManager: Check opening app=ActivityRecord{be95da2 u0 com.tyq.pro/com.qiyetong.pr
+o.MainActivity t266}: allDrawn=false startingDisplayed=false startingMoved=false isRelaunching()=false mStartingWindow=
+null isOneStepWindowChanging=falseisOpenCombinationSplitScreen=false shouldWaitCombine=false
+09-26 01:38:54.076  2926  3022 I ActivityTaskManager: Stopping ActivityRecord{5ced11f u0 com.tyq.pro/com.ssss.ss_im.log
+in.LoginActivity t266}: nowVisible=true animating=true finishing=false
+09-26 01:38:54.091 18009 18009 I ActivityThread: add activity client record, r= ActivityRecord{c15b5bc token=android.os
+.BinderProxy@fbaca30 {com.tyq.pro/com.qiyetong.pro.MainActivity}} token= android.os.BinderProxy@fbaca30
+09-26 01:38:54.128  2926  4337 I WindowManager: addWindow: Window{103a887 u0 com.tyq.pro/com.qiyetong.pro.MainActivity}
+ currentDisplayId:0 requestDisplayId:0 token:Token{e8f4d6d ActivityRecord{be95da2 u0 com.tyq.pro/com.qiyetong.pro.MainA
+ctivity t266}} appearance:8 fl_fullscreen=false vsysui_fullscreen=false
+09-26 01:38:54.130 18009 18009 I TopResumedActivityChangeItem: execute start, ActivityClientRecord = ActivityRecord{c15
+b5bc token=android.os.BinderProxy@fbaca30 {com.tyq.pro/com.qiyetong.pro.MainActivity}}
+09-26 01:38:54.130  2926  3050 I HwAudioServiceEx: ComponentInfo : className = com.qiyetong.pro.MainActivity, flag = on
+Resume, isHomeActivity = , isTop = true
+09-26 01:38:54.150  2926  3301 I WindowManager: Check opening app=ActivityRecord{be95da2 u0 com.tyq.pro/com.qiyetong.pr
+o.MainActivity t266}: allDrawn=false startingDisplayed=false startingMoved=false isRelaunching()=false mStartingWindow=
+null isOneStepWindowChanging=falseisOpenCombinationSplitScreen=false shouldWaitCombine=false
+09-26 01:38:54.151  2926  3301 I WindowManager: Changing focus from null to Window{103a887 u0 com.tyq.pro/com.qiyetong.
+pro.MainActivity} displayId=0
+09-26 01:38:54.151  2926  3301 D HwActivityTaskManagerServiceEx: getVisibleTasks add visible task to list, topActivity 
+: ActivityRecord{be95da2 u0 com.tyq.pro/com.qiyetong.pro.MainActivity t266}
+09-26 01:38:54.151  2926  3301 I NavigationCallOut: focusChanged, focus=Window{103a887 u0 com.tyq.pro/com.qiyetong.pro.
+MainActivity}, mIsFocusWinInBlackList=false
+09-26 01:38:54.152  2926  3023 I WindowManager: Focus requested for window=:103a887 com.tyq.pro/com.qiyetong.pro.MainAc
+tivity
+09-26 01:38:54.159  2926  3023 I WindowManager: wm_insets notifyInsetsControlChanged for:Window{e499af7 u0 com.tyq.pro/
+com.ssss.ss_im.login.LoginActivity}
+09-26 01:38:54.159  2926  3023 I WindowManager: wm_insets notifyInsetsControlChanged for:Window{103a887 u0 com.tyq.pro/
+com.qiyetong.pro.MainActivity}
+09-26 01:38:54.175  2926  4341 W ActivityTaskManager: do not allow hiding recent tasks, task id: 266 , package = com.ty
+q.pro
+09-26 01:38:54.176  2926  4341 W ActivityTaskManager: do not allow hiding recent tasks, task id: 266 , package = com.ty
+q.pro
+09-26 01:38:54.187  2926  3023 I WindowManager: Check opening app=ActivityRecord{be95da2 u0 com.tyq.pro/com.qiyetong.pr
+o.MainActivity t266}: allDrawn=true startingDisplayed=false startingMoved=false isRelaunching()=false mStartingWindow=n
+ull isOneStepWindowChanging=falseisOpenCombinationSplitScreen=false shouldWaitCombine=false
+09-26 01:38:54.187  2926  3023 D WindowManager: getTopAnimActivity enter true, ActivityRecord{be95da2 u0 com.tyq.pro/co
+m.qiyetong.pro.MainActivity t266}
+09-26 01:38:54.189  2926  4341 I HwOcrImeController: updateMultiWindow focus window = com.tyq.pro/com.qiyetong.pro.Main
+Activity mIsInMultiScreen = false
+09-26 01:38:54.189  2926  3023 D ActivityTaskManager: printFIFOList record=ActivityRecord{be95da2 u0 com.tyq.pro/com.qi
+yetong.pro.MainActivity t266}, record.finishing:false, record.mReportedDrawn:false
+09-26 01:38:54.189  2926  3023 D ActivityTaskManager: onAnimationLeashCreated win=Window{103a887 u0 com.tyq.pro/com.qiy
+etong.pro.MainActivity} mFrame=Rect(0, 0 - 1212, 2616)
+09-26 01:38:54.189  2926  3023 D ActivityTaskManager: printFIFOList record=ActivityRecord{5ced11f u0 com.tyq.pro/com.ss
+ss.ss_im.login.LoginActivity t266}, record.finishing:false, record.mReportedDrawn:true
+09-26 01:38:54.189  2926  3023 D ActivityTaskManager: onAnimationLeashCreated win=Window{e499af7 u0 com.tyq.pro/com.sss
+s.ss_im.login.LoginActivity} mFrame=Rect(0, 0 - 1212, 2616)
+
+
