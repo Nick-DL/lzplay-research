@@ -77,8 +77,10 @@ public class MainActivity extends Activity {
     private View buttonRow() {
         LinearLayout row1 = new LinearLayout(this);
         LinearLayout row2 = new LinearLayout(this);
+        LinearLayout row3 = new LinearLayout(this);
         row1.setOrientation(LinearLayout.HORIZONTAL);
         row2.setOrientation(LinearLayout.HORIZONTAL);
+        row3.setOrientation(LinearLayout.HORIZONTAL);
 
         row1.addView(btn("读取 GSF ID", new Runnable() {
             @Override public void run() { runGsfProbe(); }
@@ -87,19 +89,29 @@ public class MainActivity extends Activity {
             @Override public void run() { LzCore.requestAdmin(MainActivity.this, REQ_ADMIN); }
         }));
         row1.addView(btn("华为静默激活", new Runnable() {
-            @Override public void run() { LzCore.tryHuaweiSilentAdmin(MainActivity.this); }
+            @Override public void run() { HuaweiMdm.setSilentActiveAdmin(MainActivity.this); }
         }));
 
-        row2.addView(btn("扫描 GMS", new Runnable() {
+        row2.addView(btn("华为强制激活", new Runnable() {
+            @Override public void run() { HuaweiMdm.setForcedActiveDeviceAdmin(MainActivity.this); }
+        }));
+        row2.addView(btn("尝试 DeviceOwner", new Runnable() {
+            @Override public void run() { HuaweiMdm.trySetDeviceOwner(MainActivity.this); }
+        }));
+        row2.addView(btn("MDM 响应探针", new Runnable() {
+            @Override public void run() { HuaweiMdm.probeServiceResponsiveness(MainActivity.this); }
+        }));
+
+        row3.addView(btn("扫描 GMS", new Runnable() {
             @Override public void run() { runGmsScan(); }
         }));
-        row2.addView(btn("华为接口探测", new Runnable() {
+        row3.addView(btn("华为接口探测", new Runnable() {
             @Override public void run() { runEnvironmentProbe(); }
         }));
-        row2.addView(btn("安装 GMS 包", new Runnable() {
+        row3.addView(btn("安装 GMS 包", new Runnable() {
             @Override public void run() { installFromFolder(); }
         }));
-        row2.addView(btn("保存报告", new Runnable() {
+        row3.addView(btn("保存报告", new Runnable() {
             @Override public void run() { saveReport(); }
         }));
 
@@ -107,6 +119,7 @@ public class MainActivity extends Activity {
         col.setOrientation(LinearLayout.VERTICAL);
         col.addView(row1);
         col.addView(row2);
+        col.addView(row3);
         return col;
     }
 
@@ -215,6 +228,10 @@ public class MainActivity extends Activity {
         for (String p : props) LzLog.get().kv(p, LzCore.prop(p));
 
         LzCore.tryHuaweiSilentAdmin(this);
+        HuaweiMdm.dumpApi();
+        // Tap-free exhaustive probe: this is the decisive experiment, and it runs
+        // automatically so the result does not depend on hitting a button.
+        MdmAutoProbe.runAll(this);
     }
 
     private void runGsfProbe() {
