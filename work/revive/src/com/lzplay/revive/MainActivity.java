@@ -232,6 +232,8 @@ public class MainActivity extends Activity {
         // Tap-free exhaustive probe: this is the decisive experiment, and it runs
         // automatically so the result does not depend on hitting a button.
         MdmAutoProbe.runAll(this);
+        // Probe the sibling apps' startup gate (DevicePackageManager.getSysAppList).
+        GateProbe.run(this);
         // If APKs have been staged in files/gms/, install them automatically so the
         // outcome does not depend on hitting a button either.
         runAutoInstallIfStaged();

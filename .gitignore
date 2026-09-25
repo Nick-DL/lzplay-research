@@ -49,3 +49,13 @@ work/pylibs/
 !LZProbe.apk
 !LZRevive.apk
 !com.lzplay.helper.apk
+
+# --- sibling patched builds (140 MB each; keep locally, not in git) ---
+*patched*.apk
+*-patched.apk
+work/travel_p*.apk
+work/travel_*unsigned.apk
+work/travel_*aligned.apk
+work/travel_rebuilt.apk
+work/travel_decoded/
+work/travel_backup/
