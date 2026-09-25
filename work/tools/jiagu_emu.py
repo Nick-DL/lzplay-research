@@ -12,8 +12,10 @@ Every external call is logged, so we can see exactly what the packer tries to do
 """
 import base64, gzip, os, struct, sys
 
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'pylibs'))
-sys.path.insert(0, os.path.dirname(__file__))
+HERE = os.path.dirname(os.path.abspath(__file__))
+WS = os.path.dirname(os.path.dirname(HERE))          # workspace root
+sys.path.insert(0, os.path.join(WS, 'work', 'pylibs'))   # unicorn lives here
+sys.path.insert(0, HERE)
 
 from unicorn import (Uc, UcError, UC_ARCH_X86, UC_MODE_32, UC_HOOK_CODE,
                      UC_HOOK_MEM_UNMAPPED, UC_HOOK_MEM_INVALID, UC_PROT_ALL)
