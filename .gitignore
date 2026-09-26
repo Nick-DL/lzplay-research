@@ -110,3 +110,4 @@ work/uidump/
 # --- VitePress ---
 docs/.vitepress/dist/
 docs/.vitepress/cache/
+*.bin
