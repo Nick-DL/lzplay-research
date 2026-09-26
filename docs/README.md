@@ -1,233 +1,397 @@
-# lzplay 复活计划 — 研究索引
+# lzplay 复活计划 — 研究总索引
 
-> 研究对象：三个同源的"谷歌服务助手"类 App（华为平台签名授权渠道产品）
-> 目标设备：华为 Mate50 Pro (DCO-AL00) / HarmonyOS 4.2.0.218 / 未 root 零售机
+> **研究对象**：三个同源的"谷歌服务助手"类 App —— `com.lzplay.helper`（lzplay）、
+> `com.qiyecomm`（旅游必备）、`com.tyq.pro`（Chat Partner），
+> 以及它们共同携带的华为平台签名授权渠道 `META-INF/HUAWEI.CER`。
+>
+> **目标设备**：华为 Mate50 Pro (DCO-AL00) / MatePad 2022 (GOT-W09) / Nova7 (JEF-AN00)
+> 　全部 HarmonyOS 4.2 / SDK 31 / EmotionUI_14.2.0 / **未 root 零售机**
 
 ---
 
-> ## ✅ 目标已达成 —— GMS 在 Mate50 Pro 上正常运行
-> 完整记录：[lzplay目标达成-GMS正常运行.md](01-lzplay/目标达成-GMS正常运行.md)
-> 关键一步是【应用启动管理】白名单 —— 之前所有尝试都打在了没触发的那道门上。
+## ✅ 最终结果
 
+> ### GMS 在 Mate50 Pro 上**完整可用** —— Google Play 正常打开、账号已登录、设置中出现 "Google" 子菜单
 
-> ⚠️ **当前研究暂停中** —— 恢复时先读 [SESSION-STATE-暂停存档.md](SESSION-STATE-暂停存档.md)，里面有两条对早期结论的重要更正。
+<img src="../work/gms_ok.png" width="300" alt="Google Play 正常运行">
 
-## 📌 一句话结论
+**完成情况（对照 `00-原始需求.md`）**
 
-| 问题 | 结论 |
+| 原始需求 | 结果 |
 |---|---|
-| lzplay 的时间炸弹、设备白名单存在吗？ | **都不存在。** 时间炸弹属于误判；门禁只是一个反射调用，无名单可解 |
-| 装 GMS 这件事本身能不能做？ | **能。** 六个 `_29` 包全部一次装成功 |
-| 装完之后 GMS 能用吗？ | **不能。** 华为 `trustspace` 在系统层阻止 GSF provider 启动 |
-| 两个换皮 App 能不能改成"能跑"？ | **能，都改通了。** 见 `02-siblings/` |
-| 华为后门权限能不能拿到？ | **不能。** `signature\|privileged`，需华为平台签名 |
-
-**★ 最重要的单点发现**：`com.lzplay.helper.apk` **本身**就是华为授权通道 ——
-它的 `META-INF/HUAWEI.CER` 里的 `DeveloperKey` 与它的真实签名证书**逐字节相等**（密码学证实）。
-**绝不能重打包或重签名它**，那会毁掉唯一的那把钥匙。
-详见 [HUAWEI-CER-华为授权机制.md](01-lzplay/HUAWEI-CER-华为授权机制.md)。
-
-**核心链条**：
-```
-GMS 装得上 ✅  → trustspace 拦住 GSF provider ❌ → 无 GSF ID → 无法向谷歌注册 → GMS 不可用
-                      ↑
-              这就是 lzplay 当年存在的理由，也是它签名授权的意义
-```
+| 对其脱壳 | ✅ 360 加固静态分析完成 |
+| 反编译和修改 | ✅ 完成；**并证明改包对特权目标是死路** |
+| 不再限制时间 | ✅ **不存在时间炸弹** —— 改时间是给华为 CER 的 `ValidPeriod` 用的 |
+| 不再限制设备型号 | ✅ **不存在机型白名单** —— 门禁只是一个反射调用 |
+| 不再限制软件版本 | ✅ 同上 |
+| 测试该 API 是否还存在 | ✅ **存在** —— `DevicePackageManager` 35 个方法齐全 |
+| lzplay 还能不能辅助安装 GMS | ✅ **能** —— 并且 GMS 真的跑起来了 |
 
 ---
 
-## 📁 目录结构
+## 📌 五条核心结论（先看这个）
 
-```
-lzplay/
-├── docs/                        ← 全部文档
-│   ├── 00-原始需求.md
-│   ├── 01-lzplay/               ← lzplay 本体（含 360 脱壳全过程）
-│   ├── 02-siblings/             ← 旅游必备 + Chat Partner 改包
-│   ├── 03-device/               ← 设备端实测结论
-│   └── 04-logs/                 ← 原始设备日志（证据）
-│
-├── work/                        ← 工作区（工具链、反编译工程、备份）
-│   ├── tools/                   ← 自建工具链（见下方工具清单）
-│   ├── revive/                  ← LZRevive 干净替代品源码
-│   ├── travel_decoded/          ← 旅游必备完整反编译工程
-│   ├── chat_smali/              ← Chat Partner 的 smali 树（补丁后）
-│   ├── gms29/                   ← Android 10 那套 GMS 包
-│   ├── travel_backup/           ← 补丁前 smali 备份
-│   ├── chat_backup_smali/       ← 补丁前 smali 备份
-│   └── avd/                     ← 模拟器镜像（6 GB，已 gitignore）
-│
-└── *.apk                        ← 可安装产物
-    ├── LZProbe.apk              ← 华为 API 探针
-    ├── LZRevive.apk             ← 干净替代品（真机验证可用）
-    ├── 旅游必备-patched.apk       ← 已改包重签
-    └── ChatPartner-patched.apk   ← 已改包重签
-```
+### ① 不存在时间炸弹，也不存在机型白名单
+
+"时间限制"是**华为 CER 的 `ValidPeriod`**，不是 lzplay 自己写的。
+"机型限制"是 lzplay 里**一个反射调用**：检查 `getSysAppList` 方法存不存在。
+两者都不是可"破解"的名单，而是**授权机制的外在表现**。
+
+→ [HUAWEI-CER-华为授权机制.md](01-lzplay/HUAWEI-CER-华为授权机制.md) ·
+[三台设备对照-白名单之谜.md](03-device/三台设备对照-白名单之谜.md)
+
+### ② 改包 = 死路（实测 0/7）
+
+改代码 → 必须重签 → 签名证书变了 → CER 里的 `DeveloperKey` 对不上 →
+设备日志打出 `DK_VC not same!` → **整张 CER 判无效，所有声明权限作废**。
+
+**单变量 A/B 实测**：同一 APK、同一 CER（逐字节相同）、同一时刻，
+**唯一变量是签名证书** ⇒ 原装 `6/7` granted，改包 **`0/7`**。
+
+**且不可逆**：`ValidPeriod` 是时间条件（走回来就恢复），
+`DeveloperKey` 是密码学绑定（**永远** 0/7）。
+
+→ [改包版MDM权限-实测结论.md](03-device/改包版MDM权限-实测结论.md)
+
+### ③ 移植完整 lzplay 包是**唯一**可行路线
+
+既然改包必死，就必须让**原始未改动的包**跑起来。而它卡在启动页的真正原因不是网络，
+是**空的 `shared_prefs`** —— 所以要用**备份恢复**（带应用数据的还原）来"喂"它。
+
+（讽刺的是：当年厂商设计备份恢复是为了方便用户，结果成了唯一的复活路径。）
+
+→ [备份还原包分析.md](01-lzplay/备份还原包分析.md) ·
+[lzplay复活成功-完整记录.md](01-lzplay/lzplay复活成功-完整记录.md)
+
+### ④ 平板的"不支持"有两层原因，且都不是"机型白名单"
+
+| # | 原因 | 性质 |
+|---|---|---|
+| 1 | lzplay / 旅游必备 的门禁检查 `getSysAppList` 在平板上不存在 | **App 的代码问题** |
+| 2 | 平板固件**未定义** `MDM_INSTALL_SYS_APP`（34 个 MDM 权限 vs Mate50 的 36 个） | **固件能力限制** |
+
+**但平板的华为框架完全支持 CER 授权** —— 实测拿到**六项** `signature|privileged` 权限
+（`MDM_APP_MANAGEMENT`、`MDM_DEVICE_MANAGER`、`MDM_NETWORK_MANAGER`、
+`MDM_PHONE_MANAGER`、`MDM_VPN`、`ACCESS_INTERFACE`）。
+
+→ [平板MDM能力实测-最终结论.md](03-device/平板MDM能力实测-最终结论.md)
+
+### ⑤ GSF provider 封锁可以被解除（可复现）
+
+华为 iAware 会阻止 `com.google.android.gsf.gservices` 启动 ⇒ 拿不到 GSF ID ⇒ GMS 不可用。
+
+**解法：把 Google 包彻底卸载 + 重新安装。** 平板与 Mate50 两处独立验证。
+
+→ [破解-GSF封锁的消除方法.md](03-device/破解-GSF封锁的消除方法.md)
 
 ---
 
-## 📚 文档导读
+## 🧭 研究过程（按时间顺序）
+
+### 阶段一 · 脱壳与静态分析
+
+360 加固（`libjiagu.so` + VM 解释器）静态分析，30+ 轮迭代。
+同时探明 lzplay 调用的华为 API 面。
+
+**关键发现**：lzplay 其实是**两个 App** ——
+`com.lzplay.helper`（加固外壳）+ `assets/insidehelper.apk` = `com.lzplayer.insidehelper`
+（明文）。后者的**唯一职责**是读 `content://com.google.android.gsf.gservices` 的
+`android_id`，转大写去空格后广播 `com.lzplay.helper.recev.sfid`。
+
+→ [UNPACKING-NOTES.md](01-lzplay/UNPACKING-NOTES.md) ·
+[REPORT-lzplay-分析.md](01-lzplay/REPORT-lzplay-分析.md)
+
+### 阶段二 · 发现 `HUAWEI.CER`：真正的钥匙
+
+在三个 App 里都发现 `META-INF/HUAWEI.CER`。
+**密码学验证证实**：lzplay 原始包 CER 里的 `DeveloperKey` 与它的真实签名证书
+**逐字节相等**。
+
+⇒ **`com.lzplay.helper.apk` 本身就是华为授权通道。**
+⇒ **绝不能重打包或重签名它** —— 那会毁掉唯一的那把钥匙。
+
+CER 的四道校验（`com.android.server.pm.auth.processor.*`）：
+
+| 校验 | 行为 |
+|---|---|
+| `DeveloperKeyProcessor` | 比对 CER 的 DeveloperKey vs APK 真实签名证书。**无 special 短路** |
+| `ValidPeriodProcessor` | `System.currentTimeMillis() > to` ⇒ 过期 |
+| `SignatureProcessor` | 华为 RSA 对整张 CER 验签 |
+| `ApkHashProcessor` | **被短路跳过** —— 因为 CER 含 `MDM_INSTALL_SYS_APP` 等特殊权限 |
+| `CertificateProcessor` | 空标签，不做事 |
+
+→ [HUAWEI-CER-华为授权机制.md](01-lzplay/HUAWEI-CER-华为授权机制.md)
+
+### 阶段三 · 改包（当时的判断，后来被证明是弯路）
+
+三个 App 的 bug **逐行相同**，一套补丁全适用，共 6 类坑。
+旅游必备破除了无限安装循环，Chat Partner 走到了主界面。
+
+**最有价值的副产物**：Chat Partner 的 `tyq_resource_Q.json` 是**明文**的，
+第一次让我们看到厂商期望装什么包、什么版本、什么签名。
+
+→ [SIBLINGS-改包报告.md](02-siblings/SIBLINGS-改包报告.md) ·
+[TRAVEL-运行原理与安装循环剖析.md](02-siblings/TRAVEL-运行原理与安装循环剖析.md) ·
+[TRAVEL-安装流程打通记录.md](02-siblings/TRAVEL-安装流程打通记录.md) ·
+[CHATPARTNER-改包报告.md](02-siblings/CHATPARTNER-改包报告.md)
+
+### 阶段四 · 拿到 Mate50 Pro，开始设备端实测
+
+在真机上实测 CER 授权：**时钟设进窗口后，`MDM_INSTALL_SYS_APP` granted=true 且持久**
+（走出窗口仍保留）。
+
+但撞上 **GSF provider 被拦** —— 这是当时认为的最终阻塞点。
+
+→ [GMS安装与卡点说明.md](03-device/GMS安装与卡点说明.md) ·
+[GMS包来源可信性验证.md](03-device/GMS包来源可信性验证.md)
+
+### 阶段五 · 备份恢复 —— lzplay 复活
+
+**卡启动页的真正原因**：冷安装的 `shared_prefs` 是空的 ⇒ 它必须联网注册 ⇒ 服务器已死。
+
+**解法**：用华为"备份和恢复"还原**带应用数据**的备份包，
+直接供给 `sf_id=3864249757054258402`、`userRegistered=true` 等状态。
+
+```
+SplashActivity → LauncherActivity → InstallActivityNew   （< 5 秒）
+```
+
+两把锁同时满足才有效：
+
+| 锁 | 内容 |
+|---|---|
+| 锁 1 | CER 的 `ValidPeriod` 窗口 `2019-07-25 .. 2020-07-25`（靠改时钟） |
+| 锁 2 | 应用数据（靠备份恢复，绕过网络注册） |
+
+→ [备份还原包分析.md](01-lzplay/备份还原包分析.md) ·
+[lzplay复活成功-完整记录.md](01-lzplay/lzplay复活成功-完整记录.md)
+
+### 阶段六 · 目标达成 —— GMS 正常运行
+
+GSF provider 的封锁解除后，GSF ID 生成（`3885761887743418156`），
+GMS 完成初始化，**Play 商店正常打开、账号登录成功**。
+
+> ⚠️ **这一阶段的机制解释我曾给错两次，均已撤回。**
+> - ❌ "应用启动管理白名单是关键" —— 用户实际设的是**全部禁止**，反而通了
+> - ❌ "lzplay 的 MDM 特权加白名单" —— 全量 logcat 里**没有** `setSysAppList` 调用
+>
+> 最终定位：**卸载重装 Google 包**即可解除（两处独立验证）。
+> 真正有判别力的信号是 `E shouldPreventStartProvider` 这条日志**是否出现**，
+> 而不是 `provider is prevented for <reason>` 里的 reason 字符串
+> （后者在拦截与放行时**都会打印**）。
+
+→ [目标达成-GMS正常运行.md](01-lzplay/目标达成-GMS正常运行.md) ·
+[破解-GSF封锁的消除方法.md](03-device/破解-GSF封锁的消除方法.md) ·
+[未解之谜-GSF如何被放行.md](03-device/未解之谜-GSF如何被放行.md)（记录了排除过程）
+
+### 阶段七 · 平板对照实验（回答"改包到底有没有用"）
+
+用平板做干净实验台，得到三个实测结论：
+
+1. **平板能拿 MDM 权限** —— 单变量 A/B，时钟是唯一变量，六项 `signature|privileged` 全授予
+2. **改包版 0/7** —— 旅游必备 `6/7 → 0/7`，日志 `DK_VC not same!`（与反编译预测一字不差）
+3. **Chat Partner 原版也 0/7** —— 但它卡在**另一道**校验（`error tag is Signature`），
+   而同一设备上旅游必备的 CER **零报错通过** ⇒ 那份 CER 在此框架版本上验不过
+
+→ [改包版MDM权限-实测结论.md](03-device/改包版MDM权限-实测结论.md) ·
+[平板MDM能力实测-最终结论.md](03-device/平板MDM能力实测-最终结论.md)
+
+---
+
+## 📚 子文档目录
 
 ### `01-lzplay/` — lzplay 本体
-| 文件 | 内容 |
+
+| 文档 | 内容 |
 |---|---|
 | [REPORT-lzplay-分析.md](01-lzplay/REPORT-lzplay-分析.md) | 完整逆向分析 |
-| [UNPACKING-NOTES.md](01-lzplay/UNPACKING-NOTES.md) | 360 加固脱壳全过程（30+ 轮迭代记录） |
+| [UNPACKING-NOTES.md](01-lzplay/UNPACKING-NOTES.md) | 360 加固脱壳全过程 |
+| [HUAWEI-CER-华为授权机制.md](01-lzplay/HUAWEI-CER-华为授权机制.md) | **★ CER 四道校验解析** |
+| [备份还原包分析.md](01-lzplay/备份还原包分析.md) | 备份包格式（KoBackup v4）与数据解密 |
+| [lzplay复活成功-完整记录.md](01-lzplay/lzplay复活成功-完整记录.md) | **★★ 两道锁的完整解 + 可复现步骤** |
+| [目标达成-GMS正常运行.md](01-lzplay/目标达成-GMS正常运行.md) | **★★ 最终结果与完整因果链** |
 | [PROBE-README.md](01-lzplay/PROBE-README.md) | 华为 API 探针说明 |
-| [REVIVE-README.md](01-lzplay/REVIVE-README.md) | 干净替代品的实现说明 |
+| [REVIVE-README.md](01-lzplay/REVIVE-README.md) | 干净替代品 `LZRevive` 实现说明 |
 
-**关键发现**：lzplay 是**两个 App**：
-- `com.lzplay.helper` — 360 加固外壳
-- `assets/insidehelper.apk` = `com.lzplayer.insidehelper` — 明文，唯一职责是
-  `content://com.google.android.gsf.gservices` → `android_id` → 大写去空格 →
-  广播 `com.lzplay.helper.recev.sfid`
+### `02-siblings/` — 两个换皮 App 改包
 
-### `02-siblings/` — 两个换皮 App
-| 文件 | 内容 |
+| 文档 | 内容 |
 |---|---|
-| [SIBLINGS-改包报告.md](02-siblings/SIBLINGS-改包报告.md) | 三 App 架构对比 + HUAWEI.CER 分析 |
+| [SIBLINGS-改包报告.md](02-siblings/SIBLINGS-改包报告.md) | 三 App 架构对比 + CER 分析 |
 | [TRAVEL-运行原理与安装循环剖析.md](02-siblings/TRAVEL-运行原理与安装循环剖析.md) | 旅游必备状态机完整还原 |
-| [TRAVEL-安装流程打通记录.md](02-siblings/TRAVEL-安装流程打通记录.md) | 无限循环的破除过程 |
+| [TRAVEL-安装流程打通记录.md](02-siblings/TRAVEL-安装流程打通记录.md) | 无限循环破除过程 |
 | [CHATPARTNER-改包报告.md](02-siblings/CHATPARTNER-改包报告.md) | Chat Partner 改包 + **明文包清单** |
 
-**最有价值的产出**：Chat Partner 的 `tyq_resource_Q.json` 是**明文**的，
-第一次让我们看到厂商期望装什么包、什么版本、什么签名：
+### `03-device/` — 设备端实测结论
 
-| 包名 | 版本 | 大小 | 签名证书 MD5 |
-|---|---|---|---|
-| `com.google.android.gms` | 17786048 | 100247804 | `cde9f6208d672b54b1dacc0b7029f5eb` |
-| `com.google.android.gsf` | 29 | 3923176 | 同上 |
-| `com.google.android.syncadapters.contacts` | 29 | 1457061 | 同上 |
-| `com.android.proxy.gmapproxy` | 193 | 154343 | `186d8f11e0440441e0ed6ab7dec9bc77` |
-| `com.android.vending` | 81526700 | 32857746 | `cde9f6208d672b54b1dacc0b7029f5eb` |
+**核心结论类**
 
-（四个 `com.google.*` 共用同一把 Google 签名，与官方发布一致；已逐项 MD5 验证。）
-
-### `03-device/` — 设备端实测
-| 文件 | 内容 |
+| 文档 | 内容 |
 |---|---|
-| [GMS安装与卡点说明.md](03-device/GMS安装与卡点说明.md) | 六个包装机过程 + trustspace 拦截的完整排查 |
-| [破解-GSF封锁的消除方法.md](03-device/破解-GSF封锁的消除方法.md) | **★★ 最终解**：彻底卸载+重装 Google 包即可解除封锁（两处独立验证） |
-| [实验-平板能否获得MDM权限.md](03-device/实验-平板能否获得MDM权限.md) | **当前进行中**：平板能不能拿 MDM 权限 |
-| [平板MDM能力实测-最终结论.md](03-device/平板MDM能力实测-最终结论.md) | **★ 实测**：平板拿到六项特权 MDM 权限，但固件未定义 MDM_INSTALL_SYS_APP |
-| [改包版MDM权限-实测结论.md](03-device/改包版MDM权限-实测结论.md) | **★ 实测**：改包版 0/7（DK_VC not same!），原装 6/7 |
-| [lzplay复活成功-完整记录.md](01-lzplay/lzplay复活成功-完整记录.md) | **★★ lzplay 复活成功**：两道锁的完整解，可复现步骤 |
-| [最终关卡-GSF与iaware闸门.md](03-device/最终关卡-GSF与iaware闸门.md) | **当前阻塞点 + 剩余路径**（应用启动管理 / 禁用GSF / microG） |
-| [三台设备对照-白名单之谜.md](03-device/三台设备对照-白名单之谜.md) | **★ 推翻机型白名单假说**：三台设备同版本，门禁只是一个反射调用 |
-| [VERDICT-Mate50Pro-实测结论.md](03-device/VERDICT-Mate50Pro-实测结论.md) | 首轮结论（**部分被修正**） |
-| [VERDICT-修正版-两道门.md](03-device/VERDICT-修正版-两道门.md) | 修正后的"两道门"模型 |
+| [改包版MDM权限-实测结论.md](03-device/改包版MDM权限-实测结论.md) | **★ 改包 0/7 vs 原装 6/7（单变量 A/B）** |
+| [平板MDM能力实测-最终结论.md](03-device/平板MDM能力实测-最终结论.md) | **★ 平板能拿六项特权权限；固件缺 `MDM_INSTALL_SYS_APP`** |
+| [破解-GSF封锁的消除方法.md](03-device/破解-GSF封锁的消除方法.md) | **★ 卸载重装 Google 包解除封锁** |
+| [三台设备对照-白名单之谜.md](03-device/三台设备对照-白名单之谜.md) | **推翻机型白名单假说** |
 
-### `04-logs/` — 原始证据
-设备实测的 dumpsys / logcat 抓取，供复核。
+**过程记录类**
+
+| 文档 | 内容 |
+|---|---|
+| [GMS安装与卡点说明.md](03-device/GMS安装与卡点说明.md) | 六个包装机过程 + 排查记录 |
+| [GMS包来源可信性验证.md](03-device/GMS包来源可信性验证.md) | GMS 包签名与来源核验 |
+| [实验-平板能否获得MDM权限.md](03-device/实验-平板能否获得MDM权限.md) | 实验方案设计 |
+| [未解之谜-GSF如何被放行.md](03-device/未解之谜-GSF如何被放行.md) | 排除过程 + **正确判别信号** |
+| [最终关卡-GSF与iaware闸门.md](03-device/最终关卡-GSF与iaware闸门.md) | 当时的阻塞点分析（**部分已修正**） |
+
+**历史结论（已被修正，保留供追溯）**
+
+| 文档 | 状态 |
+|---|---|
+| [VERDICT-Mate50Pro-实测结论.md](03-device/VERDICT-Mate50Pro-实测结论.md) | 首轮结论，**部分被修正** |
+| [VERDICT-修正版-两道门.md](03-device/VERDICT-修正版-两道门.md) | "两道门"模型，**机制解释已被推翻** |
+
+### `04-logs/` — 原始设备日志
+`dumpsys` / `logcat` 抓取，供复核。
+
+### 其他
+
+| 文档 | 内容 |
+|---|---|
+| [00-原始需求.md](00-原始需求.md) | 最初的委托原文 |
+| [SESSION-STATE-暂停存档.md](SESSION-STATE-暂停存档.md) | 会话中间存档 |
 
 ---
 
-## 🔬 三条技术线索
+## 🔬 技术要点速查
 
-### A. 华为 MDM 权限门禁（已探明）
+### 华为 MDM 权限门禁
 
 | 权限 | protectionLevel | 结果 |
 |---|---|---|
-| `com.huawei.permission.sec.MDM` | `normal` | ✅ 任意 App 可拿（但**不是**能力证明） |
-| `MDM_DEVICE_MANAGER` | **`signature\|privileged`** | ❌ `sourcePackage=androidhwext` |
-| `MDM_DEVICE_OWNER` | **`signature\|privileged`** | ❌ |
-| `MDM_APP_MANAGEMENT` | **`signature\|privileged`** | ❌ |
-| `MDM_INSTALL_SYS_APP` | **`signature\|privileged`** | ❌ |
+| `com.huawei.permission.sec.MDM` | `normal` | ✅ 任意 App 可拿（**但这不是能力证明**） |
+| `MDM_APP_MANAGEMENT` | `signature\|privileged` | 需合法 CER |
+| `MDM_DEVICE_MANAGER` / `MDM_VPN` / `MDM_NETWORK_MANAGER` / `MDM_PHONE_MANAGER` | `signature\|privileged` | 需合法 CER |
+| `MDM_INSTALL_SYS_APP` | `signature\|privileged` | 需合法 CER；**平板固件未定义** |
+| `MDM_INSTALL_UNDETACHABLE_APP` | `signature\|privileged` | 同上 |
 
-**可以走通的**：AOSP 标准 `DeviceAdminReceiver` 路径
-（两个 App 都在 HMOS 4.2 上激活成功，无需华为签名）。
+**可以走通的（与签名无关）**：AOSP 标准 `DeviceAdminReceiver` 路径
+—— 三个改包版在 HMOS 4.2 上**都激活成功**。
 
-**关键实测**：`setDelayDeactiveDeviceAdmin(cn, 0, ctx)` 抛
-`IllegalArgumentException: delayTime illegal is out of range of [1, 72] (too low)`
-—— 这是**纯本地参数校验，无任何网络交互**，证明该调用直达真实的华为实现。
+### 正确判别 GSF provider 是否被拦
 
-### B. 华为 trustspace 拦截（未解决）
+| 信号 | 判别力 |
+|---|---|
+| `I ... provider is prevented for not-prevent` | ❌ **无** —— 拦截与放行**都会**打印 |
+| `I ... provider is prevented for iaware` | ✅ 有 |
+| `E ContentProviderHelper: ... shouldPreventStartProvider` | ✅ **最强** —— 出现即拦截逻辑执行 |
+| `I ContentProviderHelper: Successfully start provider ... GservicesProvider` | ✅ 正向证据 |
+| `com.google.process.gservices` 进程存在 | ✅ 辅助 |
 
-```
-E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider
-    name:com.google.android.gsf.gservices
-I HwActivityManagerServiceEx: provider is prevented for iaware
-E ActivityThread: Failed to find provider info for com.google.android.gsf.gservices
-```
-
-**尝试过全部无效**：`pm disable-user com.huawei.iaware` / `com.huawei.trustspace`、
-`settings put secure is_trustspace_enabled 0`、`settings put global trust_space_switch 0`、
-**重启**。两个可配置的 Provider 一个 `not exported`、一个要
-`huawei.android.permission.HW_SIGNATURE_OR_SYSTEM`。
-
-**待探索**：备份还原路径（lzplay 当年就是靠备份还原在未 root 设备上拿到权限的）。
-
-### C. 改包方法论（已成熟）
-
-三个 App 的 bug **逐行相同**，一套补丁全适用：
+### 改包六类坑（一套补丁通用）
 
 | 坑 | 症状 | 修法 |
 |---|---|---|
-| 1. 网络检查 | 提示"连接谷歌网络异常" | `NetworkUtil.a()` 恒返回 true |
-| 2. 死服务器 | 卡在启动页 | 失败回调改走成功路径 |
-| 3. `SDK_INT` 拼文件名 | 找不到 `_31.apk` | 常量改成 29 |
-| 4. 华为裸调用 | `SecurityException` 崩溃 | 换成标准 `ACTION_VIEW` Intent |
-| 5. `Uri.fromFile` | `FileUriExposedException` | 改用 FileProvider `content://` |
-| 6. 混淆的 FileProvider | `NoSuchMethodError` | 方法名是 `a` 不是 `getUriForFile` |
+| 1 网络检查 | 提示"连接谷歌网络异常" | `NetworkUtil.a()` 恒返回 true |
+| 2 死服务器 | 卡启动页 | 失败回调改走成功路径 |
+| 3 `SDK_INT` 拼文件名 | 找不到 `_31.apk` | 常量改成 29 |
+| 4 华为裸调用 | `SecurityException` 崩溃 | 换成标准 `ACTION_VIEW` Intent |
+| 5 `Uri.fromFile` | `FileUriExposedException` | 改用 FileProvider `content://` |
+| 6 混淆的 FileProvider | `NoSuchMethodError` | 方法名是 `a` 不是 `getUriForFile` |
 
-**踩过的两个结构性坑**：
-- `if-le` 是"**≤ 则跳转**"，容易把分支方向搞反
+**两个结构性坑**：
+- `if-le` 是"**≤ 则跳转**"，分支方向极易搞反
 - `.registers N` 下 `p0/p1` 就是 `v(N-2)/v(N-1)`，改写时**绝不能碰参数寄存器**（否则 `VerifyError`）
+
+### lzplay 期望安装的包（从备份 `updateModel` 解出）
+
+| 包名 | versionCode | md5 | presetPath |
+|---|---|---|---|
+| `com.google.android.gms` | 18381046 | `d317fb438ce900c138196c1954f03c18` | `/product/priv-app/` |
+| `com.google.android.gsf` | 29 | — | `/product/priv-app/` |
+| `com.google.android.gms.policy_sidecar_aps` | 2052073 | `52c60fbbc3c4e03edeb5d72dd7fbd718` | `/product/priv-app/` |
+| `com.google.android.syncadapters.contacts` | 29 | — | `/product/priv-app/` |
+| `com.android.vending` | 81601500 | `6b0389822e8b95ea86cc18b6f42f92e9` | `/product/priv-app/` |
+
+签名指纹（Google 官方）：`sign` = `cde9f6208d672b54b1dacc0b7029f5eb`，
+`sign256` = `f0fd6c5b410f25cb25c3b53346c8972fae30f8ee7411df910480ad6b2d60db83`
+
+### 设备状态（研究结束时）
+
+| 设备 | 状态 |
+|---|---|
+| **Mate50 Pro** `BLT0222902012232` | ✅ **GMS 可用**，Play 已登录；lzplay 已激活且持 MDM 权限；时钟正常 |
+| **MatePad 2022** `192.168.1.109:5556` | 实验残留已清理，时钟已恢复自动校时 |
+| **Nova7** `192.168.1.105:5557` | 仅装了探针 |
 
 ---
 
-## 🛠 work/tools/ 工具清单
+## 🛠 目录结构与工具
 
-### 自建工具（本轮产出）
+```
+lzplay/
+├── docs/                        ← 全部文档（本文件为总索引）
+│   ├── 00-原始需求.md
+│   ├── 01-lzplay/               ← lzplay 本体
+│   ├── 02-siblings/             ← 两个换皮 App 改包
+│   ├── 03-device/               ← 设备端实测结论
+│   └── 04-logs/                 ← 原始设备日志
+│
+├── work/
+│   ├── originals/               ← ★ 原装 APK 备份（不可替代，见下）
+│   ├── tools/                   ← 自建工具链
+│   ├── gateprobe/  revive/      ← 探针源码
+│   ├── travel_decoded/  chat_smali/   ← 反编译工程
+│   ├── gms29/                   ← Android 10 那套 GMS 包
+│   └── dl/lzplay-data/          ← 解密后的备份应用数据
+│
+└── *.apk                        ← 可安装产物
+```
+
+### ★ 不可替代的资产（**绝不要重打包或重签名**）
+
+| 文件 | SHA-256 | 说明 |
+|---|---|---|
+| `work/originals/com.lzplay.helper.apk` | `1242b03fc84f8d1c…` | lzplay 原版，CER 自洽 |
+| `work/originals/旅游必备 travel essentials.apk` | `269c639a1d8f3b01…` | CER 自洽，平板实测 6/7 |
+| `work/originals/chatpartner.apk` | `8d8b53afcb0f7bc1…` | 原版，CER 自洽但 `Signature` 验签失败 |
+
+### 设备实测/诊断工具
+
 | 工具 | 用途 |
 |---|---|
-| `patch_family.py` | **通用补丁器**，带 `--check` 干跑模式 |
-| `patch_chat.py` / `patch_chat_net.py` / `patch_chat_install_fix.py` | Chat Partner 专用补丁 |
-| `patch_travel.py` … `patch_travel7.py` | 旅游必备 7 轮补丁 |
-| `rebuild_chat_apk.py` | 只替换 `classes.dex` 重建 APK |
-| `verify_chat_manifest.py` | 校验包清单的 MD5 + 签名指纹 |
-| `inspect_arsc.py` | ARSC 解析（含混淆类型名） |
-| `apk_manifest_info.py` | 二进制 manifest 解析 |
-| `dump_method.py` / `dump_state_machine.py` | smali 方法/状态机导出 |
-| `find_state_calls.py` / `find_mdm_calls.py` | 调用点定位（含 try/catch 保护检查） |
-| `build_apk.ps1` | 通用 APK 构建（aapt2 + d8 + zipalign + apksigner） |
+| `reset_gms.py` | **一键卸载重装 Google 包**（解除 GSF 封锁） |
+| `tabtest.py` | 读 GSF provider 三个判别信号 |
+| `mdm_repack_test.py` | **原装 vs 改包 MDM 权限 A/B** |
+| `mdm_ab.py` | 两设备 MDM 授权对比 |
+| `test_mdm_on_tablet.py` | 单设备 CER 授权测试 |
+| `chatpartner_test.py` | Chat Partner 三版对照 |
+| `watch_system_flag.py` | 监视 `SYSTEM` / `PRIVILEGED` 标志变化 |
+| `cleanup_tablet.py` | 清理实验残留 |
+| `collect_gate.py` | 采集设备门禁报告 |
 
-### lzplay 脱壳工具链
-`x86dis.py`（32 位 x86 长度反汇编器）、`elfload32.py`、`recover_symbols.py`、
-`jiagu_emu.py`（Unicorn 模拟）、`jiagu_*.py`（一系列脱壳尝试）
+### 分析/构建工具
+
+| 工具 | 用途 |
+|---|---|
+| `patch_family.py` | **通用补丁器**（带 `--check` 干跑） |
+| `rebuild_chat_apk.py` | 只替换 `classes.dex` 重建 APK |
+| `verify_chat_manifest.py` | 校验包清单 MD5 + 签名指纹 |
+| `dump_huawei_cer.py` / `verify_huawei_cert.py` / `check_cer_locks.py` | **CER 解析与密码学验证** |
+| `hwbackup_dec.cjs` / `extract_lzplay_backup.py` | 备份包（KoBackup v4）解密 |
+| `build_apk.ps1` | 通用 APK 构建（aapt2 + d8 + zipalign + apksigner） |
+| `x86dis.py` / `jiagu_emu.py` 等 | lzplay 脱壳工具链 |
 
 ### 重要经验
+
 - **apktool 的 jar 里捆绑了 smali/baksmali**，可直接调用：
   ```powershell
   java -cp apktool-2.11.1.jar com.android.tools.smali.baksmali.Main d classes.dex -o out
   java -cp apktool-2.11.1.jar com.android.tools.smali.smali.Main    a out -o classes.dex
   ```
   （从 Maven 下的 `baksmali.jar`/`smali.jar` 是残缺文件，别用）
-- 下载走 **Node `fetch`**（`work/tools/dl.cjs`），PowerShell/curl/Python-urllib 在此环境 TLS 全挂
-- javac 在中文 Windows 必须加 `-encoding UTF-8`
-
----
-
-## ✅ 已完成 / ⏳ 待办
-
-**已完成**
-- [x] lzplay 360 加固静态分析 + 华为 API 面探明
-- [x] 三个 App 的同源关系与 `HUAWEI.CER` 授权渠道确认
-- [x] 六个 `_29` GMS 包实测安装成功
-- [x] 旅游必备：无限安装循环破除（走到系统安装器）
-- [x] Chat Partner：完整改包 + 真机走到主界面 + 设备管理器激活
-- [x] `LZRevive` 干净替代品（真机验证可用）
-- [x] Chat Partner 明文包清单恢复（含版本/MD5/签名指纹）
-- [x] **HUAWEI.CER 三把锁解析**：证实 lzplay 原始包证书自洽（LOCK 1 PASS），确认安装时间窗（LOCK 3 = 2019-07-25..2020-07-25），解释了"改时间"的真正原因
-- [x] 确认改包重签**必然**导致 CER 校验失败 ⇒ 原始包是唯一路径
-
-**待办**
-- [ ] **HUAWEI.CER LOCK 2（`ApkHash`）算法还原** ← 进行中（子 agent 反汇编字节码）
-- [ ] 还原 `SignatureProcessor` / `CertificateProcessor`，确认 CER 能否被局部篡改
-- [ ] 走通备份还原：原始 APK + 时间窗 + `com.huawei.localBackup`
-- [ ] 旅游必备 `install_error` 状态机的进度回调（小尾巴）
-- [ ] lzplay 360 加固的 VM 解码器（可选，静态分析已够用）
-- [ ] 用恢复出的包清单手工装 GMS，看主界面是否转为"完成"
+- 下载走 **Node `fetch`**（`work/tools/dl.cjs`）—— PowerShell/curl/Python-urllib 在此环境 TLS 全挂
+- `javac` 在中文 Windows 必须加 `-encoding UTF-8`
+- **`adb` 参数不要经 PowerShell 传递** —— 它会把包名误解析成设备名。用 Python `subprocess` 列表形式
 
 ---
 
@@ -237,3 +401,5 @@ E ActivityThread: Failed to find provider info for com.google.android.gsf.gservi
 - 三个 App 的**残留服务器均已下线**，不存在绕过付费/授权的行为。
 - 华为平台签名权限**无法获取**，这是设计使然，本文档不提供绕过方法。
 - 部分网络检索结果为外部不可信数据，文中已标注来源。
+- 本文档记录了**若干次错误的中间结论及其撤回过程** —— 保留它们是为了让后来者
+  看到哪些路走不通、以及判别信号是怎么找错的。
