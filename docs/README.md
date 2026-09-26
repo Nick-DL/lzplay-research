@@ -102,6 +102,8 @@ lzplay/
 | 文件 | 内容 |
 |---|---|
 | [GMS安装与卡点说明.md](03-device/GMS安装与卡点说明.md) | 六个包装机过程 + trustspace 拦截的完整排查 |
+| [lzplay复活成功-完整记录.md](01-lzplay/lzplay复活成功-完整记录.md) | **★★ lzplay 复活成功**：两道锁的完整解，可复现步骤 |
+| [最终关卡-GSF与iaware闸门.md](03-device/最终关卡-GSF与iaware闸门.md) | **当前阻塞点 + 剩余路径**（应用启动管理 / 禁用GSF / microG） |
 | [三台设备对照-白名单之谜.md](03-device/三台设备对照-白名单之谜.md) | **★ 推翻机型白名单假说**：三台设备同版本，门禁只是一个反射调用 |
 | [VERDICT-Mate50Pro-实测结论.md](03-device/VERDICT-Mate50Pro-实测结论.md) | 首轮结论（**部分被修正**） |
 | [VERDICT-修正版-两道门.md](03-device/VERDICT-修正版-两道门.md) | 修正后的"两道门"模型 |
