@@ -1,0 +1,80 @@
+﻿==============================================================================
+CHAT PARTNER (com.tyq.pro) TEST
+device: 192.168.1.109:5556   clock: Thu Sep 26 16:19:58 CST 2019
+==============================================================================
+
+------------------------------------------------------------------------------
+BUILD: GENUINE original (CER self-consistent)   (chatpartner.apk)
+------------------------------------------------------------------------------
+  uninstall: Success
+  install  : Success
+     MDM_INSTALL_SYS_APP      absent
+     MDM_APP_MANAGEMENT       false
+     MDM_DEVICE_MANAGER       absent
+     MDM_NETWORK_MANAGER      absent
+     MDM_PHONE_MANAGER        absent
+     MDM_VPN                  absent
+     ACCESS_INTERFACE         false
+  => 0/7 granted
+  certificate log:
+     09-26 16:20:12.965  2163  2357 E HwCertificationManager: HC_VC error error tag is Signature
+     09-26 16:20:12.965  2163  2357 E HwCertificationManager: verify cert failed!
+     09-26 16:20:12.965  2163  2357 E HwCertificationManager: check HwCertification error, cert is null! from path: /data/app/vmdl331491228.tmp/base.apk
+  launching to check the device gate...
+     focus : com.tyq.pro/com.qiyetong.pro.SplashActivity
+     text  : Chat Partner
+     text  : Safety protection 
+ Effectively communication
+     >>> no "device not supported" text seen
+
+------------------------------------------------------------------------------
+BUILD: user's translated build (re-signed)   (chat partner Chinese translated.apk)
+------------------------------------------------------------------------------
+  uninstall: Success
+  install  : Success
+     MDM_INSTALL_SYS_APP      absent
+     MDM_APP_MANAGEMENT       false
+     MDM_DEVICE_MANAGER       absent
+     MDM_NETWORK_MANAGER      absent
+     MDM_PHONE_MANAGER        absent
+     MDM_VPN                  absent
+     ACCESS_INTERFACE         false
+  => 0/7 granted
+  certificate log:
+     09-26 16:20:44.863  2163  2357 E HwCertificationManager: DK_VC not same!
+     09-26 16:20:44.864  2163  2357 E HwCertificationManager: HC_VC error error tag is DeveloperKey
+     09-26 16:20:44.864  2163  2357 E HwCertificationManager: verify cert failed!
+     09-26 16:20:44.864  2163  2357 E HwCertificationManager: check HwCertification error, cert is null! from path: /data/app/vmdl1295578720.tmp/base.apk
+  launching to check the device gate...
+     focus : com.tyq.pro/com.qiyetong.pro.SplashActivity
+     text  : Chat Partner
+     text  : ��ȫ����
+��Ч��ͨ
+     >>> no "device not supported" text seen
+
+------------------------------------------------------------------------------
+BUILD: our repacked build   (ChatPartner-patched.apk)
+------------------------------------------------------------------------------
+  uninstall: Success
+  install  : Success
+     MDM_INSTALL_SYS_APP      absent
+     MDM_APP_MANAGEMENT       false
+     MDM_DEVICE_MANAGER       absent
+     MDM_NETWORK_MANAGER      absent
+     MDM_PHONE_MANAGER        absent
+     MDM_VPN                  absent
+     ACCESS_INTERFACE         false
+  => 0/7 granted
+  certificate log:
+     09-26 16:21:15.704  2163  2357 E HwCertificationManager: DK_VC not same!
+     09-26 16:21:15.704  2163  2357 E HwCertificationManager: HC_VC error error tag is DeveloperKey
+     09-26 16:21:15.704  2163  2357 E HwCertificationManager: verify cert failed!
+     09-26 16:21:15.704  2163  2357 E HwCertificationManager: check HwCertification error, cert is null! from path: /data/app/vmdl887311821.tmp/base.apk
+  launching to check the device gate...
+     focus : com.tyq.pro/com.ssss.ss_im.login.LoginActivity
+     text  : ��¼
+     text  : �������û���
+     text  : ����������
+     text  : ��¼
+     text  : ����豸
+     >>> no "device not supported" text seen
