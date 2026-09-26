@@ -1,0 +1,86 @@
+==== LZPLAY GATE PROBE ====
+time    : 2026-09-26 08:53:10
+model   : HUAWEI JEF-AN00 (HWJEF)
+android : 12 sdk=31
+display : JEF-AN00 4.2.0.121(C00E121R5P5)
+emui    : EmotionUI_14.2.0  platform=4.2.0
+package : com.lzplay.gateprobe
+
+---- 1. class presence ----
+   FOUND  com.huawei.android.app.admin.DevicePackageManager
+          loader=java.lang.BootClassLoader
+          location=<unavailable: NullPointerException>
+   FOUND  com.huawei.android.app.admin.DeviceApplicationManager
+          loader=java.lang.BootClassLoader
+          location=<unavailable: NullPointerException>
+   FOUND  com.huawei.android.util.NoExtAPIException
+          loader=java.lang.BootClassLoader
+          location=<unavailable: NullPointerException>
+
+---- 2. DevicePackageManager methods (ALL) ----
+   method count: 35
+   * boolean addAllowNotificationApps(ComponentName, ArrayList)
+   * void addDisabledDeactivateMdmPackages(ComponentName, List)
+   * void addDisallowedUninstallPackages(ComponentName, List)
+   * void addInstallPackageTrustList(ComponentName, List)
+   * void addInstallPackageWhiteList(ComponentName, List)
+   * void clearPackageData(ComponentName, String)
+   * void disableInstallSource(ComponentName, List)
+   * void enableInstallPackage(ComponentName)
+   * ArrayList getAllowNotificationApps(ComponentName)
+   * List getDisabledDeactivateMdmPackageList(ComponentName)
+   * List getDisallowedUninstallPackageList(ComponentName)
+   * List getInstallPackageSourceTrustList(ComponentName)
+   * List getInstallPackageSourceWhiteList(ComponentName)
+   * List getInstallPackageTrustList(ComponentName)
+   * List getInstallPackageWhiteList(ComponentName)
+   * List getSysAppList(ComponentName, List)
+   * void installBundle(ComponentName, List)
+   * void installPackage(ComponentName, String)
+   * boolean isInstallSourceDisabled(ComponentName)
+   * boolean removeAllowNotificationApps(ComponentName, ArrayList)
+   * void removeDisabledDeactivateMdmPackages(ComponentName, List)
+   * void removeDisallowedUninstallPackages(ComponentName, List)
+   * void removeInstallPackageTrustList(ComponentName, List)
+   * void removeInstallPackageWhiteList(ComponentName, List)
+   * void setSysAppList(ComponentName, Map, Bundle)
+   * void uninstallPackage(ComponentName, String, boolean)
+   >>> getSysAppList present: true
+   >>> candidates containing App/List/Sys:
+       boolean addAllowNotificationApps(ComponentName, ArrayList)
+       void addInstallPackageTrustList(ComponentName, List)
+       void addInstallPackageWhiteList(ComponentName, List)
+       ArrayList getAllowNotificationApps(ComponentName)
+       List getDisabledDeactivateMdmPackageList(ComponentName)
+       List getDisallowedUninstallPackageList(ComponentName)
+       List getInstallPackageSourceTrustList(ComponentName)
+       List getInstallPackageSourceWhiteList(ComponentName)
+       List getInstallPackageTrustList(ComponentName)
+       List getInstallPackageWhiteList(ComponentName)
+       List getSysAppList(ComponentName, List)
+       boolean removeAllowNotificationApps(ComponentName, ArrayList)
+       void removeInstallPackageTrustList(ComponentName, List)
+       void removeInstallPackageWhiteList(ComponentName, List)
+       void setSysAppList(ComponentName, Map, Bundle)
+   getMethod(getSysAppList, ComponentName, List) OK -> java.util.List
+
+---- 3. live call to getSysAppList ----
+   THREW: android.os.RemoteException
+   message: Remote stack trace:
+	at com.android.server.devicepolicy.HwDevicePolicyManagerService.getHwActiveAdminUncheckedLocked(HwDevicePolicyManagerService.java:4011)
+	at com.android.server.devicepolicy.HwDevicePolicyManagerService.getPolicy(HwDevicePolicyManagerService.java:4227)
+	at com.android.server.devicepolicy.TransactionProcessor.getPolicy(TransactionProcessor.java:1049)
+	at com.android.server.devicepolicy.TransactionProcessor.dealPolicyByType(TransactionProcessor.java:968)
+	at com.android.server.devicepolicy.TransactionProcessor.processTransactionWithPolicyName(TransactionProcessor.java:1025)
+callee: null 1816/6513
+
+   top-level: java.lang.reflect.InvocationTargetException
+   stack:
+
+---- 4. lzplay's verdict ----
+   SUPPORTED (threw android.os.RemoteException, which lzplay treats as supported)
+
+---- 5. context ----
+   NoExtAPIException loadable : true
+   DeviceApplicationManager.getPersistentApp OK -> java.util.List
+   DeviceApplicationManager.addPersistentApp OK -> void

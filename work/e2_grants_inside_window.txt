@@ -1,0 +1,4 @@
+﻿      com.huawei.permission.sec.MDM_INSTALL_SYS_APP: granted=true
+      com.huawei.permission.sec.MDM_INSTALL_UNDETACHABLE_APP: granted=false
+      com.huawei.permission.sec.MDM: granted=true
+      com.huawei.permission.sec.MDM_APP_MANAGEMENT: granted=true
