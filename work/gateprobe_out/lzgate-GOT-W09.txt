@@ -1,0 +1,76 @@
+==== LZPLAY GATE PROBE ====
+time    : 2026-09-26 09:45:10
+model   : HUAWEI GOT-W09 (HWGOT)
+android : 12 sdk=31
+display : GOT-W09 4.2.0.237(C00E100R9P7)
+emui    : EmotionUI_14.2.0  platform=4.2.0
+package : com.lzplay.gateprobe
+
+---- 1. class presence ----
+   FOUND  com.huawei.android.app.admin.DevicePackageManager
+          loader=java.lang.BootClassLoader
+          location=<unavailable: NullPointerException>
+   FOUND  com.huawei.android.app.admin.DeviceApplicationManager
+          loader=java.lang.BootClassLoader
+          location=<unavailable: NullPointerException>
+   FOUND  com.huawei.android.util.NoExtAPIException
+          loader=java.lang.BootClassLoader
+          location=<unavailable: NullPointerException>
+
+---- 2. DevicePackageManager methods (ALL) ----
+   method count: 33
+   * boolean addAllowNotificationApps(ComponentName, ArrayList)
+   * void addDisabledDeactivateMdmPackages(ComponentName, List)
+   * void addDisallowedUninstallPackages(ComponentName, List)
+   * void addInstallPackageTrustList(ComponentName, List)
+   * void addInstallPackageWhiteList(ComponentName, List)
+   * void clearPackageData(ComponentName, String)
+   * void disableInstallSource(ComponentName, List)
+   * void enableInstallPackage(ComponentName)
+   * ArrayList getAllowNotificationApps(ComponentName)
+   * List getDisabledDeactivateMdmPackageList(ComponentName)
+   * List getDisallowedUninstallPackageList(ComponentName)
+   * List getInstallPackageSourceTrustList(ComponentName)
+   * List getInstallPackageSourceWhiteList(ComponentName)
+   * List getInstallPackageTrustList(ComponentName)
+   * List getInstallPackageWhiteList(ComponentName)
+   * void installBundle(ComponentName, List)
+   * void installPackage(ComponentName, String)
+   * boolean isInstallSourceDisabled(ComponentName)
+   * boolean removeAllowNotificationApps(ComponentName, ArrayList)
+   * void removeDisabledDeactivateMdmPackages(ComponentName, List)
+   * void removeDisallowedUninstallPackages(ComponentName, List)
+   * void removeInstallPackageTrustList(ComponentName, List)
+   * void removeInstallPackageWhiteList(ComponentName, List)
+   * void uninstallPackage(ComponentName, String, boolean)
+   >>> getSysAppList present: false
+   >>> candidates containing App/List/Sys:
+       boolean addAllowNotificationApps(ComponentName, ArrayList)
+       void addInstallPackageTrustList(ComponentName, List)
+       void addInstallPackageWhiteList(ComponentName, List)
+       ArrayList getAllowNotificationApps(ComponentName)
+       List getDisabledDeactivateMdmPackageList(ComponentName)
+       List getDisallowedUninstallPackageList(ComponentName)
+       List getInstallPackageSourceTrustList(ComponentName)
+       List getInstallPackageSourceWhiteList(ComponentName)
+       List getInstallPackageTrustList(ComponentName)
+       List getInstallPackageWhiteList(ComponentName)
+       boolean removeAllowNotificationApps(ComponentName, ArrayList)
+       void removeInstallPackageTrustList(ComponentName, List)
+       void removeInstallPackageWhiteList(ComponentName, List)
+   getMethod(getSysAppList, ComponentName, List) -> NoSuchMethodException
+
+---- 3. live call to getSysAppList ----
+   method missing -> this is exactly lzplay's NoSuchMethodError case
+
+---- 4. lzplay's verdict ----
+   UNSUPPORTED (method missing)
+
+---- 5. context ----
+   NoExtAPIException loadable : true
+   DeviceApplicationManager.getPersistentApp OK -> java.util.List
+   DeviceApplicationManager.addPersistentApp OK -> void
+WROTE /storage/emulated/0/Android/data/com.lzplay.gateprobe/files/lzgate.txt
+could not write /sdcard/lzgate.txt: java.io.FileNotFoundException: /sdcard/lzgate.txt: open failed: EPERM (Operation not permitted)
+could not write /data/local/tmp/lzgate.txt: java.io.FileNotFoundException: /data/local/tmp/lzgate.txt: open failed: EACCES (Permission denied)
+WROTE /data/user/0/com.lzplay.gateprobe/files/lzgate.txt

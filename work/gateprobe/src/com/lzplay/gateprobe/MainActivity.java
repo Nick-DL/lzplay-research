@@ -184,6 +184,43 @@ public class MainActivity extends Activity {
             w("   DeviceApplicationManager NOT loadable");
         }
 
+        // ---------- 6. GSF provider ----------
+        w("");
+        w("---- 6. GSF provider (needs READ_GSERVICES) ----");
+        android.net.Uri gsf = android.net.Uri.parse(
+                "content://com.google.android.gsf.gservices");
+        // is the permission actually held?
+        try {
+            int st = checkCallingOrSelfPermission(
+                    "com.google.android.providers.gsf.permission.READ_GSERVICES");
+            w("   READ_GSERVICES held: "
+                    + (st == android.content.pm.PackageManager.PERMISSION_GRANTED));
+        } catch (Throwable t) {
+            w("   READ_GSERVICES check failed: " + t);
+        }
+        String[] keys = {"android_id", "checkin_interval", "device_country", "digest"};
+        try {
+            android.database.Cursor c = getContentResolver().query(gsf, null, null, null, null);
+            w("   open provider: " + (c == null ? "NULL cursor  <-- BLOCKED"
+                    + " (see logcat 'provider is prevented for')"
+                    : "OK rows=" + c.getCount() + " cols=" + c.getColumnCount()));
+            if (c != null) c.close();
+        } catch (Throwable t) {
+            w("   open provider THREW: " + t.getClass().getSimpleName() + ": " + t.getMessage());
+        }
+        for (String k : keys) {
+            try {
+                android.database.Cursor c = getContentResolver().query(
+                        gsf, null, null, new String[]{k}, null);
+                String v = null;
+                if (c != null && c.moveToFirst() && c.getColumnCount() >= 2) v = c.getString(1);
+                if (c != null) c.close();
+                w(String.format("   %-18s = %s", k, v == null ? "(no row)" : v));
+            } catch (Throwable t) {
+                w(String.format("   %-18s = THREW %s", k, t.getClass().getSimpleName()));
+            }
+        }
+
         flush();
         finish();
     }
