@@ -1,0 +1,17 @@
+{
+  "name": "lzplay-research",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "lzplay revival research - VitePress documentation site",
+  "scripts": {
+    "stage": "node tools/stage-docs.mjs",
+    "dev": "npm run stage && vitepress dev .vitepress-src",
+    "build": "npm run stage && vitepress build .vitepress-src",
+    "preview": "vitepress preview .vitepress-src"
+  },
+  "devDependencies": {
+    "sitemap": "^9.0.1",
+    "vitepress": "^1.6.3"
+  }
+}

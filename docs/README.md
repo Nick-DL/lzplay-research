@@ -13,7 +13,7 @@
 
 > ### GMS 在 Mate50 Pro 上**完整可用** —— Google Play 正常打开、账号已登录、设置中出现 "Google" 子菜单
 
-<img src="../work/gms_ok.png" width="300" alt="Google Play 正常运行">
+<img src="/gms_ok.png" width="300" alt="Google Play 正常运行">
 
 **完成情况（对照 `00-原始需求.md`）**
 

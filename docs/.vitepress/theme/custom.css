@@ -1,0 +1,50 @@
+/**
+ * Small readability tweaks for the research documents.
+ *
+ * The docs lean heavily on:
+ *   - wide comparison tables (device A/B matrices, permission lists)
+ *   - fenced blocks used as evidence excerpts (logcat / dumpsys output)
+ *   - inline <img> for device screenshots
+ * none of which the stock theme sizes for, so give them room.
+ */
+
+/* Wide tables: let them scroll rather than squash the columns */
+.vp-doc table {
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.vp-doc th,
+.vp-doc td {
+  /* CJK plus latin needs a little more breathing room than the default */
+  padding: 6px 14px;
+  white-space: nowrap;
+}
+
+/* Evidence blocks: these hold logcat output, so keep them tight and scrollable */
+.vp-doc div[class*='language-'] pre {
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* Screenshots embedded with raw <img> */
+.vp-doc img {
+  border-radius: 6px;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Pull-quote callouts are used a lot for "correction" notices */
+.vp-doc blockquote {
+  border-left-width: 3px;
+}
+
+/* Slightly narrow the content column on very wide screens so long CJK lines
+   do not become hard to track */
+@media (min-width: 1440px) {
+  .VPDoc .content-container {
+    max-width: 860px;
+  }
+}
