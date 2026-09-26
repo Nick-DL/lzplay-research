@@ -109,6 +109,7 @@ lzplay/
 | [GMS安装与卡点说明.md](03-device/GMS安装与卡点说明.md) | 六个包装机过程 + trustspace 拦截的完整排查 |
 | [破解-GSF封锁的消除方法.md](03-device/破解-GSF封锁的消除方法.md) | **★★ 最终解**：彻底卸载+重装 Google 包即可解除封锁（两处独立验证） |
 | [实验-平板能否获得MDM权限.md](03-device/实验-平板能否获得MDM权限.md) | **当前进行中**：平板能不能拿 MDM 权限 |
+| [平板MDM能力实测-最终结论.md](03-device/平板MDM能力实测-最终结论.md) | **★ 实测**：平板拿到六项特权 MDM 权限，但固件未定义 MDM_INSTALL_SYS_APP |
 | [lzplay复活成功-完整记录.md](01-lzplay/lzplay复活成功-完整记录.md) | **★★ lzplay 复活成功**：两道锁的完整解，可复现步骤 |
 | [最终关卡-GSF与iaware闸门.md](03-device/最终关卡-GSF与iaware闸门.md) | **当前阻塞点 + 剩余路径**（应用启动管理 / 禁用GSF / microG） |
 | [三台设备对照-白名单之谜.md](03-device/三台设备对照-白名单之谜.md) | **★ 推翻机型白名单假说**：三台设备同版本，门禁只是一个反射调用 |
