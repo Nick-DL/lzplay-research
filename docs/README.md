@@ -392,6 +392,30 @@ lzplay/
 - 下载走 **Node `fetch`**（`work/tools/dl.cjs`）—— PowerShell/curl/Python-urllib 在此环境 TLS 全挂
 - `javac` 在中文 Windows 必须加 `-encoding UTF-8`
 - **`adb` 参数不要经 PowerShell 传递** —— 它会把包名误解析成设备名。用 Python `subprocess` 列表形式
+- **不要用 PowerShell 处理含中文/正则/引号的字符串** —— 会静默损坏。写 `.py` / `.mjs` 文件执行
+
+### 关于本站（VitePress）
+
+`docs/` 是一份 VitePress 站点，部署在 GitHub Pages：<https://nickdl.site/lzplay-research/>
+
+**构建不修改任何文档**：`tools/stage-docs.mjs` 在构建时把 `docs/`（含 `.vitepress/`）
+复制到 `.vitepress-src/`，VitePress 在副本上工作。`docs/` 的 Markdown 保持原样。
+
+```powershell
+npm install
+npm run dev      # 本地开发
+npm run build    # 产出 .vitepress-src/.vitepress/dist
+npm run preview  # 预览构建结果（默认 4173）
+```
+
+只有一个文件为了站点做过改动：`docs/README.md` 里的截图从
+`../work/gms_ok.png` 改成 `/gms_ok.png`，图片同时复制进 `docs/public/`
+（`work/` 在 `.gitignore` 里，站点构建不到那里）。
+
+**⚠️ 本机网络注意**：`github.com` 与 `codeload.github.com` 的直连被阻断
+（TLS 握手中断），`api.github.com` 与 `objects.githubusercontent.com` 可通。
+`git push` 前需要给 git 配好代理。
+
 
 ---
 
