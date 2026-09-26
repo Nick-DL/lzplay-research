@@ -1,0 +1,23 @@
+# Binary assets: never try to diff or merge these.
+*.apk        binary
+*.jar        binary
+*.zip        binary
+*.so         binary
+*.b64.gz     binary
+*.png        binary
+*.jpg        binary
+*.webp       binary
+*.dex        binary
+*.arsc       binary
+
+# Keep the markdown docs and our own source diffable as text.
+*.md         text eol=lf
+*.py         text eol=lf
+*.cjs        text eol=lf
+*.js         text eol=lf
+*.ts         text eol=lf
+*.json       text eol=lf
+*.yml        text eol=lf
+*.yaml       text eol=lf
+*.ps1        text eol=crlf
+*.smali      text eol=lf

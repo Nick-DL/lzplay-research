@@ -1,9 +1,0 @@
-BEFORE-ACTIVATE snapshot  Thu Sep 26 09:20:53 CST 2019
-com.google.android.gms                       -                                  -
-com.google.android.gsf                       10                                 /data/app/~~Bfk5eiEwN_9BTi-lyPAltQ==/com.google.android.gsf-qZdEEhonEp
-com.android.vending                          18.8.16-all                        /data/app/~~kQAdF9r6YIZp3QESHxGv_w==/com.android.vending-udX6PkyhFH2Qw
-com.google.android.syncadapters.contacts     10                                 /data/app/~~hIfrn8dRdre0_akFsgIGdw==/com.google.android.syncadapters.c
-com.google.android.gms.policy_sidecar_aps    -                                  -
-com.oversea.gmapjar                          1.0                                /data/app/~~Dq3XwJIKbSeBlEUo_aG_4A==/com.oversea.gmapjar-hWLLe7ehEJtXB
-com.x.idhelper                               1.0                                /data/app/~~yH3_teAr2yvPIzjyg3WoyQ==/com.x.idhelper-1YO6r31GN9gPqOZLsh
-com.lzplay.helper                            1.0                                /data/app/~~PZiN_wqWzKfGWrL7ASRzTQ==/com.lzplay.helper-MIYbX2mANWNE_qM

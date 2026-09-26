@@ -1,3 +1,0 @@
-GSF ID (android_id) = 3885761887743418156
-device = Mate50 Pro DCO-AL00 / HarmonyOS 4.2.0.218
-captured = 2026-09-26T09:30:43.259441
