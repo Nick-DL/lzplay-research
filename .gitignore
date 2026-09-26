@@ -63,3 +63,7 @@ work/scratch/
 *.tmp
 # --- subagent research scratch (jars, decompiled trees, downloaded tools) ---
 work/research-*/
+# --- downloaded tutorial material (user-provided, large) ---
+work/2026*
+work/dl/
+work/uidump/
