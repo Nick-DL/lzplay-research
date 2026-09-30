@@ -1,172 +1,162 @@
-# ★ 破解：GSF provider 封锁的消除方法（可复现）
+# GSF provider 封锁 —— 修正后的结论
 
-> **本文档推翻我之前两版结论，并给出一个实测可复现的解法。**
-> 平板与 Mate50 两处独立验证通过。
-
----
-
-## 一、结论先行
-
-**把 Google 包「彻底卸载 → 重新安装」，GSF provider 的封锁就消失了。**
-
-**与以下因素无关**（全部实测排除）：
-- ❌ 华为"应用启动管理"的设置（Mate50 上是**全部禁止**，照样通）
-- ❌ lzplay 及其 MDM 权限（**平板上根本没运行过 lzplay**，也通了）
-- ❌ 时间/CER/备份恢复（平板完全没做这些）
-- ❌ `setSysAppList` / 白名单调用（全量 logcat 里不存在）
+> ## ⚠️ 本文档已重写
+>
+> **我原先的结论是"彻底卸载 + 重装 Google 包即可解除封锁"。该结论已被推翻。**
+>
+> 用户的补充说明澄清了关键事实：他在**初期研究时**不小心把"Google 服务框架"的
+> **三个启动方式设为全部禁止，那一次提权是失败的**。
+>
+> 也就是说 —— **"全部禁止"是被证伪的做法，不是解药**。
+> 真正必要的是 **允许自启动 / 后台运行**。
 
 ---
 
-## 二、两处独立验证
+## 一、事实时间线（以用户说明为准）
 
-### 验证 1：Mate50 Pro（DCO-AL00）
+| 时间 | 事件 | 结果 |
+|---|---|---|
+| **初期研究时** | 用户把 GSF 三个启动方式设为**全部禁止** | ❌ **提权失败** ← 用户明确说明 |
+| 09:19 | 备份恢复安装 lzplay（带应用数据） | — |
+| 09:21 | 激活设备管理器 | lzplay 获得 MDM 权限 |
+| 09:25 | 复测 | GSF provider **仍被拦** |
+| **09:29 前后** | 用户在"应用启动管理"里**允许** GSF 自启动 / 后台运行 | ✅ **provider 通了** |
+| ~09:30 | 用户测试改版旅游必备时卸载了 GMS | 与本次问题**无关** |
+| ~09:31 | 我重装了 GMS | — |
+| 09:33+ | 复测 | provider 正常 |
 
-```
-时间线：
-  09:19  备份恢复安装 lzplay
-  09:21  激活设备管理器
-  09:25  复测：GSF provider 仍被拦（E行 5、for-iaware 5、NULL cursor）
-  ~09:30 用户测试改版旅游必备时按流程【卸载了 GMS】
-  ~09:31 我【重装 GMS】
-  09:33  复测：provider 通了（GSF ID = 3885761887743418156）
-```
-
-### 验证 2：MatePad（GOT-W09）—— 干净实验台
-
-平板此前**从未安装过 lzplay、从未做过备份恢复、从未改过应用启动管理**。
-
-```
-基线（GSF + GMS 装好，未做任何操作）：
-  open provider: NULL cursor
-  E shouldPreventStartProvider : 5
-  "prevented for iaware"       : 5
-  ==> STILL BLOCKED
-
-操作：彻底卸载全部 Google 包（仅 gms + gsf），再安装同一套 6 个包
-  （与 Mate50 完全相同的 APK 文件：_29 套装 + idhelper）
-
-结果：
-  E shouldPreventStartProvider : 0
-  "prevented for iaware"       : 0
-  com.google.process.gservices 进程运行中
-  ==> UNBLOCKED
-```
-
-**平板上没有任何"应用启动管理"改动，也没有 lzplay，卸载重装后封锁同样消失。**
-
-⇒ **问题出在 Google 包的安装状态上，与华为的门禁设置无关。**
+**关键**：provider 恢复可用发生在**用户修正启动管理设置之后**，
+而 GMS 的卸载/重装发生在那之后 —— **不是原因**。
 
 ---
 
-## 三、判别信号（重要方法论）
+## 二、我犯的错误
 
-调研过程中我犯过一个读数错误，这里记录正确判据：
+### 错误 1：把用户的"更正说明"读反了
 
-| 信号 | 是否有判别力 |
+用户原话：
+
+> "闸门 1 这一块，我之前好像在你初期研究时设置错了 ——
+> 我的手动管理当时好像设置了 gsf 全部禁止。"
+
+我把这句读成了"用户当前把它设成了全部禁止，而 provider 却通了，所以设置无关"。
+**实际意思是"初期设错了（全部禁止），那是失败的一次"** ——
+用户在陈述一个**错误配置**，不是在陈述当前状态。
+
+### 错误 2：把"卸载重装"当成了因果，而它只是巧合
+
+GMS 的卸载发生在 09:30 左右，**晚于** provider 恢复（09:29 前后）。
+我把两件时间相邻的事拼成了因果链。
+
+### 错误 3：用平板的观察去支持一个它并不支持的结论
+
+我在平板上"卸载重装 Google 包"后测到 `E shouldPreventStartProvider = 0`，
+就宣称两处独立验证。但**同一次会话稍后复测，平板又变回被拦（E行 11）**。
+说明那次"0"只是**暂时状态**，不是"重装解除了封锁"的证据。
+
+---
+
+## 三、修正后的结论
+
+### ✅ 正确的做法
+
+**必须允许 "Google 服务框架"（`com.google.android.gsf`）自启动与后台运行。**
+
+```
+设置 → 应用和服务 → 应用启动管理
+  → "Google 服务框架" / com.google.android.gsf
+  → 手动管理，且【自启动】【关联启动】【后台活动】三个开关都要打开
+```
+
+**理由**：GSF provider 是**按需拉起**的。如果系统不允许它自启动/后台运行，
+provider 进程起不来，`content://com.google.android.gsf.gservices` 就打不开，
+也就拿不到 GSF ID。这正好解释了闸门 1（iAware 的"应用启动管理"策略）为什么是拦路虎。
+
+**同理需要放行的还有**：
+- `com.google.android.gms`（Google Play 服务）
+- `com.android.vending`（Google Play 商店）
+- `com.lzplay.helper`（谷歌服务助手，安装阶段需要）
+
+### ❌ 已被证伪的做法
+
+| 做法 | 状态 |
 |---|---|
-| `I HwActivityManagerServiceEx: provider is prevented for not-prevent` | ❌ **无**。它在拦截与放行时都会打印。平板上实测该字符串出现 34–50 次，而实际拦截只有 5 次 |
-| `I ... provider is prevented for iaware` | ✅ **有**。出现即表示被 iAware 闸门拦截 |
-| `E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider` | ✅ **最有判别力**。这条 E 行出现 = 拦截逻辑执行 |
-| `I ContentProviderHelper: Successfully start provider ... GservicesProvider` | ✅ **正向证据**。出现即已放行 |
+| 把 GSF 设为"全部禁止" | ❌ **用户实测失败**，这才是错误配置 |
+| 卸载 + 重装 Google 包 | ❌ **不是解药**（发生时间晚于恢复点，且平板复测仍被拦） |
+| 关闭 `com.huawei.iaware` 包 | ❌ 早已排除 |
+| 改 `is_trustspace_enabled` / `trust_space_switch` | ❌ 打在了没触发的门上 |
+| lzplay 用 MDM 特权调 `setSysAppList` 加白名单 | ❌ 全量 logcat 里没有此调用 |
+
+---
+
+## 四、判别信号（这部分结论仍然有效）
+
+调研中我确实读错过一个信号，这点仍值得记录：
+
+| 信号 | 判别力 |
+|---|---|
+| `I HwActivityManagerServiceEx: provider is prevented for not-prevent` | ❌ **弱**。拦截与放行**都会**打印 |
+| `I ... provider is prevented for iaware` | ✅ 有 —— 明确指向 iAware 闸门 |
+| `E ContentProviderHelper: IAware or trustspace shouldPreventStartProvider` | ✅ **最强** —— 出现即拦截逻辑执行 |
+| `I ContentProviderHelper: Successfully start provider ... GservicesProvider` | ✅ 正向证据 |
 | `com.google.process.gservices` 进程存在 | ✅ 辅助正向证据 |
+| 探针读到 `android_id` | ✅ **最终判据** |
 
-**判定"已放行"的充分条件**：`E shouldPreventStartProvider` 计数为 0 **且**
-`for iaware` 计数为 0。
-
----
-
-## 四、机制推测（未证实，仅作方向）
-
-最可能的原因是 **iAware 的拦截决策被缓存，且缓存不会因包被替换而失效**：
-
-```
-首次安装 GSF（或某次安装顺序）
-      ↓
-iAware 对该包做了一次策略判定，结果固化（可能是"未在启动管理名单中"⇒ 拦）
-      ↓
-此后无论改设置、禁用包、重启，缓存都不刷新   ← 这解释了早先"四招全废"
-      ↓
-卸载该包 + 重新安装 ⇒ 触发重新判定 ⇒ 放行
-```
-
-**这也解释了为什么早先所有尝试都失败**：我一直在改"策略输入"，
-而没有触发"策略重新评估"。
-
-> ⚠️ 这是推测，没有代码级证据。但**解法本身已被两处独立验证**。
+**判定"已放行"的充分条件**：探针能读出 `android_id`。
 
 ---
 
-## 五、复现步骤
+## 五、复现步骤（修正版）
 
 ```powershell
-$py = "C:\Users\NickDL\.dsh\dsh-runtimes\dsh-primary-runtime\dependencies\python\python.exe"
-$S  = "<设备序列号或 ip:port>"
+# 1. 时钟设进 lzplay CER 的 ValidPeriod 窗口
+#    设置 → 系统和更新 → 日期和时间 → 关闭自动 → 2019-12-07
 
-# 一条命令完成：卸载全部 Google 包 → 重装与 Mate50 相同的 6 个包
-& $py work\tools\reset_gms.py $S
+# 2. 设置 → 系统和更新 → 备份和恢复 → 从内部存储恢复
+#    选 toalan.com 备份，密码 a12345678，只勾"应用和数据"
 
-# 然后验证（触发探针 + 读三个判别信号）
-& $py work\tools\tabtest.py $S "卸载重装后"
+# 3. 启动 lzplay → 进入安装界面 → 激活设备管理器
+
+# 4. ★ 设置 → 应用和服务 → 应用启动管理
+#    把以下四个全部设为【手动管理】且三个开关【全部打开】（不是禁止！）
+#      com.google.android.gsf       ← 最关键
+#      com.google.android.gms
+#      com.android.vending
+#      com.lzplay.helper
+
+# 5. 安装 GMS
+
+# 6. 验证
+adb -s <serial> shell am force-stop com.lzplay.revive
+adb -s <serial> shell am start -n com.lzplay.revive/.MainActivity
+Start-Sleep 13
+adb -s <serial> shell "cat /sdcard/Android/data/com.lzplay.revive/files/lzrevive.txt" |
+    Select-String "open provider|android_id"
+# 期望：open provider = OK，android_id = <数字>
 ```
-
-`reset_gms.py` 卸载的目标包：
-```
-com.google.android.gms / .gsf / .gsf.login
-com.android.vending
-com.google.android.syncadapters.contacts
-com.oversea.gmapjar
-com.google.android.gms.policy_sidecar_aps
-com.google.android.backuptransport
-com.x.idhelper
-```
-
-**注意**：装完后如果探针 App 报 `READ_GSERVICES` 权限不足，
-**重装一次探针**（`READ_GSERVICES` 的权限声明来自 GSF，
-探针若在 GSF 之前安装则拿不到该声明）。
 
 ---
 
-## 六、这对"改包版是否有用"的影响
+## 六、对"改包版是否有用"的影响
 
-**这是好消息，而且直接回答了你最初的疑问。**
+**不受影响。** 改包版的结论是**独立的实测**（单变量 A/B + Chat Partner 三版对照）：
 
-既然封锁的消除**完全不需要**：
-- 华为平台签名
-- MDM 特权权限
-- lzplay
+- 改包 → 签名变 → `DeveloperKey` 不匹配 → `DK_VC not same!` → **MDM 权限 0/7**
+- 见 [改包版MDM权限-实测结论.md](改包版MDM权限-实测结论.md)
 
-那么一台设备要跑通 GMS，实际上只需要：
+**而"应用启动管理"是纯用户级设置**，与 App 签名无关 —— 所以：
 
-| 步骤 | 是否需要改包/特权 |
-|---|---|
-| 装 Google 包（用户态即可） | ❌ 不需要 |
-| **卸载重装以解除 iAware 封锁** | ❌ 不需要 |
-| 设备管理器（AOSP 标准路径） | ❌ 不需要（改包版也能激活，已实测三个） |
-| 应用启动管理白名单 | ⚠️ 可能不需要（本次实验显示与它无关） |
-| 静默装**系统**应用到 `/product/priv-app/` | ✅ 需要 `MDM_INSTALL_SYS_APP` |
-
-⇒ **改包的旅游助手 / Chat Partner 完全可以起到"装 GMS 并让它可用"的作用。**
-它们唯一确定做不到的，是把 GMS 静默装成**系统应用**（那需要华为平台签名）。
-
-**而这在本次成功路径里根本没被用到** —— GSF 至今仍是 `/data/app/` 用户应用，
-Play 商店照常工作。
-
-### 对平板的结论也要更正
-
-我早先说"平板缺 `getSysAppList` 所以不能用 lzplay" —— **这只说明 lzplay 的门禁会拒绝它，
-不代表平板不能跑 GMS**。
-
-**实测：平板的 GSF provider 现在完全正常。** 平板的 MDM API 有 33 个方法
-（静默装/卸、安装白名单、信任列表齐全），只是少了 lzplay 用来做检查的那 2 个。
-
-⇒ **平板可以跑 GMS**，只是需要绕开 lzplay 那个过于死板的门禁。
+> **改包版 App 完全可以引导用户完成"应用启动管理"的配置**，
+> 它唯一做不到的是需要华为平台签名的特权安装（把 GMS 装成系统应用）。
 
 ---
 
-## 七、两处"未解之谜"文档的处置
+## 七、教训
 
-| 文档 | 处置 |
-|---|---|
-| `未解之谜-GSF如何被放行.md` | 保留（记录了排除过程与正确判据），但**结论已被本文档取代** |
-| `目标达成-GMS正常运行.md` 的撤回声明 | 保留（撤回"应用启动管理是关键"） |
-| 本文档 | ✅ **最终解** |
+**这个错误和前面几次是同一类**：我把"时间上相邻"当成了"因果"，
+并且**没有回到用户的原话去核对**。
+
+用户的说明里已经明确写了"设置错了"和"失败"，
+我却因为先入为主地认为"改设置不可能有效"，把关键信息读成了它的反面。
+
+**记录在此，作为方法论警告。**

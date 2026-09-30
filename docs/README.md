@@ -76,13 +76,24 @@
 
 → [平板MDM能力实测-最终结论.md](03-device/平板MDM能力实测-最终结论.md)
 
-### ⑤ GSF provider 封锁可以被解除（可复现）
+### ⑤ GSF provider 封锁的解除条件
 
 华为 iAware 会阻止 `com.google.android.gsf.gservices` 启动 ⇒ 拿不到 GSF ID ⇒ GMS 不可用。
 
-**解法：把 Google 包彻底卸载 + 重新安装。** 平板与 Mate50 两处独立验证。
+**解法：必须允许「Google 服务框架」自启动与后台运行。**
 
-→ [破解-GSF封锁的消除方法.md](03-device/破解-GSF封锁的消除方法.md)
+```
+设置 → 应用和服务 → 应用启动管理
+  → com.google.android.gsf
+  → 手动管理，且【自启动】【关联启动】【后台活动】三个开关全部打开
+```
+
+⚠️ **把 GSF 设为"全部禁止"是错的** —— 用户实测那一次提权失败。
+GSF provider 是按需拉起的，不允许它自启动/后台运行，provider 进程就起不来。
+
+**同样放行**：`com.google.android.gms`、`com.android.vending`、`com.lzplay.helper`
+
+→ [破解-GSF封锁的消除方法.md](03-device/破解-GSF封锁的消除方法.md)（含我两次错误结论的撤回记录）
 
 ---
 
@@ -171,14 +182,16 @@ SplashActivity → LauncherActivity → InstallActivityNew   （< 5 秒）
 GSF provider 的封锁解除后，GSF ID 生成（`3885761887743418156`），
 GMS 完成初始化，**Play 商店正常打开、账号登录成功**。
 
-> ⚠️ **这一阶段的机制解释我曾给错两次，均已撤回。**
-> - ❌ "应用启动管理白名单是关键" —— 用户实际设的是**全部禁止**，反而通了
+> ⚠️ **这一阶段的机制解释我曾给错三次，全部撤回。**
+> - ❌ "应用启动管理白名单是关键" —— **其实这条是对的，是我读反了用户的话**：
+>   用户说的是"初期设错了（全部禁止），那次失败"，而非"现在设成禁止却通了"
 > - ❌ "lzplay 的 MDM 特权加白名单" —— 全量 logcat 里**没有** `setSysAppList` 调用
+> - ❌ "卸载重装 Google 包即可解除" —— 卸载发生在恢复**之后**，只是时间相邻；
+>   且平板复测又变回被拦，说明不是它
 >
-> 最终定位：**卸载重装 Google 包**即可解除（两处独立验证）。
-> 真正有判别力的信号是 `E shouldPreventStartProvider` 这条日志**是否出现**，
-> 而不是 `provider is prevented for <reason>` 里的 reason 字符串
-> （后者在拦截与放行时**都会打印**）。
+> **最终定位：必须允许「Google 服务框架」自启动与后台运行。**
+> 真正有判别力的信号是探针能否读出 `android_id`；
+> `provider is prevented for not-prevent` 这条日志**拦截与放行都会打印**，不可用。
 
 → [目标达成-GMS正常运行.md](01-lzplay/目标达成-GMS正常运行.md) ·
 [破解-GSF封锁的消除方法.md](03-device/破解-GSF封锁的消除方法.md) ·
@@ -230,7 +243,7 @@ GMS 完成初始化，**Play 商店正常打开、账号登录成功**。
 |---|---|
 | [改包版MDM权限-实测结论.md](03-device/改包版MDM权限-实测结论.md) | **★ 改包 0/7 vs 原装 6/7（单变量 A/B）** |
 | [平板MDM能力实测-最终结论.md](03-device/平板MDM能力实测-最终结论.md) | **★ 平板能拿六项特权权限；固件缺 `MDM_INSTALL_SYS_APP`** |
-| [破解-GSF封锁的消除方法.md](03-device/破解-GSF封锁的消除方法.md) | **★ 卸载重装 Google 包解除封锁** |
+| [破解-GSF封锁的消除方法.md](03-device/破解-GSF封锁的消除方法.md) | **★ 必须允许 GSF 自启动/后台运行**（含两次错误结论的撤回） |
 | [三台设备对照-白名单之谜.md](03-device/三台设备对照-白名单之谜.md) | **推翻机型白名单假说** |
 
 **过程记录类**
@@ -359,7 +372,7 @@ lzplay/
 
 | 工具 | 用途 |
 |---|---|
-| `reset_gms.py` | **一键卸载重装 Google 包**（解除 GSF 封锁） |
+| `reset_gms.py` | 一键卸载重装 Google 包（**注意：这不是 GSF 封锁的解药**，仅用于重置版本） |
 | `tabtest.py` | 读 GSF provider 三个判别信号 |
 | `mdm_repack_test.py` | **原装 vs 改包 MDM 权限 A/B** |
 | `mdm_ab.py` | 两设备 MDM 授权对比 |
