@@ -1,4 +1,4 @@
-﻿# lzplay research workspace - .gitignore
+# lzplay research workspace - .gitignore
 #
 # Policy
 #   KEEP   : source, docs, our own tools, small irreplaceable originals
@@ -44,6 +44,13 @@ work/native/*.so
 work/native/*.b64.gz
 work/native/an/
 work/carve/
+
+# --- phase-2 research artefacts: SMALL and worth tracking ----
+#     work/xpp/      decrypted package manifests (Xpp_Q.json etc, ~2 KB each)
+#     work/register/ the built-in device-registration JavaScript (~1.7 KB)
+#     These are evidence for the phase-2 writeup, so do NOT ignore them.
+#     (they are re-derivable with work/tools/decrypt_xpp.py and
+#      work/tools/extract_register_js.py, but keeping them makes the docs verifiable)
 
 # --- large generated / regenerable artifacts ---
 work/probe_out/
