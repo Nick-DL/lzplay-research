@@ -27,7 +27,7 @@ import javax.net.ssl.HttpsURLConnection;
 public final class TlsProbe {
 
     /** Set this to the PC's LAN address before running. */
-    public static volatile String host = "10.95.226.159";
+    public static volatile String host = "192.168.3.37";
 
     private TlsProbe() { }
 
@@ -39,20 +39,27 @@ public final class TlsProbe {
         new Thread(new Runnable() {
             @Override public void run() {
                 LzLog l = LzLog.get();
-                boolean ndcOk = attempt(l, 18443, "NDC-signed");
-                boolean selfOk = attempt(l, 18444, "self-signed");
+                // Baseline first: a server the platform definitely trusts.  If THIS fails
+                // the problem is our test setup, not the trust question.
+                boolean realOk = attemptUrl(l, "https://www.google.com/generate_204",
+                        "REAL (system CA)", false);
                 l.get().add("");
+                l.get().add("  --- candidate certificates for the proxy ---");
+                boolean ndcOk = attempt(l, 18501, "NDC user CA");
+                boolean selfOk = attempt(l, 18502, "self-signed");
+                l.get().add("");
+                l.kv("REAL trusted server reachable", realOk);
                 l.kv("NDC-signed reachable", ndcOk);
                 l.kv("self-signed reachable", selfOk);
                 l.get().add("");
-                if (ndcOk && !selfOk) {
-                    l.kv("VERDICT", "NDC root IS trusted -> no cert install needed");
-                } else if (ndcOk && selfOk) {
-                    l.kv("VERDICT", "both accepted - something is bypassing validation");
+                if (!realOk) {
+                    l.kv("VERDICT", "baseline failed - fix network/test setup first");
+                } else if (ndcOk) {
+                    l.kv("VERDICT", "*** a USER CA is accepted - proxy works with no root ***");
                 } else if (!ndcOk && !selfOk) {
-                    l.kv("VERDICT", "neither accepted -> NDC root NOT installed");
+                    l.kv("VERDICT", "only system CAs accepted - user CA NOT honoured");
                 } else {
-                    l.kv("VERDICT", "unexpected: NDC failed but self-signed passed");
+                    l.kv("VERDICT", "unexpected combination");
                 }
                 l.get().add("  (if the CA is missing, install work/ca/ndc-ca.crt)");
                 try {
@@ -71,7 +78,13 @@ public final class TlsProbe {
     }
 
     private static boolean attempt(LzLog l, int port, String label) {
-        String url = "https://" + host + ":" + port + "/";
+        return attemptUrl(l, "https://" + host + ":" + port + "/", label, true);
+    }
+
+    /**
+     * @param wantChain when true, also report the peer certificate subject and issuer
+     */
+    private static boolean attemptUrl(LzLog l, String url, String label, boolean wantChain) {
         long t0 = System.currentTimeMillis();
         HttpsURLConnection c = null;
         try {
@@ -85,15 +98,17 @@ public final class TlsProbe {
             String body = r.readLine();
             r.close();
             l.get().add("  [" + label + "] HTTP " + code + " in " + dt + " ms  body=" + body);
-            try {
-                Certificate[] chain = c.getServerCertificates();
-                if (chain != null && chain.length > 0 && chain[0] instanceof X509Certificate) {
-                    X509Certificate x = (X509Certificate) chain[0];
-                    l.get().add("      subject: " + x.getSubjectDN());
-                    l.get().add("      issuer : " + x.getIssuerDN());
+            if (wantChain) {
+                try {
+                    Certificate[] chain = c.getServerCertificates();
+                    if (chain != null && chain.length > 0 && chain[0] instanceof X509Certificate) {
+                        X509Certificate x = (X509Certificate) chain[0];
+                        l.get().add("      subject: " + x.getSubjectDN());
+                        l.get().add("      issuer : " + x.getIssuerDN());
+                    }
+                } catch (Throwable ignore) {
+                    // getServerCertificates needs a handshake that completed; ignore
                 }
-            } catch (Throwable ignore) {
-                // getServerCertificates needs a handshake that completed; ignore
             }
             return true;
         } catch (Throwable t) {

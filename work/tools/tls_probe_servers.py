@@ -81,8 +81,14 @@ def serve(port, crt, key, label):
 
 def main():
     self_crt, self_key = make_selfsigned()
-    ndc_crt = os.path.join(CA, 'server.crt')
+    # server-ip.crt carries BOTH "DNS:api.trip-happy.com" and "IP:<pc address>" in its
+    # SAN.  The plain server.crt only has the DNS name, so a client connecting to the
+    # bare IP would fail hostname verification no matter whether the CA is trusted -
+    # which is exactly the false negative this probe produced the first time.
+    ndc_crt = os.path.join(CA, 'server-ip.crt')
     ndc_key = os.path.join(CA, 'server.key')
+    if not os.path.exists(ndc_crt):
+        ndc_crt = os.path.join(CA, 'server.crt')
 
     for p in (ndc_crt, ndc_key):
         if not os.path.exists(p):

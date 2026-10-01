@@ -344,6 +344,12 @@ public class MainActivity extends Activity {
         row4.addView(btn("CA 信任探测", new Runnable() {
             @Override public void run() { TlsProbe.run(MainActivity.this); }
         }));
+        row4.addView(btn("信任库枚举", new Runnable() {
+            @Override public void run() { TrustStoreProbe.run(MainActivity.this); }
+        }));
+        row4.addView(btn("代理可行性", new Runnable() {
+            @Override public void run() { ProxyFeasibilityProbe.run(MainActivity.this); }
+        }));
 
         LinearLayout col = new LinearLayout(this);
         col.setOrientation(LinearLayout.VERTICAL);
