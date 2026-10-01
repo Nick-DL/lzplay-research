@@ -56,6 +56,7 @@ export default defineConfig({
       { text: 'lzplay 本体', link: '/01-lzplay/REPORT-lzplay-分析' },
       { text: '换皮 App', link: '/02-siblings/SIBLINGS-改包报告' },
       { text: '设备实测', link: '/03-device/改包版MDM权限-实测结论' },
+      { text: '第二阶段', link: '/05-phase2/04-第二阶段需求' },
       {
         text: 'GitHub',
         link: 'https://github.com/Nick-DL/lzplay-research'
@@ -68,7 +69,8 @@ export default defineConfig({
         items: [
           { text: '首页', link: '/' },
           { text: '研究总索引', link: '/README' },
-          { text: '原始需求', link: '/00-原始需求' }
+          { text: '原始需求（第一阶段）', link: '/00-原始需求' },
+          { text: '第二阶段需求', link: '/05-phase2/04-第二阶段需求' }
         ]
       },
       {
@@ -116,6 +118,51 @@ export default defineConfig({
         items: [
           { text: '首轮实测结论', link: '/03-device/VERDICT-Mate50Pro-实测结论' },
           { text: '修正版 — 两道门', link: '/03-device/VERDICT-修正版-两道门' }
+        ]
+      },
+
+      // ---------------------------------------------------------------- 第二阶段
+      {
+        text: '05 · 第二阶段：需求与联网流程',
+        collapsed: false,
+        items: [
+          { text: '第二阶段需求（委托原文）', link: '/05-phase2/04-第二阶段需求' },
+          { text: '★ 联网流程研究', link: '/05-phase2/05-第二阶段-联网流程研究' }
+        ]
+      },
+      {
+        text: '05 · 第二阶段：安装流程剖析',
+        collapsed: false,
+        items: [
+          { text: '安装状态机与下载缓存', link: '/05-phase2/06-第二阶段-安装状态机与下载缓存' },
+          { text: 'FileDownloader 缓存预置（配方，已被 08 否定）', link: '/05-phase2/07-第二阶段-FileDownloader缓存预置' },
+          { text: '★ 为什么必须改包（卡 88% 的真相）', link: '/05-phase2/08-第二阶段-原版OOM与必须改包的原因' },
+          { text: '★ 原版必然崩溃的精确定位', link: '/05-phase2/09-第二阶段-原版必然崩溃的精确定位' }
+        ]
+      },
+      {
+        text: '05 · 第二阶段：修复与卡点',
+        collapsed: false,
+        items: [
+          { text: '★ OOM 修复与流程跑通', link: '/05-phase2/10-第二阶段-OOM修复与流程跑通' },
+          { text: '安装失败的两个根因', link: '/05-phase2/11-第二阶段-安装失败的两个根因' },
+          { text: '安装失败的第 3 个原因（缺权限）', link: '/05-phase2/12-第二阶段-安装失败的第3个原因' },
+          { text: '★ 进展与卡点存档', link: '/05-phase2/13-第二阶段-进展与卡点存档' }
+        ]
+      },
+      {
+        text: '05 · 第二阶段：Chat Partner',
+        collapsed: false,
+        items: [
+          { text: 'Chat Partner 分析', link: '/05-phase2/14-第二阶段-ChatPartner分析' },
+          { text: 'Chat Partner 实测结果', link: '/05-phase2/15-第二阶段-ChatPartner实测结果' }
+        ]
+      },
+      {
+        text: '存档',
+        collapsed: true,
+        items: [
+          { text: '会话中断存档', link: '/SESSION-STATE-暂停存档' }
         ]
       }
     ],

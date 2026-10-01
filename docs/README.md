@@ -280,6 +280,13 @@ GMS 完成初始化，**Play 商店正常打开、账号登录成功**。
 | [06-第二阶段-安装状态机与下载缓存.md](05-phase2/06-第二阶段-安装状态机与下载缓存.md) | 安装状态机（f=0..4）、88% 的由来、FileDownloader 缓存 |
 | [07-第二阶段-FileDownloader缓存预置.md](05-phase2/07-第二阶段-FileDownloader缓存预置.md) | 预置缓存的完整配方（**但被 08 否定**） |
 | [08-第二阶段-原版OOM与必须改包的原因.md](05-phase2/08-第二阶段-原版OOM与必须改包的原因.md) | **★★ 卡 88% 的真正原因：OOM，不是网络** |
+| [09-第二阶段-原版必然崩溃的精确定位.md](05-phase2/09-第二阶段-原版必然崩溃的精确定位.md) | **★★ 精确定位到代码行：`UpdateImp.e()` 给已装 APK 算 MD5** |
+| [10-第二阶段-OOM修复与流程跑通.md](05-phase2/10-第二阶段-OOM修复与流程跑通.md) | **★★ OOM 已修复，App 跑通并显示安装界面** |
+| [11-第二阶段-安装失败的两个根因.md](05-phase2/11-第二阶段-安装失败的两个根因.md) | Intent 缺 `FLAG_GRANT_READ_URI_PERMISSION` + FileProvider 路径包名残留 |
+| [12-第二阶段-安装失败的第3个原因.md](05-phase2/12-第二阶段-安装失败的第3个原因.md) | **★ 清单缺 `REQUEST_INSTALL_PACKAGES`（当前卡点）** |
+| [13-第二阶段-进展与卡点存档.md](05-phase2/13-第二阶段-进展与卡点存档.md) | **★ 已排除的 6 个假设 + 调试手法（接手必读）** |
+| [14-第二阶段-ChatPartner分析.md](05-phase2/14-第二阶段-ChatPartner分析.md) | Chat Partner 安装路径剖析（**只走 MDM，无 ACTION_VIEW 兜底**） |
+| [15-第二阶段-ChatPartner实测结果.md](05-phase2/15-第二阶段-ChatPartner实测结果.md) | 原版实测：不崩、卡死服务器、**CER 验签失败 ⇒ 此路不通** |
 
 ### 第二阶段已确定的三条结论
 
@@ -311,6 +318,32 @@ App 的"文件已就绪"预检 `Downloader.a(path, md5)` 用的**还是** `FileU
 
 > ⚠️ **VPN 代理方案（原需求设想）经研究证明是不必要的** —— 但它仍作为兜底保留，
 > 代码在 `work/revive/src/com/lzplay/revive/ProxyVpnService.java`。
+
+### 📍 第二阶段当前状态（2026-10-01）
+
+```
+① 用户不需要收集 APK      ✅ 已解决（助手包自带全套，5/5 MD5 一致）
+② 不需要 VPN 代理         ✅ 已证实（安装流程从 assets 本地解包）
+③ 必须改包                ✅ 已证实（原版启动即 OOM）
+④ 改包版能跑起来          ✅ 已解决（流式 MD5 修复）
+⑤ 改包版能否装上 GMS      ❌ 【当前卡点】清单缺 REQUEST_INSTALL_PACKAGES
+⑥ SafeNet 设备认证        ❌ 未解决（手动注册后通知仍在）
+```
+
+**已建成的产物**：`旅游必备-nostream-oom.apk`（140,950,628 B）
+= 原版 + 流式 MD5 修复 + Intent 读取授权修复
+
+**卡点的性质**：三条安装路径各自的状态
+
+| 路径 | 状态 |
+|---|---|
+| 标准 Intent（`ACTION_VIEW`） | 差 `REQUEST_INSTALL_PACKAGES` 声明 |
+| 华为 MDM 特权（`installPackage`） | 需 CER 授权，而**改包必重签 ⇒ 必然失效** |
+| `pm install` 会话 API | ✅ 实测可行，但需用户自备 APK（等于回到原问题） |
+
+**Chat Partner 这条路已排除**：它的 CER 在 HMOS 4.2 上**验签失败**
+（`HC_VC error tag is Signature`），拿不到 MDM 特权；而它的安装路径**只有**
+MDM 两条分支，无标准路径兜底。
 
 ### 其他
 
