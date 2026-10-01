@@ -280,6 +280,12 @@ public class MainActivity extends Activity {
         row4.addView(btn("网络门禁探针", new Runnable() {
             @Override public void run() { NetProbe.run(MainActivity.this); }
         }));
+        row4.addView(btn("响应器自检", new Runnable() {
+            @Override public void run() {
+                new TripHappyResponder(MainActivity.this).selfTest();
+                saveReport();
+            }
+        }));
 
         LinearLayout col = new LinearLayout(this);
         col.setOrientation(LinearLayout.VERTICAL);
