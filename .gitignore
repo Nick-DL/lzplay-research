@@ -138,20 +138,21 @@ work/reqable.apk
 
 # --- secret material -------------------------------------------------------
 # The NDC CA passphrase leaked into a commit message and work/siblings.jks was
-# tracked; both are fixed.  No PEM private key ever entered history - these rules
-# keep it that way.  Nothing tracked today matches them, so they only affect
-# future additions.
+# tracked; both are fixed.  No PEM private key ever entered git history.
 #
-#   work/ca/*.key   NDC CA key, server key, self-signed test keys
-#   *.key.pem       the plain-PEM form openssl writes
-#   *.jks/*.keystore/*.p12/*.pfx   signing keystores
-#                   (work/siblings.jks untracked; rebuild with
-#                    work/tools/make_keystore.py)
+# Sensitivity here is deliberately NOT uniform:
+#   HIGH  NDC.key - the user's general-purpose root CA (CA:TRUE + Certificate
+#         Sign).  Its private key must never be committed.
+#   LOW   everything generated for this research - siblings.jks, lzprobe.jks and
+#         the self-signed test keys.  Their passphrase is the public "lzplay123",
+#         and a repacked build can never satisfy HUAWEI.CER anyway, so they prove
+#         nothing and impersonate nothing.  work/siblings.jks is listed only
+#         because it briefly was tracked; it is not treated as a secret.
+#
+# Only *.key is blocked globally, since a .key file is a private key by
+# definition.  Certificates stay trackable: work/ca/ndc-ca.crt is the public cert
+# the user installs on the device and the docs refer to it.
 *.key
 *.key.pem
-*.jks
-*.keystore
-*.p12
-*.pfx
-work/ca/
+work/siblings.jks
 
