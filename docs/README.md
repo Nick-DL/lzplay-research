@@ -266,6 +266,52 @@ GMS 完成初始化，**Play 商店正常打开、账号登录成功**。
 ### `04-logs/` — 原始设备日志
 `dumpsys` / `logcat` 抓取，供复核。
 
+---
+
+## 🚧 第二阶段（进行中）
+
+目标：**(1)** 找到取代"备份还原 + 用户手工收集 APK"的方案；
+**(2)** 解决 SafeNet /"此设备未获得 Play 保护机制认证"。
+
+| 文档 | 内容 |
+|---|---|
+| [04-第二阶段需求.md](04-第二阶段需求.md) | 委托原文 |
+| [05-第二阶段-联网流程研究.md](05-第二阶段-联网流程研究.md) | **★ 全部联网点、请求协议、内置清单、注册 JS** |
+| [06-第二阶段-安装状态机与下载缓存.md](06-第二阶段-安装状态机与下载缓存.md) | 安装状态机（f=0..4）、88% 的由来、FileDownloader 缓存 |
+| [07-第二阶段-FileDownloader缓存预置.md](07-第二阶段-FileDownloader缓存预置.md) | 预置缓存的完整配方（**但被 08 否定**） |
+| [08-第二阶段-原版OOM与必须改包的原因.md](08-第二阶段-原版OOM与必须改包的原因.md) | **★★ 卡 88% 的真正原因：OOM，不是网络** |
+
+### 第二阶段已确定的三条结论
+
+**① 用户不需要自己收集 Google APK —— 原版 APK 自带整套。**
+
+```
+旅游必备 travel essentials.apk (134 MB)
+  assets/com.google.android.gms_29.apk                  90,657,638 B
+  assets/com.android.vending_29.apk                     21,168,579 B
+  assets/com.google.android.gsf_29.apk                   3,923,176 B
+  assets/com.google.android.syncadapters.contacts_29.apk  1,457,061 B
+  assets/com.oversea.gmapjar_29.apk                         154,359 B
+  ...外加整套 _28，共 13 个 APK
+```
+实测与解密出的清单 **5/5 MD5 与大小完全一致**。
+
+**② "卡 88%" 的根因是内存溢出（OOM），不是下载失败。**
+
+`FileUtil.b()` 为算一个文件的 MD5，把**整个文件**读进内存。被算的是 86.5 MB 的
+`gms_29.apk`，于是要申请 256 MB 连续数组 → 在 Android 12 上崩溃。
+
+**③ 因此"预置缓存"这条替代路线同样是死的。**
+
+App 的"文件已就绪"预检 `Downloader.a(path, md5)` 用的**还是** `FileUtil.b()` ——
+照样 OOM。而放进内部缓存目录需要 root（实测无 root）。
+
+⇒ **第一阶段的改包是必需的，没有替代**；但**不致命**，因为 GMS 作为普通用户应用
+也能工作（Mate50 的 `SYSTEM` 标志来自 Play 商店自我升级，不是 lzplay 灌的）。
+
+> ⚠️ **VPN 代理方案（原需求设想）经研究证明是不必要的** —— 但它仍作为兜底保留，
+> 代码在 `work/revive/src/com/lzplay/revive/ProxyVpnService.java`。
+
 ### 其他
 
 | 文档 | 内容 |
