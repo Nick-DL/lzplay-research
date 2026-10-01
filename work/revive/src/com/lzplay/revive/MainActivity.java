@@ -45,17 +45,66 @@ public class MainActivity extends Activity {
         setContentView(buildUi());
 
         LzLog.get().setListener(new Runnable() {
-            @Override public void run() { refresh(); }
+            @Override public void run() { refreshSoon(); }
         });
 
         LzLog.get().add("LZRevive 1.0  -  clean-room lzplay replacement");
         LzLog.get().kv("device", LzCore.deviceSummary());
-        runEnvironmentProbe();
-        runGsfProbe();
-        // The network gate probe does live HTTP on its own thread, so it is safe here.
-        NetProbe.run(this);
-        saveReport();
         refresh();
+
+        // Everything below touches the package manager, the network, Huawei's MDM API
+        // and the filesystem, and it writes a ~30 KB report.  Doing that on the UI
+        // thread caused the "Application Error" / ANR the app kept showing, so it all
+        // moves to a worker.  The UI is only touched again via runOnUiThread.
+        new Thread(new Runnable() {
+            @Override public void run() {
+                try {
+                    runEnvironmentProbe();
+                    runGsfProbe();
+                    // NetProbe does live HTTP; it already spawns its own thread for that,
+                    // but the network enumeration is still not UI work.
+                    NetProbe.run(MainActivity.this);
+                } catch (Throwable t) {
+                    LzLog.get().add("[startup probe error] " + t);
+                }
+                // MUST be the quiet variant: this runs on a worker with no Looper, and
+                // saveReport() ends in Toast.makeText -> "Can't toast on a thread that
+                // has not called Looper.prepare()".
+                saveReportQuiet();
+                runOnUiThread(new Runnable() {
+                    @Override public void run() { refresh(); }
+                });
+            }
+        }, "lzrevive-startup").start();
+    }
+
+    /** Coalesce log-driven refreshes so a burst of log lines does not redraw N times. */
+    private boolean refreshPending = false;
+
+    private void refreshSoon() {
+        if (refreshPending) return;
+        refreshPending = true;
+        if (tv == null) { refreshPending = false; return; }
+        tv.post(new Runnable() {
+            @Override public void run() {
+                refreshPending = false;
+                refresh();
+            }
+        });
+    }
+
+    private void saveReportQuiet() {
+        // saveReport() shows a Toast, which must not happen on a worker thread.
+        try {
+            File dir = getExternalFilesDir(null);
+            if (dir == null) dir = getFilesDir();
+            File f = new File(dir, "lzrevive.txt");
+            FileOutputStream fos = new FileOutputStream(f);
+            fos.write(LzLog.get().stamped().getBytes("UTF-8"));
+            fos.close();
+        } catch (Throwable t) {
+            LzLog.get().add("[saveReport error] " + t);
+        }
     }
 
     // ------------------------------------------------------------------ UI
@@ -272,7 +321,11 @@ public class MainActivity extends Activity {
             @Override public void run() { installFromFolder(); }
         }));
         row3.addView(btn("保存报告", new Runnable() {
-            @Override public void run() { saveReport(); }
+            @Override public void run() {
+                // btn() saves the report itself once this returns, and it does so on a
+                // worker thread - calling saveReport() here would Toast without a Looper.
+                LzLog.get().add("manual save requested");
+            }
         }));
 
         LinearLayout row4 = new LinearLayout(this);
@@ -282,8 +335,10 @@ public class MainActivity extends Activity {
         }));
         row4.addView(btn("响应器自检", new Runnable() {
             @Override public void run() {
+                // btn() already runs this on a worker and saves the report afterwards,
+                // so do NOT call saveReport() here - it ends in a Toast, which throws
+                // "Can't toast on a thread that has not called Looper.prepare()".
                 new TripHappyResponder(MainActivity.this).selfTest();
-                saveReport();
             }
         }));
         row4.addView(btn("CA 信任探测", new Runnable() {
@@ -340,13 +395,24 @@ public class MainActivity extends Activity {
         b.setAllCaps(false);
         b.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
-                try {
-                    action.run();
-                } catch (Throwable t) {
-                    LzLog.get().add("[error] " + t);
-                }
-                saveReport();
-                refresh();
+                // Probes touch the network, decode assets and rewrite a 30 KB report.
+                // Running that on the UI thread invites an ANR, so hand it to a worker
+                // and only touch the UI again from runOnUiThread.
+                new Thread(new Runnable() {
+                    @Override public void run() {
+                        try {
+                            action.run();
+                        } catch (Throwable t) {
+                            LzLog.get().add("[error] " + t);
+                        }
+                        // quiet variant: saveReport() shows a Toast and must stay on the
+                        // UI thread, which is exactly what we are avoiding here.
+                        saveReportQuiet();
+                        runOnUiThread(new Runnable() {
+                            @Override public void run() { refresh(); }
+                        });
+                    }
+                }, "lzrevive-action").start();
             }
         });
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(0,
