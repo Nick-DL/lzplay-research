@@ -1,0 +1,289 @@
+.class final Landroidx/core/e/r$d;
+.super Ljava/lang/Object;
+.source "ViewCompat.java"
+
+
+# annotations
+.annotation system Ldalvik/annotation/EnclosingClass;
+    value = Landroidx/core/e/r;
+.end annotation
+
+.annotation system Ldalvik/annotation/InnerClass;
+    accessFlags = 0x8
+    name = "d"
+.end annotation
+
+
+# static fields
+.field static final a:Ljava/util/ArrayList;
+    .annotation system Ldalvik/annotation/Signature;
+        value = {
+            "Ljava/util/ArrayList<",
+            "Ljava/lang/ref/WeakReference<",
+            "Landroid/view/View;",
+            ">;>;"
+        }
+    .end annotation
+.end field
+
+
+# instance fields
+.field b:Ljava/util/WeakHashMap;
+    .annotation system Ldalvik/annotation/Signature;
+        value = {
+            "Ljava/util/WeakHashMap<",
+            "Landroid/view/View;",
+            "Ljava/lang/Boolean;",
+            ">;"
+        }
+    .end annotation
+.end field
+
+.field c:Ljava/lang/ref/WeakReference;
+    .annotation system Ldalvik/annotation/Signature;
+        value = {
+            "Ljava/lang/ref/WeakReference<",
+            "Landroid/view/KeyEvent;",
+            ">;"
+        }
+    .end annotation
+.end field
+
+.field private d:Landroid/util/SparseArray;
+    .annotation system Ldalvik/annotation/Signature;
+        value = {
+            "Landroid/util/SparseArray<",
+            "Ljava/lang/ref/WeakReference<",
+            "Landroid/view/View;",
+            ">;>;"
+        }
+    .end annotation
+.end field
+
+
+# direct methods
+.method static constructor <clinit>()V
+    .registers 1
+
+    .line 4121
+    new-instance v0, Ljava/util/ArrayList;
+
+    invoke-direct {v0}, Ljava/util/ArrayList;-><init>()V
+
+    sput-object v0, Landroidx/core/e/r$d;->a:Ljava/util/ArrayList;
+
+    return-void
+.end method
+
+.method constructor <init>()V
+    .registers 2
+
+    .line 4117
+    invoke-direct {p0}, Ljava/lang/Object;-><init>()V
+
+    const/4 v0, 0x0
+
+    .line 4125
+    iput-object v0, p0, Landroidx/core/e/r$d;->b:Ljava/util/WeakHashMap;
+
+    .line 4130
+    iput-object v0, p0, Landroidx/core/e/r$d;->d:Landroid/util/SparseArray;
+
+    .line 4136
+    iput-object v0, p0, Landroidx/core/e/r$d;->c:Ljava/lang/ref/WeakReference;
+
+    return-void
+.end method
+
+.method static a(Landroid/view/View;)Landroidx/core/e/r$d;
+    .registers 3
+
+    .line 4146
+    sget v0, Landroidx/core/R$id;->tag_unhandled_key_event_manager:I
+
+    .line 4147
+    invoke-virtual {p0, v0}, Landroid/view/View;->getTag(I)Ljava/lang/Object;
+
+    move-result-object v0
+
+    check-cast v0, Landroidx/core/e/r$d;
+
+    if-nez v0, :cond_14
+
+    .line 4149
+    new-instance v0, Landroidx/core/e/r$d;
+
+    invoke-direct {v0}, Landroidx/core/e/r$d;-><init>()V
+
+    .line 4150
+    sget v1, Landroidx/core/R$id;->tag_unhandled_key_event_manager:I
+
+    invoke-virtual {p0, v1, v0}, Landroid/view/View;->setTag(ILjava/lang/Object;)V
+
+    :cond_14
+    return-object v0
+.end method
+
+.method static b(Landroid/view/View;)Z
+    .registers 4
+
+    .line 4234
+    sget v0, Landroidx/core/R$id;->tag_unhandled_key_listeners:I
+
+    .line 4236
+    invoke-virtual {p0, v0}, Landroid/view/View;->getTag(I)Ljava/lang/Object;
+
+    move-result-object p0
+
+    check-cast p0, Ljava/util/ArrayList;
+
+    if-eqz p0, :cond_22
+
+    .line 4238
+    invoke-virtual {p0}, Ljava/util/ArrayList;->size()I
+
+    move-result v0
+
+    const/4 v1, 0x1
+
+    sub-int/2addr v0, v1
+
+    :goto_10
+    if-ltz v0, :cond_22
+
+    .line 4239
+    invoke-virtual {p0, v0}, Ljava/util/ArrayList;->get(I)Ljava/lang/Object;
+
+    move-result-object v2
+
+    check-cast v2, Landroidx/core/e/r$c;
+
+    invoke-interface {v2}, Landroidx/core/e/r$c;->a()Z
+
+    move-result v2
+
+    if-eqz v2, :cond_1f
+
+    return v1
+
+    :cond_1f
+    add-int/lit8 v0, v0, -0x1
+
+    goto :goto_10
+
+    :cond_22
+    const/4 p0, 0x0
+
+    return p0
+.end method
+
+
+# virtual methods
+.method final a()Landroid/util/SparseArray;
+    .registers 2
+    .annotation system Ldalvik/annotation/Signature;
+        value = {
+            "()",
+            "Landroid/util/SparseArray<",
+            "Ljava/lang/ref/WeakReference<",
+            "Landroid/view/View;",
+            ">;>;"
+        }
+    .end annotation
+
+    .line 4139
+    iget-object v0, p0, Landroidx/core/e/r$d;->d:Landroid/util/SparseArray;
+
+    if-nez v0, :cond_b
+
+    .line 4140
+    new-instance v0, Landroid/util/SparseArray;
+
+    invoke-direct {v0}, Landroid/util/SparseArray;-><init>()V
+
+    iput-object v0, p0, Landroidx/core/e/r$d;->d:Landroid/util/SparseArray;
+
+    .line 4142
+    :cond_b
+    iget-object p0, p0, Landroidx/core/e/r$d;->d:Landroid/util/SparseArray;
+
+    return-object p0
+.end method
+
+.method final a(Landroid/view/View;Landroid/view/KeyEvent;)Landroid/view/View;
+    .registers 7
+
+    .line 4175
+    iget-object v0, p0, Landroidx/core/e/r$d;->b:Ljava/util/WeakHashMap;
+
+    const/4 v1, 0x0
+
+    if-eqz v0, :cond_33
+
+    iget-object v0, p0, Landroidx/core/e/r$d;->b:Ljava/util/WeakHashMap;
+
+    invoke-virtual {v0, p1}, Ljava/util/WeakHashMap;->containsKey(Ljava/lang/Object;)Z
+
+    move-result v0
+
+    if-nez v0, :cond_e
+
+    goto :goto_33
+
+    .line 4178
+    :cond_e
+    instance-of v0, p1, Landroid/view/ViewGroup;
+
+    if-eqz v0, :cond_2b
+
+    .line 4179
+    move-object v0, p1
+
+    check-cast v0, Landroid/view/ViewGroup;
+
+    .line 4181
+    invoke-virtual {v0}, Landroid/view/ViewGroup;->getChildCount()I
+
+    move-result v2
+
+    add-int/lit8 v2, v2, -0x1
+
+    :goto_1b
+    if-ltz v2, :cond_2b
+
+    .line 4182
+    invoke-virtual {v0, v2}, Landroid/view/ViewGroup;->getChildAt(I)Landroid/view/View;
+
+    move-result-object v3
+
+    .line 4183
+    invoke-virtual {p0, v3, p2}, Landroidx/core/e/r$d;->a(Landroid/view/View;Landroid/view/KeyEvent;)Landroid/view/View;
+
+    move-result-object v3
+
+    if-eqz v3, :cond_28
+
+    return-object v3
+
+    :cond_28
+    add-int/lit8 v2, v2, -0x1
+
+    goto :goto_1b
+
+    .line 4189
+    :cond_2b
+    invoke-static {p1}, Landroidx/core/e/r$d;->b(Landroid/view/View;)Z
+
+    move-result p0
+
+    if-eqz p0, :cond_32
+
+    return-object p1
+
+    :cond_32
+    return-object v1
+
+    :cond_33
+    :goto_33
+    return-object v1
+.end method

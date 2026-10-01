@@ -1,0 +1,499 @@
+.class final Landroidx/core/widget/h$a;
+.super Ljava/lang/Object;
+.source "TextViewCompat.java"
+
+# interfaces
+.implements Landroid/view/ActionMode$Callback;
+
+
+# annotations
+.annotation system Ldalvik/annotation/EnclosingClass;
+    value = Landroidx/core/widget/h;
+.end annotation
+
+.annotation system Ldalvik/annotation/InnerClass;
+    accessFlags = 0x8
+    name = "a"
+.end annotation
+
+
+# instance fields
+.field private final a:Landroid/view/ActionMode$Callback;
+
+.field private final b:Landroid/widget/TextView;
+
+.field private c:Ljava/lang/Class;
+
+.field private d:Ljava/lang/reflect/Method;
+
+.field private e:Z
+
+.field private f:Z
+
+
+# direct methods
+.method constructor <init>(Landroid/view/ActionMode$Callback;Landroid/widget/TextView;)V
+    .registers 3
+
+    .line 549
+    invoke-direct {p0}, Ljava/lang/Object;-><init>()V
+
+    .line 550
+    iput-object p1, p0, Landroidx/core/widget/h$a;->a:Landroid/view/ActionMode$Callback;
+
+    .line 551
+    iput-object p2, p0, Landroidx/core/widget/h$a;->b:Landroid/widget/TextView;
+
+    const/4 p1, 0x0
+
+    .line 552
+    iput-boolean p1, p0, Landroidx/core/widget/h$a;->f:Z
+
+    return-void
+.end method
+
+.method private static a()Landroid/content/Intent;
+    .registers 2
+
+    .line 671
+    new-instance v0, Landroid/content/Intent;
+
+    invoke-direct {v0}, Landroid/content/Intent;-><init>()V
+
+    const-string v1, "android.intent.action.PROCESS_TEXT"
+
+    invoke-virtual {v0, v1}, Landroid/content/Intent;->setAction(Ljava/lang/String;)Landroid/content/Intent;
+
+    move-result-object v0
+
+    const-string v1, "text/plain"
+
+    invoke-virtual {v0, v1}, Landroid/content/Intent;->setType(Ljava/lang/String;)Landroid/content/Intent;
+
+    move-result-object v0
+
+    return-object v0
+.end method
+
+
+# virtual methods
+.method public final onActionItemClicked(Landroid/view/ActionMode;Landroid/view/MenuItem;)Z
+    .registers 3
+
+    .line 568
+    iget-object p0, p0, Landroidx/core/widget/h$a;->a:Landroid/view/ActionMode$Callback;
+
+    invoke-interface {p0, p1, p2}, Landroid/view/ActionMode$Callback;->onActionItemClicked(Landroid/view/ActionMode;Landroid/view/MenuItem;)Z
+
+    move-result p0
+
+    return p0
+.end method
+
+.method public final onCreateActionMode(Landroid/view/ActionMode;Landroid/view/Menu;)Z
+    .registers 3
+
+    .line 557
+    iget-object p0, p0, Landroidx/core/widget/h$a;->a:Landroid/view/ActionMode$Callback;
+
+    invoke-interface {p0, p1, p2}, Landroid/view/ActionMode$Callback;->onCreateActionMode(Landroid/view/ActionMode;Landroid/view/Menu;)Z
+
+    move-result p0
+
+    return p0
+.end method
+
+.method public final onDestroyActionMode(Landroid/view/ActionMode;)V
+    .registers 2
+
+    .line 573
+    iget-object p0, p0, Landroidx/core/widget/h$a;->a:Landroid/view/ActionMode$Callback;
+
+    invoke-interface {p0, p1}, Landroid/view/ActionMode$Callback;->onDestroyActionMode(Landroid/view/ActionMode;)V
+
+    return-void
+.end method
+
+.method public final onPrepareActionMode(Landroid/view/ActionMode;Landroid/view/Menu;)Z
+    .registers 14
+
+    .line 1577
+    iget-object v0, p0, Landroidx/core/widget/h$a;->b:Landroid/widget/TextView;
+
+    invoke-virtual {v0}, Landroid/widget/TextView;->getContext()Landroid/content/Context;
+
+    move-result-object v0
+
+    .line 1578
+    invoke-virtual {v0}, Landroid/content/Context;->getPackageManager()Landroid/content/pm/PackageManager;
+
+    move-result-object v1
+
+    .line 1580
+    iget-boolean v2, p0, Landroidx/core/widget/h$a;->f:Z
+
+    const/4 v3, 0x0
+
+    const/4 v4, 0x1
+
+    if-nez v2, :cond_34
+
+    .line 1581
+    iput-boolean v4, p0, Landroidx/core/widget/h$a;->f:Z
+
+    :try_start_12
+    const-string v2, "com.android.internal.view.menu.MenuBuilder"
+
+    .line 1584
+    invoke-static {v2}, Ljava/lang/Class;->forName(Ljava/lang/String;)Ljava/lang/Class;
+
+    move-result-object v2
+
+    iput-object v2, p0, Landroidx/core/widget/h$a;->c:Ljava/lang/Class;
+
+    .line 1585
+    iget-object v2, p0, Landroidx/core/widget/h$a;->c:Ljava/lang/Class;
+
+    const-string v5, "removeItemAt"
+
+    new-array v6, v4, [Ljava/lang/Class;
+
+    sget-object v7, Ljava/lang/Integer;->TYPE:Ljava/lang/Class;
+
+    aput-object v7, v6, v3
+
+    .line 1586
+    invoke-virtual {v2, v5, v6}, Ljava/lang/Class;->getDeclaredMethod(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
+
+    move-result-object v2
+
+    iput-object v2, p0, Landroidx/core/widget/h$a;->d:Ljava/lang/reflect/Method;
+
+    .line 1587
+    iput-boolean v4, p0, Landroidx/core/widget/h$a;->e:Z
+    :try_end_2c
+    .catch Ljava/lang/ClassNotFoundException; {:try_start_12 .. :try_end_2c} :catch_2d
+    .catch Ljava/lang/NoSuchMethodException; {:try_start_12 .. :try_end_2c} :catch_2d
+
+    goto :goto_34
+
+    :catch_2d
+    const/4 v2, 0x0
+
+    .line 1589
+    iput-object v2, p0, Landroidx/core/widget/h$a;->c:Ljava/lang/Class;
+
+    .line 1590
+    iput-object v2, p0, Landroidx/core/widget/h$a;->d:Ljava/lang/reflect/Method;
+
+    .line 1591
+    iput-boolean v3, p0, Landroidx/core/widget/h$a;->e:Z
+
+    .line 1596
+    :cond_34
+    :goto_34
+    :try_start_34
+    iget-boolean v2, p0, Landroidx/core/widget/h$a;->e:Z
+
+    if-eqz v2, :cond_43
+
+    iget-object v2, p0, Landroidx/core/widget/h$a;->c:Ljava/lang/Class;
+
+    .line 1597
+    invoke-virtual {v2, p2}, Ljava/lang/Class;->isInstance(Ljava/lang/Object;)Z
+
+    move-result v2
+
+    if-eqz v2, :cond_43
+
+    iget-object v2, p0, Landroidx/core/widget/h$a;->d:Ljava/lang/reflect/Method;
+
+    goto :goto_53
+
+    .line 1599
+    :cond_43
+    invoke-virtual {p2}, Ljava/lang/Object;->getClass()Ljava/lang/Class;
+
+    move-result-object v2
+
+    const-string v5, "removeItemAt"
+
+    new-array v6, v4, [Ljava/lang/Class;
+
+    sget-object v7, Ljava/lang/Integer;->TYPE:Ljava/lang/Class;
+
+    aput-object v7, v6, v3
+
+    .line 1600
+    invoke-virtual {v2, v5, v6}, Ljava/lang/Class;->getDeclaredMethod(Ljava/lang/String;[Ljava/lang/Class;)Ljava/lang/reflect/Method;
+
+    move-result-object v2
+
+    .line 1601
+    :goto_53
+    invoke-interface {p2}, Landroid/view/Menu;->size()I
+
+    move-result v5
+
+    sub-int/2addr v5, v4
+
+    :goto_58
+    if-ltz v5, :cond_82
+
+    .line 1602
+    invoke-interface {p2, v5}, Landroid/view/Menu;->getItem(I)Landroid/view/MenuItem;
+
+    move-result-object v6
+
+    .line 1603
+    invoke-interface {v6}, Landroid/view/MenuItem;->getIntent()Landroid/content/Intent;
+
+    move-result-object v7
+
+    if-eqz v7, :cond_7f
+
+    const-string v7, "android.intent.action.PROCESS_TEXT"
+
+    .line 1604
+    invoke-interface {v6}, Landroid/view/MenuItem;->getIntent()Landroid/content/Intent;
+
+    move-result-object v6
+
+    invoke-virtual {v6}, Landroid/content/Intent;->getAction()Ljava/lang/String;
+
+    move-result-object v6
+
+    invoke-virtual {v7, v6}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    move-result v6
+
+    if-eqz v6, :cond_7f
+
+    .line 1605
+    new-array v6, v4, [Ljava/lang/Object;
+
+    invoke-static {v5}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+
+    move-result-object v7
+
+    aput-object v7, v6, v3
+
+    invoke-virtual {v2, p2, v6}, Ljava/lang/reflect/Method;->invoke(Ljava/lang/Object;[Ljava/lang/Object;)Ljava/lang/Object;
+    :try_end_7f
+    .catch Ljava/lang/NoSuchMethodException; {:try_start_34 .. :try_end_7f} :catch_11e
+    .catch Ljava/lang/IllegalAccessException; {:try_start_34 .. :try_end_7f} :catch_11e
+    .catch Ljava/lang/reflect/InvocationTargetException; {:try_start_34 .. :try_end_7f} :catch_11e
+
+    :cond_7f
+    add-int/lit8 v5, v5, -0x1
+
+    goto :goto_58
+
+    .line 1630
+    :cond_82
+    new-instance v2, Ljava/util/ArrayList;
+
+    invoke-direct {v2}, Ljava/util/ArrayList;-><init>()V
+
+    .line 1631
+    instance-of v5, v0, Landroid/app/Activity;
+
+    if-eqz v5, :cond_d1
+
+    .line 1636
+    invoke-static {}, Landroidx/core/widget/h$a;->a()Landroid/content/Intent;
+
+    move-result-object v5
+
+    invoke-virtual {v1, v5, v3}, Landroid/content/pm/PackageManager;->queryIntentActivities(Landroid/content/Intent;I)Ljava/util/List;
+
+    move-result-object v5
+
+    .line 1637
+    invoke-interface {v5}, Ljava/util/List;->iterator()Ljava/util/Iterator;
+
+    move-result-object v5
+
+    :cond_97
+    :goto_97
+    invoke-interface {v5}, Ljava/util/Iterator;->hasNext()Z
+
+    move-result v6
+
+    if-eqz v6, :cond_d1
+
+    invoke-interface {v5}, Ljava/util/Iterator;->next()Ljava/lang/Object;
+
+    move-result-object v6
+
+    check-cast v6, Landroid/content/pm/ResolveInfo;
+
+    .line 1646
+    invoke-virtual {v0}, Landroid/content/Context;->getPackageName()Ljava/lang/String;
+
+    move-result-object v7
+
+    iget-object v8, v6, Landroid/content/pm/ResolveInfo;->activityInfo:Landroid/content/pm/ActivityInfo;
+
+    iget-object v8, v8, Landroid/content/pm/ActivityInfo;->packageName:Ljava/lang/String;
+
+    invoke-virtual {v7, v8}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+
+    move-result v7
+
+    if-eqz v7, :cond_b3
+
+    :cond_b1
+    :goto_b1
+    move v7, v4
+
+    goto :goto_cb
+
+    .line 1649
+    :cond_b3
+    iget-object v7, v6, Landroid/content/pm/ResolveInfo;->activityInfo:Landroid/content/pm/ActivityInfo;
+
+    iget-boolean v7, v7, Landroid/content/pm/ActivityInfo;->exported:Z
+
+    if-eqz v7, :cond_ca
+
+    .line 1652
+    iget-object v7, v6, Landroid/content/pm/ResolveInfo;->activityInfo:Landroid/content/pm/ActivityInfo;
+
+    iget-object v7, v7, Landroid/content/pm/ActivityInfo;->permission:Ljava/lang/String;
+
+    if-eqz v7, :cond_b1
+
+    iget-object v7, v6, Landroid/content/pm/ResolveInfo;->activityInfo:Landroid/content/pm/ActivityInfo;
+
+    iget-object v7, v7, Landroid/content/pm/ActivityInfo;->permission:Ljava/lang/String;
+
+    .line 1653
+    invoke-virtual {v0, v7}, Landroid/content/Context;->checkSelfPermission(Ljava/lang/String;)I
+
+    move-result v7
+
+    if-nez v7, :cond_ca
+
+    goto :goto_b1
+
+    :cond_ca
+    move v7, v3
+
+    :goto_cb
+    if-eqz v7, :cond_97
+
+    .line 1639
+    invoke-interface {v2, v6}, Ljava/util/List;->add(Ljava/lang/Object;)Z
+
+    goto :goto_97
+
+    :cond_d1
+    move v0, v3
+
+    .line 1618
+    :goto_d2
+    invoke-interface {v2}, Ljava/util/List;->size()I
+
+    move-result v5
+
+    if-ge v0, v5, :cond_11e
+
+    .line 1619
+    invoke-interface {v2, v0}, Ljava/util/List;->get(I)Ljava/lang/Object;
+
+    move-result-object v5
+
+    check-cast v5, Landroid/content/pm/ResolveInfo;
+
+    add-int/lit8 v6, v0, 0x64
+
+    .line 1622
+    invoke-virtual {v5, v1}, Landroid/content/pm/ResolveInfo;->loadLabel(Landroid/content/pm/PackageManager;)Ljava/lang/CharSequence;
+
+    move-result-object v7
+
+    .line 1620
+    invoke-interface {p2, v3, v3, v6, v7}, Landroid/view/Menu;->add(IIILjava/lang/CharSequence;)Landroid/view/MenuItem;
+
+    move-result-object v6
+
+    iget-object v7, p0, Landroidx/core/widget/h$a;->b:Landroid/widget/TextView;
+
+    .line 1659
+    invoke-static {}, Landroidx/core/widget/h$a;->a()Landroid/content/Intent;
+
+    move-result-object v8
+
+    const-string v9, "android.intent.extra.PROCESS_TEXT_READONLY"
+
+    .line 1665
+    instance-of v10, v7, Landroid/text/Editable;
+
+    if-eqz v10, :cond_102
+
+    .line 1666
+    invoke-virtual {v7}, Landroid/widget/TextView;->onCheckIsTextEditor()Z
+
+    move-result v10
+
+    if-eqz v10, :cond_102
+
+    .line 1667
+    invoke-virtual {v7}, Landroid/widget/TextView;->isEnabled()Z
+
+    move-result v7
+
+    if-eqz v7, :cond_102
+
+    move v7, v4
+
+    goto :goto_103
+
+    :cond_102
+    move v7, v3
+
+    :goto_103
+    xor-int/2addr v7, v4
+
+    .line 1660
+    invoke-virtual {v8, v9, v7}, Landroid/content/Intent;->putExtra(Ljava/lang/String;Z)Landroid/content/Intent;
+
+    move-result-object v7
+
+    iget-object v8, v5, Landroid/content/pm/ResolveInfo;->activityInfo:Landroid/content/pm/ActivityInfo;
+
+    iget-object v8, v8, Landroid/content/pm/ActivityInfo;->packageName:Ljava/lang/String;
+
+    iget-object v5, v5, Landroid/content/pm/ResolveInfo;->activityInfo:Landroid/content/pm/ActivityInfo;
+
+    iget-object v5, v5, Landroid/content/pm/ActivityInfo;->name:Ljava/lang/String;
+
+    .line 1661
+    invoke-virtual {v7, v8, v5}, Landroid/content/Intent;->setClassName(Ljava/lang/String;Ljava/lang/String;)Landroid/content/Intent;
+
+    move-result-object v5
+
+    .line 1623
+    invoke-interface {v6, v5}, Landroid/view/MenuItem;->setIntent(Landroid/content/Intent;)Landroid/view/MenuItem;
+
+    move-result-object v5
+
+    .line 1624
+    invoke-interface {v5, v4}, Landroid/view/MenuItem;->setShowAsAction(I)V
+
+    add-int/lit8 v0, v0, 0x1
+
+    goto :goto_d2
+
+    .line 563
+    :catch_11e
+    :cond_11e
+    iget-object p0, p0, Landroidx/core/widget/h$a;->a:Landroid/view/ActionMode$Callback;
+
+    invoke-interface {p0, p1, p2}, Landroid/view/ActionMode$Callback;->onPrepareActionMode(Landroid/view/ActionMode;Landroid/view/Menu;)Z
+
+    move-result p0
+
+    return p0
+.end method

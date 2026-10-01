@@ -1,0 +1,67 @@
+.class final Lcom/liulishuo/filedownloader/b/b$b;
+.super Ljava/lang/Object;
+.source "NoDatabaseImpl.java"
+
+# interfaces
+.implements Ljava/util/Iterator;
+
+
+# annotations
+.annotation system Ldalvik/annotation/EnclosingClass;
+    value = Lcom/liulishuo/filedownloader/b/b;
+.end annotation
+
+.annotation system Ldalvik/annotation/InnerClass;
+    accessFlags = 0x0
+    name = "b"
+.end annotation
+
+.annotation system Ldalvik/annotation/Signature;
+    value = {
+        "Ljava/lang/Object;",
+        "Ljava/util/Iterator<",
+        "Lcom/liulishuo/filedownloader/model/FileDownloadModel;",
+        ">;"
+    }
+.end annotation
+
+
+# instance fields
+.field final synthetic a:Lcom/liulishuo/filedownloader/b/b;
+
+
+# direct methods
+.method constructor <init>(Lcom/liulishuo/filedownloader/b/b;)V
+    .registers 2
+
+    .line 218
+    iput-object p1, p0, Lcom/liulishuo/filedownloader/b/b$b;->a:Lcom/liulishuo/filedownloader/b/b;
+
+    invoke-direct {p0}, Ljava/lang/Object;-><init>()V
+
+    return-void
+.end method
+
+
+# virtual methods
+.method public final hasNext()Z
+    .registers 1
+
+    const/4 p0, 0x0
+
+    return p0
+.end method
+
+.method public final bridge synthetic next()Ljava/lang/Object;
+    .registers 1
+
+    const/4 p0, 0x0
+
+    return-object p0
+.end method
+
+.method public final remove()V
+    .registers 1
+
+    return-void
+.end method

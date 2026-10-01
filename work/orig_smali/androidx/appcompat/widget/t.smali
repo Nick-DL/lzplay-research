@@ -1,0 +1,716 @@
+.class public abstract Landroidx/appcompat/widget/t;
+.super Ljava/lang/Object;
+.source "ForwardingListener.java"
+
+# interfaces
+.implements Landroid/view/View$OnAttachStateChangeListener;
+.implements Landroid/view/View$OnTouchListener;
+
+
+# annotations
+.annotation system Ldalvik/annotation/MemberClasses;
+    value = {
+        Landroidx/appcompat/widget/t$b;,
+        Landroidx/appcompat/widget/t$a;
+    }
+.end annotation
+
+
+# instance fields
+.field private final a:F
+
+.field private final b:I
+
+.field final c:Landroid/view/View;
+
+.field private final d:I
+
+.field private e:Ljava/lang/Runnable;
+
+.field private f:Ljava/lang/Runnable;
+
+.field private g:Z
+
+.field private h:I
+
+.field private final i:[I
+
+
+# direct methods
+.method public constructor <init>(Landroid/view/View;)V
+    .registers 4
+
+    .line 68
+    invoke-direct {p0}, Ljava/lang/Object;-><init>()V
+
+    const/4 v0, 0x2
+
+    .line 66
+    new-array v1, v0, [I
+
+    iput-object v1, p0, Landroidx/appcompat/widget/t;->i:[I
+
+    .line 69
+    iput-object p1, p0, Landroidx/appcompat/widget/t;->c:Landroid/view/View;
+
+    const/4 v1, 0x1
+
+    .line 70
+    invoke-virtual {p1, v1}, Landroid/view/View;->setLongClickable(Z)V
+
+    .line 71
+    invoke-virtual {p1, p0}, Landroid/view/View;->addOnAttachStateChangeListener(Landroid/view/View$OnAttachStateChangeListener;)V
+
+    .line 73
+    invoke-virtual {p1}, Landroid/view/View;->getContext()Landroid/content/Context;
+
+    move-result-object p1
+
+    invoke-static {p1}, Landroid/view/ViewConfiguration;->get(Landroid/content/Context;)Landroid/view/ViewConfiguration;
+
+    move-result-object p1
+
+    invoke-virtual {p1}, Landroid/view/ViewConfiguration;->getScaledTouchSlop()I
+
+    move-result p1
+
+    int-to-float p1, p1
+
+    iput p1, p0, Landroidx/appcompat/widget/t;->a:F
+
+    .line 74
+    invoke-static {}, Landroid/view/ViewConfiguration;->getTapTimeout()I
+
+    move-result p1
+
+    iput p1, p0, Landroidx/appcompat/widget/t;->b:I
+
+    .line 77
+    iget p1, p0, Landroidx/appcompat/widget/t;->b:I
+
+    invoke-static {}, Landroid/view/ViewConfiguration;->getLongPressTimeout()I
+
+    move-result v1
+
+    add-int/2addr p1, v1
+
+    div-int/2addr p1, v0
+
+    iput p1, p0, Landroidx/appcompat/widget/t;->d:I
+
+    return-void
+.end method
+
+.method private e()V
+    .registers 3
+
+    .line 216
+    iget-object v0, p0, Landroidx/appcompat/widget/t;->f:Ljava/lang/Runnable;
+
+    if-eqz v0, :cond_b
+
+    .line 217
+    iget-object v0, p0, Landroidx/appcompat/widget/t;->c:Landroid/view/View;
+
+    iget-object v1, p0, Landroidx/appcompat/widget/t;->f:Ljava/lang/Runnable;
+
+    invoke-virtual {v0, v1}, Landroid/view/View;->removeCallbacks(Ljava/lang/Runnable;)Z
+
+    .line 220
+    :cond_b
+    iget-object v0, p0, Landroidx/appcompat/widget/t;->e:Ljava/lang/Runnable;
+
+    if-eqz v0, :cond_16
+
+    .line 221
+    iget-object v0, p0, Landroidx/appcompat/widget/t;->c:Landroid/view/View;
+
+    iget-object p0, p0, Landroidx/appcompat/widget/t;->e:Ljava/lang/Runnable;
+
+    invoke-virtual {v0, p0}, Landroid/view/View;->removeCallbacks(Ljava/lang/Runnable;)Z
+
+    :cond_16
+    return-void
+.end method
+
+
+# virtual methods
+.method public abstract a()Landroidx/appcompat/view/menu/p;
+.end method
+
+.method protected b()Z
+    .registers 2
+
+    .line 139
+    invoke-virtual {p0}, Landroidx/appcompat/widget/t;->a()Landroidx/appcompat/view/menu/p;
+
+    move-result-object p0
+
+    if-eqz p0, :cond_f
+
+    .line 140
+    invoke-interface {p0}, Landroidx/appcompat/view/menu/p;->d()Z
+
+    move-result v0
+
+    if-nez v0, :cond_f
+
+    .line 141
+    invoke-interface {p0}, Landroidx/appcompat/view/menu/p;->b_()V
+
+    :cond_f
+    const/4 p0, 0x1
+
+    return p0
+.end method
+
+.method protected c()Z
+    .registers 2
+
+    .line 156
+    invoke-virtual {p0}, Landroidx/appcompat/widget/t;->a()Landroidx/appcompat/view/menu/p;
+
+    move-result-object p0
+
+    if-eqz p0, :cond_f
+
+    .line 157
+    invoke-interface {p0}, Landroidx/appcompat/view/menu/p;->d()Z
+
+    move-result v0
+
+    if-eqz v0, :cond_f
+
+    .line 158
+    invoke-interface {p0}, Landroidx/appcompat/view/menu/p;->c()V
+
+    :cond_f
+    const/4 p0, 0x1
+
+    return p0
+.end method
+
+.method final d()V
+    .registers 12
+
+    .line 226
+    invoke-direct {p0}, Landroidx/appcompat/widget/t;->e()V
+
+    .line 228
+    iget-object v0, p0, Landroidx/appcompat/widget/t;->c:Landroid/view/View;
+
+    .line 229
+    invoke-virtual {v0}, Landroid/view/View;->isEnabled()Z
+
+    move-result v1
+
+    if-eqz v1, :cond_37
+
+    invoke-virtual {v0}, Landroid/view/View;->isLongClickable()Z
+
+    move-result v1
+
+    if-eqz v1, :cond_12
+
+    goto :goto_37
+
+    .line 235
+    :cond_12
+    invoke-virtual {p0}, Landroidx/appcompat/widget/t;->b()Z
+
+    move-result v1
+
+    if-nez v1, :cond_19
+
+    return-void
+
+    .line 240
+    :cond_19
+    invoke-virtual {v0}, Landroid/view/View;->getParent()Landroid/view/ViewParent;
+
+    move-result-object v1
+
+    const/4 v2, 0x1
+
+    invoke-interface {v1, v2}, Landroid/view/ViewParent;->requestDisallowInterceptTouchEvent(Z)V
+
+    .line 243
+    invoke-static {}, Landroid/os/SystemClock;->uptimeMillis()J
+
+    move-result-wide v5
+
+    const/4 v7, 0x3
+
+    const/4 v8, 0x0
+
+    const/4 v9, 0x0
+
+    const/4 v10, 0x0
+
+    move-wide v3, v5
+
+    .line 244
+    invoke-static/range {v3 .. v10}, Landroid/view/MotionEvent;->obtain(JJIFFI)Landroid/view/MotionEvent;
+
+    move-result-object v1
+
+    .line 245
+    invoke-virtual {v0, v1}, Landroid/view/View;->onTouchEvent(Landroid/view/MotionEvent;)Z
+
+    .line 246
+    invoke-virtual {v1}, Landroid/view/MotionEvent;->recycle()V
+
+    .line 248
+    iput-boolean v2, p0, Landroidx/appcompat/widget/t;->g:Z
+
+    return-void
+
+    :cond_37
+    :goto_37
+    return-void
+.end method
+
+.method public onTouch(Landroid/view/View;Landroid/view/MotionEvent;)Z
+    .registers 13
+
+    .line 94
+    iget-boolean p1, p0, Landroidx/appcompat/widget/t;->g:Z
+
+    const/4 v0, 0x1
+
+    const/4 v1, 0x0
+
+    if-eqz p1, :cond_71
+
+    .line 1259
+    iget-object v2, p0, Landroidx/appcompat/widget/t;->c:Landroid/view/View;
+
+    .line 1260
+    invoke-virtual {p0}, Landroidx/appcompat/widget/t;->a()Landroidx/appcompat/view/menu/p;
+
+    move-result-object v3
+
+    if-eqz v3, :cond_61
+
+    .line 1261
+    invoke-interface {v3}, Landroidx/appcompat/view/menu/p;->d()Z
+
+    move-result v4
+
+    if-nez v4, :cond_15
+
+    goto :goto_61
+
+    .line 1265
+    :cond_15
+    invoke-interface {v3}, Landroidx/appcompat/view/menu/p;->e()Landroid/widget/ListView;
+
+    move-result-object v3
+
+    check-cast v3, Landroidx/appcompat/widget/r;
+
+    if-eqz v3, :cond_61
+
+    .line 1266
+    invoke-virtual {v3}, Landroidx/appcompat/widget/r;->isShown()Z
+
+    move-result v4
+
+    if-nez v4, :cond_24
+
+    goto :goto_61
+
+    .line 1271
+    :cond_24
+    invoke-static {p2}, Landroid/view/MotionEvent;->obtainNoHistory(Landroid/view/MotionEvent;)Landroid/view/MotionEvent;
+
+    move-result-object v4
+
+    .line 1309
+    iget-object v5, p0, Landroidx/appcompat/widget/t;->i:[I
+
+    .line 1310
+    invoke-virtual {v2, v5}, Landroid/view/View;->getLocationOnScreen([I)V
+
+    .line 1311
+    aget v2, v5, v1
+
+    int-to-float v2, v2
+
+    aget v5, v5, v0
+
+    int-to-float v5, v5
+
+    invoke-virtual {v4, v2, v5}, Landroid/view/MotionEvent;->offsetLocation(FF)V
+
+    .line 2298
+    iget-object v2, p0, Landroidx/appcompat/widget/t;->i:[I
+
+    .line 2299
+    invoke-virtual {v3, v2}, Landroid/view/View;->getLocationOnScreen([I)V
+
+    .line 2300
+    aget v5, v2, v1
+
+    neg-int v5, v5
+
+    int-to-float v5, v5
+
+    aget v2, v2, v0
+
+    neg-int v2, v2
+
+    int-to-float v2, v2
+
+    invoke-virtual {v4, v5, v2}, Landroid/view/MotionEvent;->offsetLocation(FF)V
+
+    .line 1276
+    iget v2, p0, Landroidx/appcompat/widget/t;->h:I
+
+    invoke-virtual {v3, v4, v2}, Landroidx/appcompat/widget/r;->a(Landroid/view/MotionEvent;I)Z
+
+    move-result v2
+
+    .line 1277
+    invoke-virtual {v4}, Landroid/view/MotionEvent;->recycle()V
+
+    .line 1280
+    invoke-virtual {p2}, Landroid/view/MotionEvent;->getActionMasked()I
+
+    move-result p2
+
+    if-eq p2, v0, :cond_5a
+
+    const/4 v3, 0x3
+
+    if-eq p2, v3, :cond_5a
+
+    move p2, v0
+
+    goto :goto_5b
+
+    :cond_5a
+    move p2, v1
+
+    :goto_5b
+    if-eqz v2, :cond_61
+
+    if-eqz p2, :cond_61
+
+    move p2, v0
+
+    goto :goto_62
+
+    :cond_61
+    :goto_61
+    move p2, v1
+
+    :goto_62
+    if-nez p2, :cond_6e
+
+    .line 97
+    invoke-virtual {p0}, Landroidx/appcompat/widget/t;->c()Z
+
+    move-result p2
+
+    if-nez p2, :cond_6b
+
+    goto :goto_6e
+
+    :cond_6b
+    move p2, v1
+
+    goto/16 :goto_11f
+
+    :cond_6e
+    :goto_6e
+    move p2, v0
+
+    goto/16 :goto_11f
+
+    .line 3170
+    :cond_71
+    iget-object v2, p0, Landroidx/appcompat/widget/t;->c:Landroid/view/View;
+
+    .line 3171
+    invoke-virtual {v2}, Landroid/view/View;->isEnabled()Z
+
+    move-result v3
+
+    if-eqz v3, :cond_fc
+
+    .line 3175
+    invoke-virtual {p2}, Landroid/view/MotionEvent;->getActionMasked()I
+
+    move-result v3
+
+    packed-switch v3, :pswitch_data_128
+
+    goto/16 :goto_fc
+
+    .line 3191
+    :pswitch_82
+    iget v3, p0, Landroidx/appcompat/widget/t;->h:I
+
+    invoke-virtual {p2, v3}, Landroid/view/MotionEvent;->findPointerIndex(I)I
+
+    move-result v3
+
+    if-ltz v3, :cond_fc
+
+    .line 3193
+    invoke-virtual {p2, v3}, Landroid/view/MotionEvent;->getX(I)F
+
+    move-result v4
+
+    .line 3194
+    invoke-virtual {p2, v3}, Landroid/view/MotionEvent;->getY(I)F
+
+    move-result p2
+
+    .line 3197
+    iget v3, p0, Landroidx/appcompat/widget/t;->a:F
+
+    neg-float v5, v3
+
+    cmpl-float v6, v4, v5
+
+    if-ltz v6, :cond_bd
+
+    cmpl-float v5, p2, v5
+
+    if-ltz v5, :cond_bd
+
+    .line 3289
+    invoke-virtual {v2}, Landroid/view/View;->getRight()I
+
+    move-result v5
+
+    invoke-virtual {v2}, Landroid/view/View;->getLeft()I
+
+    move-result v6
+
+    sub-int/2addr v5, v6
+
+    int-to-float v5, v5
+
+    add-float/2addr v5, v3
+
+    cmpg-float v4, v4, v5
+
+    if-gez v4, :cond_bd
+
+    .line 3290
+    invoke-virtual {v2}, Landroid/view/View;->getBottom()I
+
+    move-result v4
+
+    invoke-virtual {v2}, Landroid/view/View;->getTop()I
+
+    move-result v5
+
+    sub-int/2addr v4, v5
+
+    int-to-float v4, v4
+
+    add-float/2addr v4, v3
+
+    cmpg-float p2, p2, v4
+
+    if-gez p2, :cond_bd
+
+    move p2, v0
+
+    goto :goto_be
+
+    :cond_bd
+    move p2, v1
+
+    :goto_be
+    if-nez p2, :cond_fc
+
+    .line 3198
+    invoke-direct {p0}, Landroidx/appcompat/widget/t;->e()V
+
+    .line 3201
+    invoke-virtual {v2}, Landroid/view/View;->getParent()Landroid/view/ViewParent;
+
+    move-result-object p2
+
+    invoke-interface {p2, v0}, Landroid/view/ViewParent;->requestDisallowInterceptTouchEvent(Z)V
+
+    move p2, v0
+
+    goto :goto_fd
+
+    .line 3208
+    :pswitch_cc
+    invoke-direct {p0}, Landroidx/appcompat/widget/t;->e()V
+
+    goto :goto_fc
+
+    .line 3178
+    :pswitch_d0
+    invoke-virtual {p2, v1}, Landroid/view/MotionEvent;->getPointerId(I)I
+
+    move-result p2
+
+    iput p2, p0, Landroidx/appcompat/widget/t;->h:I
+
+    .line 3180
+    iget-object p2, p0, Landroidx/appcompat/widget/t;->e:Ljava/lang/Runnable;
+
+    if-nez p2, :cond_e1
+
+    .line 3181
+    new-instance p2, Landroidx/appcompat/widget/t$a;
+
+    invoke-direct {p2, p0}, Landroidx/appcompat/widget/t$a;-><init>(Landroidx/appcompat/widget/t;)V
+
+    iput-object p2, p0, Landroidx/appcompat/widget/t;->e:Ljava/lang/Runnable;
+
+    .line 3183
+    :cond_e1
+    iget-object p2, p0, Landroidx/appcompat/widget/t;->e:Ljava/lang/Runnable;
+
+    iget v3, p0, Landroidx/appcompat/widget/t;->b:I
+
+    int-to-long v3, v3
+
+    invoke-virtual {v2, p2, v3, v4}, Landroid/view/View;->postDelayed(Ljava/lang/Runnable;J)Z
+
+    .line 3185
+    iget-object p2, p0, Landroidx/appcompat/widget/t;->f:Ljava/lang/Runnable;
+
+    if-nez p2, :cond_f4
+
+    .line 3186
+    new-instance p2, Landroidx/appcompat/widget/t$b;
+
+    invoke-direct {p2, p0}, Landroidx/appcompat/widget/t$b;-><init>(Landroidx/appcompat/widget/t;)V
+
+    iput-object p2, p0, Landroidx/appcompat/widget/t;->f:Ljava/lang/Runnable;
+
+    .line 3188
+    :cond_f4
+    iget-object p2, p0, Landroidx/appcompat/widget/t;->f:Ljava/lang/Runnable;
+
+    iget v3, p0, Landroidx/appcompat/widget/t;->d:I
+
+    int-to-long v3, v3
+
+    invoke-virtual {v2, p2, v3, v4}, Landroid/view/View;->postDelayed(Ljava/lang/Runnable;J)Z
+
+    :cond_fc
+    :goto_fc
+    move p2, v1
+
+    :goto_fd
+    if-eqz p2, :cond_107
+
+    .line 99
+    invoke-virtual {p0}, Landroidx/appcompat/widget/t;->b()Z
+
+    move-result p2
+
+    if-eqz p2, :cond_107
+
+    move p2, v0
+
+    goto :goto_108
+
+    :cond_107
+    move p2, v1
+
+    :goto_108
+    if-eqz p2, :cond_11f
+
+    .line 103
+    invoke-static {}, Landroid/os/SystemClock;->uptimeMillis()J
+
+    move-result-wide v4
+
+    const/4 v6, 0x3
+
+    const/4 v7, 0x0
+
+    const/4 v8, 0x0
+
+    const/4 v9, 0x0
+
+    move-wide v2, v4
+
+    .line 104
+    invoke-static/range {v2 .. v9}, Landroid/view/MotionEvent;->obtain(JJIFFI)Landroid/view/MotionEvent;
+
+    move-result-object v2
+
+    .line 106
+    iget-object v3, p0, Landroidx/appcompat/widget/t;->c:Landroid/view/View;
+
+    invoke-virtual {v3, v2}, Landroid/view/View;->onTouchEvent(Landroid/view/MotionEvent;)Z
+
+    .line 107
+    invoke-virtual {v2}, Landroid/view/MotionEvent;->recycle()V
+
+    .line 111
+    :cond_11f
+    :goto_11f
+    iput-boolean p2, p0, Landroidx/appcompat/widget/t;->g:Z
+
+    if-nez p2, :cond_127
+
+    if-eqz p1, :cond_126
+
+    goto :goto_127
+
+    :cond_126
+    return v1
+
+    :cond_127
+    :goto_127
+    return v0
+
+    :pswitch_data_128
+    .packed-switch 0x0
+        :pswitch_d0
+        :pswitch_cc
+        :pswitch_82
+        :pswitch_cc
+    .end packed-switch
+.end method
+
+.method public onViewAttachedToWindow(Landroid/view/View;)V
+    .registers 2
+
+    return-void
+.end method
+
+.method public onViewDetachedFromWindow(Landroid/view/View;)V
+    .registers 2
+
+    const/4 p1, 0x0
+
+    .line 121
+    iput-boolean p1, p0, Landroidx/appcompat/widget/t;->g:Z
+
+    const/4 p1, -0x1
+
+    .line 122
+    iput p1, p0, Landroidx/appcompat/widget/t;->h:I
+
+    .line 124
+    iget-object p1, p0, Landroidx/appcompat/widget/t;->e:Ljava/lang/Runnable;
+
+    if-eqz p1, :cond_11
+
+    .line 125
+    iget-object p1, p0, Landroidx/appcompat/widget/t;->c:Landroid/view/View;
+
+    iget-object p0, p0, Landroidx/appcompat/widget/t;->e:Ljava/lang/Runnable;
+
+    invoke-virtual {p1, p0}, Landroid/view/View;->removeCallbacks(Ljava/lang/Runnable;)Z
+
+    :cond_11
+    return-void
+.end method

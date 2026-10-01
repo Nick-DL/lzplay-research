@@ -52,6 +52,8 @@ public class MainActivity extends Activity {
         LzLog.get().kv("device", LzCore.deviceSummary());
         runEnvironmentProbe();
         runGsfProbe();
+        // The network gate probe does live HTTP on its own thread, so it is safe here.
+        NetProbe.run(this);
         saveReport();
         refresh();
     }
@@ -273,11 +275,18 @@ public class MainActivity extends Activity {
             @Override public void run() { saveReport(); }
         }));
 
+        LinearLayout row4 = new LinearLayout(this);
+        row4.setOrientation(LinearLayout.HORIZONTAL);
+        row4.addView(btn("网络门禁探针", new Runnable() {
+            @Override public void run() { NetProbe.run(MainActivity.this); }
+        }));
+
         LinearLayout col = new LinearLayout(this);
         col.setOrientation(LinearLayout.VERTICAL);
         col.addView(row1);
         col.addView(row2);
         col.addView(row3);
+        col.addView(row4);
         return col;
     }
 
