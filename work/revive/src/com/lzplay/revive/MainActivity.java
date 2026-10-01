@@ -286,6 +286,9 @@ public class MainActivity extends Activity {
                 saveReport();
             }
         }));
+        row4.addView(btn("CA 信任探测", new Runnable() {
+            @Override public void run() { TlsProbe.run(MainActivity.this); }
+        }));
 
         LinearLayout col = new LinearLayout(this);
         col.setOrientation(LinearLayout.VERTICAL);
