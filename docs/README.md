@@ -283,12 +283,17 @@ GMS 完成初始化，**Play 商店正常打开、账号登录成功**。
 | [09-第二阶段-原版必然崩溃的精确定位.md](05-phase2/09-第二阶段-原版必然崩溃的精确定位.md) | **★★ 精确定位到代码行：`UpdateImp.e()` 给已装 APK 算 MD5** |
 | [10-第二阶段-OOM修复与流程跑通.md](05-phase2/10-第二阶段-OOM修复与流程跑通.md) | **★★ OOM 已修复，App 跑通并显示安装界面** |
 | [11-第二阶段-安装失败的两个根因.md](05-phase2/11-第二阶段-安装失败的两个根因.md) | Intent 缺 `FLAG_GRANT_READ_URI_PERMISSION` + FileProvider 路径包名残留 |
-| [12-第二阶段-安装失败的第3个原因.md](05-phase2/12-第二阶段-安装失败的第3个原因.md) | **★ 清单缺 `REQUEST_INSTALL_PACKAGES`（当前卡点）** |
+| [12-第二阶段-安装失败的第3个原因.md](05-phase2/12-第二阶段-安装失败的第3个原因.md) | 清单缺 `REQUEST_INSTALL_PACKAGES` —— **仅改包版有此问题，原版走 MDM 不受影响** |
 | [13-第二阶段-进展与卡点存档.md](05-phase2/13-第二阶段-进展与卡点存档.md) | **★ 已排除的 6 个假设 + 调试手法（接手必读）** |
 | [14-第二阶段-ChatPartner分析.md](05-phase2/14-第二阶段-ChatPartner分析.md) | Chat Partner 安装路径剖析（**只走 MDM，无 ACTION_VIEW 兜底**） |
 | [15-第二阶段-ChatPartner实测结果.md](05-phase2/15-第二阶段-ChatPartner实测结果.md) | 原版实测：不崩、卡死服务器、**CER 验签失败 ⇒ 此路不通** |
+| [16-第二阶段-网络门禁的真相.md](05-phase2/16-第二阶段-网络门禁的真相.md) | **★ 真机探针实测：证伪两个流行假设** |
+| [17-第二阶段-代理设计.md](05-phase2/17-第二阶段-代理设计.md) | **★★ 完整协议逆向（RC4/base64/MD5/签名），全部从原版 smali 读出** |
+| [18-第二阶段-代理实现.md](05-phase2/18-第二阶段-代理实现.md) | **★★ 响应器内建到 LZRevive，真机自检 PASS** |
+| [19-第二阶段-证书基础设施.md](05-phase2/19-第二阶段-证书基础设施.md) | 用 NDC 根证书签发服务端证书，TLS 握手自验通过 |
+| [20-第二阶段-代理方案最终结论.md](05-phase2/20-第二阶段-代理方案最终结论.md) | **★★★ 四项受控实验裁定：无 root 时 TLS 中间人不可行** |
 
-### 第二阶段已确定的三条结论
+### 第二阶段已确定的结论
 
 **① 用户不需要自己收集 Google APK —— 原版 APK 自带整套。**
 
@@ -303,43 +308,73 @@ GMS 完成初始化，**Play 商店正常打开、账号登录成功**。
 ```
 实测与解密出的清单 **5/5 MD5 与大小完全一致**。
 
-**② "卡 88%" 的根因是内存溢出（OOM），不是下载失败。**
+**② OOM 只在「GMS 已安装」时发生 —— 全新安装场景下原版不崩。**
 
-`FileUtil.b()` 为算一个文件的 MD5，把**整个文件**读进内存。被算的是 86.5 MB 的
-`gms_29.apk`，于是要申请 256 MB 连续数组 → 在 Android 12 上崩溃。
+`FileUtil.b()` 为算 MD5 把**整个文件**读进内存，而被算的是**已安装 APK**的路径。
+⇒ **GMS 没装就没有 86.5 MB 的东西可哈希，不会崩。**
 
-**③ 因此"预置缓存"这条替代路线同样是死的。**
+**⚠️ 这条修正了早先的错误结论。** 实测（Mate50 / GMS 四个包全部未装）：
 
-App 的"文件已就绪"预检 `Downloader.a(path, md5)` 用的**还是** `FileUtil.b()` ——
-照样 OOM。而放进内部缓存目录需要 root（实测无 root）。
+```
+旅游助手签名 1241a3cf（原版未改动）
+MDM_INSTALL_SYS_APP / APP_MANAGEMENT / DEVICE_MANAGER / NETWORK_MANAGER
+  / VPN / PHONE_MANAGER / ACCESS_INTERFACE   全部 true
+启动 90 秒无崩溃，停在 SplashActivity 等待服务器
+```
 
-⇒ **第一阶段的改包是必需的，没有替代**；但**不致命**，因为 GMS 作为普通用户应用
-也能工作（Mate50 的 `SYSTEM` 标志来自 Play 商店自我升级，不是 lzplay 灌的）。
+⇒ **原版在全新安装环境下持有完整 MDM 特权，可以用 `installPackage()` 静默安装。**
 
-> ⚠️ **VPN 代理方案（原需求设想）经研究证明是不必要的** —— 但它仍作为兜底保留，
-> 代码在 `work/revive/src/com/lzplay/revive/ProxyVpnService.java`。
+**③ 唯一卡点：`api.trip-happy.com` 已死。**
 
-### 📍 第二阶段当前状态（2026-10-01）
+域名仍注册（解析到 Cloudflare 占位页），拿不到合法更新列表 ⇒ App 停在启动页
+或弹「连接谷歌网络异常」。
+
+**④ 「改包」与「MDM 特权」互斥，而全新安装不需要改包。**
+
+改包必重签 ⇒ 签名 ≠ `HUAWEI.CER` 的 DeveloperKey ⇒ 特权全失（改包版永远 0/7）。
+`REQUEST_INSTALL_PACKAGES` 只是**改包版**的连锁后果，**与不改包的原版无关**。
+
+**⑤ 无 root 时无法伪造 TMS 响应 —— 这是整条代理路线的硬约束。**
+
+四项受控实验（Mate50 / 未 root / 服务端证书 SAN 同时含域名与 IP）：
+
+| 用例 | 结果 |
+|---|---|
+| 真 CA（Google） | **HTTP 204** ✅ 基线有效 |
+| NDC 用户 CA 签发 | `Trust anchor for certification path not found` (91ms) ❌ |
+| 自签证书 | 同上 (29ms) ❌ |
+| **明文 HTTP 发到 TLS 端口** | `SSLException: Unable to parse TLS packet header` (13ms) ❌ |
+
+13 毫秒**不是超时** ⇒ 字节到达了 App，是 TLS 协议层拒绝的。
+根因：`default TrustManager` 只有 **125 条系统 CA**，而用户装的 NDC 根证书虽在
+`AndroidCAStore`（`user:4325b699.0`）里，**对 `targetSdk ≥ 24` 且无
+`networkSecurityConfig` 的 App 不可见**。
+
+**⑥ 协议侧已完全解决 —— 一旦能控制 TLS 端点，响应可任意伪造。**
+
+`upgradeConfSign = MD5hex( Base64_NO_WRAP(UTF8(upgradeConf)) + sign )`，
+**没有服务器密钥参与**。响应器 `TripHappyResponder` 已在真机自检 PASS。
+
+### 📍 第二阶段当前状态
 
 ```
 ① 用户不需要收集 APK      ✅ 已解决（助手包自带全套，5/5 MD5 一致）
-② 不需要 VPN 代理         ✅ 已证实（安装流程从 assets 本地解包）
-③ 必须改包                ✅ 已证实（原版启动即 OOM）
-④ 改包版能跑起来          ✅ 已解决（流式 MD5 修复）
-⑤ 改包版能否装上 GMS      ❌ 【当前卡点】清单缺 REQUEST_INSTALL_PACKAGES
+② 原版在全新安装下不崩     ✅ 已实测（并持有完整 MDM 特权）
+③ 不需要改包              ✅ 已修正（早先"必须改包"的结论是错的）
+④ 代理协议侧              ✅ 已解决（响应器真机自检 PASS）
+⑤ 代理 TLS 侧             ❌ 【当前卡点】用户 CA 不可见于 App
 ⑥ SafeNet 设备认证        ❌ 未解决（手动注册后通知仍在）
 ```
 
-**已建成的产物**：`旅游必备-nostream-oom.apk`（140,950,628 B）
-= 原版 + 流式 MD5 修复 + Intent 读取授权修复
+**卡点性质**：唯一障碍是「如何让 App 信任我们的证书」。
 
-**卡点的性质**：三条安装路径各自的状态
-
-| 路径 | 状态 |
-|---|---|
-| 标准 Intent（`ACTION_VIEW`） | 差 `REQUEST_INSTALL_PACKAGES` 声明 |
-| 华为 MDM 特权（`installPackage`） | 需 CER 授权，而**改包必重签 ⇒ 必然失效** |
-| `pm install` 会话 API | ✅ 实测可行，但需用户自备 APK（等于回到原问题） |
+| 出路 | 需要 | 说明 |
+|---|---|---|
+| **① 拿到 root** | 解锁 bootloader / 工程机 | ⭐ 装系统 CA ⇒ **原版完全不动**，整条链立刻通 |
+| ② 换一台可 root 的华为设备 | 任意可 root 机型 | 同样有效 |
+| ③ 厂商测试入口 | `adb root`（零售机不给） | 值得一试 |
+| ④ 回到改包路线 | 接受丢 MDM 特权 | 需同时解决清单权限（二进制补丁） |
+| ⑤ 接受现状 | — | 第一阶段目标已达成 |
 
 **Chat Partner 这条路已排除**：它的 CER 在 HMOS 4.2 上**验签失败**
 （`HC_VC error tag is Signature`），拿不到 MDM 特权；而它的安装路径**只有**

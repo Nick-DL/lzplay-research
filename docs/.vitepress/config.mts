@@ -159,6 +159,17 @@ export default defineConfig({
         ]
       },
       {
+        text: '05 · 第二阶段：网络真相与代理',
+        collapsed: false,
+        items: [
+          { text: '★ 网络门禁的真相（真机探针实测）', link: '/05-phase2/16-第二阶段-网络门禁的真相' },
+          { text: '★ 代理设计（完整协议逆向）', link: '/05-phase2/17-第二阶段-代理设计' },
+          { text: '★ 代理实现（内建到 LZRevive）', link: '/05-phase2/18-第二阶段-代理实现' },
+          { text: '证书基础设施（CA 签发与验证）', link: '/05-phase2/19-第二阶段-证书基础设施' },
+          { text: '★★ 代理方案最终结论（TLS 硬约束）', link: '/05-phase2/20-第二阶段-代理方案最终结论' }
+        ]
+      },
+      {
         text: '存档',
         collapsed: true,
         items: [
