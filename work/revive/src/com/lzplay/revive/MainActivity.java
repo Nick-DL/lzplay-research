@@ -2,13 +2,17 @@ package com.lzplay.revive;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -55,6 +59,160 @@ public class MainActivity extends Activity {
     // ------------------------------------------------------------------ UI
 
     private View buildUi() {
+        LinearLayout root = new LinearLayout(this);
+        root.setOrientation(LinearLayout.VERTICAL);
+
+        // ---- 页签栏 ----
+        final RadioGroup tabs = new RadioGroup(this);
+        tabs.setOrientation(LinearLayout.HORIZONTAL);
+        tabs.setBackgroundColor(Color.parseColor("#101418"));
+
+        RadioButton tProxy = new RadioButton(this);
+        tProxy.setText("代理");
+        tProxy.setId(0x7f010001);
+        tProxy.setTextColor(Color.WHITE);
+        tProxy.setButtonDrawable(null);
+        tProxy.setPadding(40, 22, 40, 22);
+
+        RadioButton tInfo = new RadioButton(this);
+        tInfo.setText("权限信息");
+        tInfo.setId(0x7f010002);
+        tInfo.setTextColor(Color.WHITE);
+        tInfo.setButtonDrawable(null);
+        tInfo.setPadding(40, 22, 40, 22);
+
+        tabs.addView(tProxy);
+        tabs.addView(tInfo);
+        tabs.check(0x7f010001);
+        root.addView(tabs, new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT));
+
+        // ---- 内容区：两个页签都建好，靠 visibility 切换 ----
+        final View proxyTab = buildProxyTab();
+        final View infoTab = buildInfoTab();
+
+        FrameLayout content = new FrameLayout(this);
+        content.addView(proxyTab, new FrameLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT));
+        content.addView(infoTab, new FrameLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT));
+        infoTab.setVisibility(View.GONE);
+
+        root.addView(content, new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, 0, 1f));
+
+        tabs.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup g, int id) {
+                boolean proxy = (id == 0x7f010001);
+                proxyTab.setVisibility(proxy ? View.VISIBLE : View.GONE);
+                infoTab.setVisibility(proxy ? View.GONE : View.VISIBLE);
+            }
+        });
+
+        return root;
+    }
+
+    // ------------------------------------------------------------- 页签1：代理
+
+    private TextView proxyStatus;
+    private TextView proxyLog;
+    private Button vpnButton;
+
+    private View buildProxyTab() {
+        LinearLayout col = new LinearLayout(this);
+        col.setOrientation(LinearLayout.VERTICAL);
+
+        // 状态卡
+        LinearLayout card = new LinearLayout(this);
+        card.setOrientation(LinearLayout.VERTICAL);
+        card.setPadding(28, 24, 28, 20);
+        card.setBackgroundColor(Color.parseColor("#0d1117"));
+
+        proxyStatus = new TextView(this);
+        proxyStatus.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12f);
+        proxyStatus.setTextColor(Color.parseColor("#7fe0a0"));
+        proxyStatus.setText("代理未启动");
+        card.addView(proxyStatus);
+
+        TextView sub = new TextView(this);
+        sub.setTextSize(TypedValue.COMPLEX_UNIT_SP, 10f);
+        sub.setTextColor(Color.parseColor("#9aa4ae"));
+        sub.setPadding(0, 10, 0, 0);
+        sub.setText("作用：把两个已失效的 CDN 域名的 HTTP 请求劫持到本地，\n"
+                + "直接返回 assets 里预置的原版 GMS 包，使用户不必自己收集 APK。\n"
+                + "拦截目标：\n"
+                + "  · cdn.trip-happy.com\n"
+                + "  · cdn-trip-happy.sg.ufileos.com\n"
+                + "  · cdn.chat-kingdom.com\n"
+                + "（Google 的 uncertified 接口不在拦截范围内）");
+        card.addView(sub);
+
+        vpnButton = btn("启动代理", new Runnable() {
+            @Override public void run() { toggleProxy(); }
+        });
+        card.addView(vpnButton);
+
+        col.addView(card);
+
+        // 代理日志
+        ScrollView sv2 = new ScrollView(this);
+        proxyLog = new TextView(this);
+        proxyLog.setTextSize(TypedValue.COMPLEX_UNIT_SP, 9.5f);
+        proxyLog.setTypeface(Typeface.MONOSPACE);
+        proxyLog.setTextIsSelectable(true);
+        int pad = (int) (8 * getResources().getDisplayMetrics().density);
+        proxyLog.setPadding(pad, pad, pad, pad);
+        sv2.addView(proxyLog, new ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        col.addView(sv2, new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, 0, 1f));
+
+        // 代理相关的操作按钮
+        LinearLayout rowA = new LinearLayout(this);
+        rowA.setOrientation(LinearLayout.HORIZONTAL);
+        rowA.addView(btn("设备注册", new Runnable() {
+            @Override public void run() {
+                startActivity(new Intent(MainActivity.this, RegisterActivity.class));
+            }
+        }));
+        rowA.addView(btn("列出代理包", new Runnable() {
+            @Override public void run() { ProxyAssets.list(MainActivity.this, proxyOut()); }
+        }));
+        rowA.addView(btn("写入设备", new Runnable() {
+            @Override public void run() { ProxyAssets.pushToDevice(MainActivity.this, proxyOut()); }
+        }));
+        col.addView(rowA);
+
+        return col;
+    }
+
+    private LzLog proxyOut() {
+        return LzLog.get();
+    }
+
+    private void toggleProxy() {
+        boolean running = ProxyVpnService.isRunning();
+        if (running) {
+            ProxyVpnService.stop(this);
+            vpnButton.setText("启动代理");
+            proxyStatus.setText("代理已停止");
+        } else {
+            ProxyVpnService.start(this);
+            vpnButton.setText("停止代理");
+        }
+    }
+
+    void onProxyState(String s) {
+        if (proxyStatus != null) proxyStatus.setText(s);
+    }
+
+    // -------------------------------------------------- 页签2：权限信息（原有功能）
+
+    private View buildInfoTab() {
         LinearLayout root = new LinearLayout(this);
         root.setOrientation(LinearLayout.VERTICAL);
 

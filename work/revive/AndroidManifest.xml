@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.lzplay.revive"
-    android:versionCode="1"
-    android:versionName="1.0">
+    android:versionCode="2"
+    android:versionName="2.0">
 
     <uses-sdk android:minSdkVersion="21" android:targetSdkVersion="33" />
 
@@ -15,20 +15,41 @@
     <uses-permission android:name="com.huawei.systemmanager.permission.ACCESS_INTERFACE" />
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
     <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <!-- 第二阶段新增：VPN 代理 -->
+    <uses-permission android:name="android.permission.BIND_VPN_SERVICE" />
 
     <application
         android:label="LZRevive"
         android:allowBackup="false"
         android:usesCleartextTraffic="true">
 
+        <!-- 双页签主界面：页签1 = 代理，页签2 = 权限信息 -->
         <activity android:name=".MainActivity" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- 设备注册（SafeNet）：内置 JS 走 Google uncertified 页面 -->
+        <activity
+            android:name=".RegisterActivity"
+            android:exported="false"
+            android:label="设备注册" />
+
+        <!-- VPN 代理服务 -->
+        <service
+            android:name=".ProxyVpnService"
+            android:exported="false"
+            android:permission="android.permission.BIND_VPN_SERVICE">
+            <intent-filter>
+                <action android:name="android.net.VpnService" />
+            </intent-filter>
+        </service>
 
         <receiver
             android:name=".InstallResultReceiver"

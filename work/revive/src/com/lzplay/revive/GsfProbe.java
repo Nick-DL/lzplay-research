@@ -30,6 +30,34 @@ public final class GsfProbe {
             "google_login",
     };
 
+    /** The gservices provider both lzplay and the two sibling apps gate on. */
+    public static final Uri GSERVICES = Uri.parse("content://com.google.android.gsf.gservices");
+
+    /**
+     * Read a single gservices key and return its value, or null.
+     *
+     * The sibling apps do exactly this to obtain the GSF id they submit to Google's
+     * /android/uncertified page.  The provider is queried with a one-element
+     * selection array: the key goes in the "selectionArgs" slot, not the projection,
+     * and the value comes back in column 1.
+     */
+    public static String readGservices(Context ctx, String key) {
+        try {
+            Cursor c = ctx.getContentResolver().query(GSERVICES, null, null,
+                    new String[]{key}, null);
+            if (c == null) return null;
+            String v = null;
+            if (c.moveToFirst() && c.getColumnCount() >= 2) {
+                v = c.getString(1);
+            }
+            c.close();
+            if (v != null) v = v.trim();
+            return (v == null || v.isEmpty()) ? null : v;
+        } catch (Throwable t) {
+            return null;
+        }
+    }
+
     public static void run(Context ctx) {
         LzLog log = LzLog.get();
         log.section("GSF PROVIDER RAW PROBE");

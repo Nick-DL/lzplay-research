@@ -40,10 +40,20 @@ function Build-AndroidApp {
     if ($LASTEXITCODE -ne 0) { throw 'aapt2 compile failed' }
 
     Write-Host '--- 2/7 aapt2 link (generates R.java) ---'
+    # -A bundles <Proj>/assets into the APK when that directory exists.
+    # aapt2 refuses an empty/missing dir, so only pass it when there is something.
+    $assetsArg = @()
+    if (Test-Path "$Proj\assets") {
+        $n = @(Get-ChildItem "$Proj\assets" -Recurse -File -ErrorAction SilentlyContinue).Count
+        if ($n -gt 0) {
+            $assetsArg = @('-A', "$Proj\assets")
+            Write-Host "    bundling assets: $n file(s)"
+        }
+    }
     & "$BT\aapt2.exe" link -o "$work\base.apk" -I $AJAR `
         --manifest "$Proj\AndroidManifest.xml" --java "$work\gen" `
         --min-sdk-version $MinSdk --target-sdk-version $TargetSdk `
-        --version-code 1 --version-name 1.0 "$work\res.zip"
+        --version-code 1 --version-name 1.0 @assetsArg "$work\res.zip"
     if ($LASTEXITCODE -ne 0) { throw 'aapt2 link failed' }
 
     Write-Host '--- 3/7 javac ---'
